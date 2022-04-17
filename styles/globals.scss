@@ -1,0 +1,30 @@
+@import './modules/colors.module.scss';
+@import './components/font.scss';
+@import './components/animation.scss';
+@import './components/scrollbar.scss';
+@import './components/ripple.scss';
+
+:root {
+  --vs-bg: #{$bg};
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: rgba(var(--vs-bg), 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+}
+
+* {
+  font-weight: 500;
+  font-family: 'Nunito';
+  letter-spacing: 0.02rem;
+}
