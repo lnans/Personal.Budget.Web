@@ -1,6 +1,7 @@
 $primary: 54, 52, 197;
 $success: 41, 196, 102;
 $error: 196, 78, 71;
+$warning: 196, 139, 71;
 $black: 6, 18, 55;
 $default: 177, 177, 177;
 
@@ -15,6 +16,8 @@ $shadowOpacity: 0.05;
 
 :export {
   primary: $primary;
+  info: $primary;
+  warning: $warning;
   success: $success;
   error: $error;
   black: $black;
