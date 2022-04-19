@@ -6,7 +6,6 @@ export type VsButtonColor = 'primary' | 'success' | 'error' | 'default'
 export interface VsButtonProps {
   children?: React.ReactNode
   color?: VsButtonColor
-  outlined?: boolean
   disabled?: boolean
   loading?: boolean
   fullWidth?: boolean

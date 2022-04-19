@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
 import VsButton from '../components/VsButton'
+import VsInput from '../components/VsInput'
 import VsSelect from '../components/VsSelect'
 import { toastAlertService } from '../components/VsToaster'
 
@@ -65,7 +66,11 @@ const Home: NextPage = () => {
           itemValue="value"
           message="Required"
         ></VsSelect>
-        <VsSelect label="Select an option" items={testValues} itemKey="id" itemValue="value" loading></VsSelect>
+        <VsSelect label="Select an option" items={testValues} itemKey="id" itemValue="value" disabled></VsSelect>
+      </div>
+      <div style={styles}>
+        <VsInput label="Type a text" value="" icon="bx-user" message="test" />
+        <VsInput label="Type a text" value="" />
       </div>
     </>
   )

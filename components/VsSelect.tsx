@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import styled from 'styled-components'
 import colors from '../styles/modules/colors.module.scss'
 
@@ -12,12 +12,13 @@ export interface VsSelectProps {
   itemValue: string
   items: VsSelectItem[]
   loading?: boolean
+  disabled?: boolean
   message?: string
-  onSelect?: (id: string) => void
+  onChange?: (id: string) => void
 }
 
 export default function VsSelect(props: VsSelectProps) {
-  const { label, items, itemKey, itemValue, onSelect, loading, message } = props
+  const { label, items, itemKey, itemValue, onChange, loading, disabled, message } = props
   const [isActive, setIsActive] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string>()
   const [selectedLabel, setLabelValue] = useState<string>()
@@ -32,7 +33,7 @@ export default function VsSelect(props: VsSelectProps) {
     setSelectedValue(item[itemKey])
     setLabelValue(item[itemValue])
     setIsActive(false)
-    onSelect && onSelect(item[itemKey])
+    onChange && onChange(item[itemKey])
   }
 
   const styles = {
@@ -45,7 +46,7 @@ export default function VsSelect(props: VsSelectProps) {
   }
   return (
     <SelectContentSlyled>
-      <SelectStyled isLoading={!!loading}>
+      <SelectStyled isDisabled={!!loading || !!disabled}>
         <InputStyled
           onFocus={() => setIsActive(true)}
           onBlur={handleOnBlur}
@@ -54,11 +55,12 @@ export default function VsSelect(props: VsSelectProps) {
           textColor={styles.textColor}
           isActive={isActive}
           value={selectedLabel ?? ''}
+          tabIndex={loading || disabled ? -1 : undefined}
         />
 
         <SelectPlaceHolderStyled hasValue={!!selectedLabel || isActive}>{label}</SelectPlaceHolderStyled>
 
-        {!loading && <SelectIconStyled textColor={styles.textColor} isActive={isActive} />}
+        {!loading && <SelectIconStyled textColor={styles.textColor} isActive={isActive} isDisabled={!!disabled} />}
         {loading && <SelectLoaderStyled loaderColor={styles.loaderColor} />}
         {message && <SelectMessageStyled textColor={styles.messageColor}>{message}</SelectMessageStyled>}
 
@@ -101,16 +103,17 @@ const SelectContentSlyled = styled('div')`
   display: flex;
 `
 
-const SelectStyled = styled('div')<{ isLoading: boolean }>`
+const SelectStyled = styled('div')<{ isDisabled: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 38px;
   width: 100%;
-  pointer-events: ${(props) => (props.isLoading ? 'none' : 'all')};
+  pointer-events: ${(props) => (props.isDisabled ? 'none' : 'all')};
+  user-select: ${(props) => (props.isDisabled ? 'none' : 'all')};
   & input {
-    opacity: ${(props) => (props.isLoading ? '.6' : '1')};
+    opacity: ${(props) => (props.isDisabled ? '.6' : '1')};
   }
 `
 
@@ -130,7 +133,7 @@ const InputStyled = styled('input')<{ bgColor: string; textColor: string; isActi
   box-shadow: ${(props) => (props.isActive ? '0 5px 25px -4px rgba(0,0,0,.05)' : 'none')};
 `
 
-const SelectIconStyled = styled('i')<{ textColor: string; isActive: boolean }>`
+const SelectIconStyled = styled('i')<{ textColor: string; isActive: boolean; isDisabled: boolean }>`
   z-index: 4;
   position: absolute;
   right: 15px;
@@ -142,6 +145,7 @@ const SelectIconStyled = styled('i')<{ textColor: string; isActive: boolean }>`
   height: 7px;
   transform: ${(props) => (props.isActive ? 'rotate(45deg)' : 'rotate(-135deg)')};
   transform-origin: center;
+  opacity: ${(props) => (props.isDisabled ? '.6' : '1')};
 
   &:before {
     width: 1px;
