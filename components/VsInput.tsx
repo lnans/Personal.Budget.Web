@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLInputTypeAttribute, useState } from 'react'
+import React, { ChangeEvent, createRef, HTMLInputTypeAttribute, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import colors from '../styles/modules/colors.module.scss'
 
@@ -12,11 +12,14 @@ export interface VsInputProps {
   icon?: string
   type?: HTMLInputTypeAttribute
   onChange?: (value: string) => void
+  onEnterKey?: () => void
 }
 
 export default function VsInput(props: VsInputProps) {
-  const { label, message, loading, disabled, icon, onChange, type, fullWidth } = props
+  const { label, message, loading, disabled, icon, type, fullWidth, onChange, onEnterKey } = props
   const [value, setValue] = useState(props.value ?? '')
+
+  const ref = useRef<HTMLInputElement>(null)
 
   const styles = {
     textColor: `rgba(${colors.black}, 1)`,
@@ -29,13 +32,27 @@ export default function VsInput(props: VsInputProps) {
     onChange && onChange(e.target.value)
   }
 
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onEnterKey && onEnterKey()
+    }
+  }
+
+  useEffect(() => {
+    if ((disabled || loading) && ref?.current) {
+      ref.current.blur()
+    }
+  }, [disabled, loading])
+
   return (
     <InputParentStyled fullWidth={!!fullWidth}>
       <InputContentStyled isDisabled={!!loading || !!disabled}>
         <InputStyled
+          ref={ref}
           textColor={styles.textColor}
           value={value ?? ''}
           onChange={handleChange}
+          onKeyUp={handleEnterKey}
           tabIndex={loading || disabled ? -1 : undefined}
           hasIcon={!!icon}
           type={!!type ? type : 'text'}
@@ -44,7 +61,7 @@ export default function VsInput(props: VsInputProps) {
         {loading && <InputLoaderStyled loaderColor={styles.loaderColor} />}
         {message && <InputMessageStyled textColor={styles.messageColor}>{message}</InputMessageStyled>}
         {!!icon && !loading && (
-          <InputIconStyled textColor={styles.textColor}>
+          <InputIconStyled textColor={styles.textColor} isDisabled={!!disabled}>
             <i className={`bx ${icon}`} />
           </InputIconStyled>
         )}
@@ -183,7 +200,7 @@ const InputMessageStyled = styled('label')<{ textColor: string }>`
   bottom: -20px;
 `
 
-const InputIconStyled = styled('span')<{ textColor: string }>`
+const InputIconStyled = styled('span')<{ textColor: string; isDisabled: boolean }>`
   left: auto;
   right: 0;
   box-shadow: -12px 0 10px -10px rgba(0, 0, 0, 0.05);
@@ -197,4 +214,5 @@ const InputIconStyled = styled('span')<{ textColor: string }>`
   background: ${() => `rgba(${colors.gray2}, 1)`};
   pointer-events: none;
   color: ${(props) => props.textColor};
+  opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 `

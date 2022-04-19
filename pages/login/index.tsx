@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useState } from 'react'
 import styled from 'styled-components'
 import VsButton from '../../components/VsButton'
 import VsCheckBox from '../../components/VsCheckBox'
@@ -9,6 +10,14 @@ import { toastAlertService } from '../../components/VsToaster'
 import colors from '../../styles/modules/colors.module.scss'
 
 const Login: NextPage = () => {
+  const [loading, setIsLoading] = useState<boolean>(false)
+
+  const handleLogin = () => {
+    setIsLoading(true)
+    toastAlertService.info('Connexion', "Cette fonctionnalité n'est pas encore implémentée !")
+    setTimeout(() => setIsLoading(false), 2000)
+  }
+
   return (
     <VsDialog show={true} closable={false} width="350px">
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 16px 16px 16px' }}>
@@ -17,15 +26,25 @@ const Login: NextPage = () => {
             Bienvenue sur <b>Budget.</b>
           </MessageStyled>
         </VsHeader>
-        <VsInput label="Nom d'utilisateur" value="" fullWidth icon="bx-user" />
-        <VsInput label="Mot de passe" value="" fullWidth icon="bxs-lock" type="password" />
-        <VsCheckBox label="Rester connecté" value={false} compact />
-        <VsButton
-          color="primary"
+        <VsInput
+          label="Nom d'utilisateur"
+          value=""
           fullWidth
-          style={{ marginTop: '16px' }}
-          onClick={() => toastAlertService.info('Connexion', "Cette fonctionnalité n'est pas encore implémentée !")}
-        >
+          icon="bx-user"
+          disabled={loading}
+          onEnterKey={handleLogin}
+        />
+        <VsInput
+          label="Mot de passe"
+          value=""
+          fullWidth
+          icon="bxs-lock"
+          type="password"
+          disabled={loading}
+          onEnterKey={handleLogin}
+        />
+        <VsCheckBox label="Rester connecté" value={false} compact />
+        <VsButton color="primary" fullWidth style={{ marginTop: '16px' }} onClick={handleLogin}>
           Connexion
         </VsButton>
         <InfoStyled>Nouveau ici ? Contact moi 😄</InfoStyled>
