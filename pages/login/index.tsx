@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import VsButton from '../../components/VsButton'
 import VsCheckBox from '../../components/VsCheckBox'
@@ -9,9 +11,18 @@ import VsInput from '../../components/VsInput'
 import { toastAlertService } from '../../components/VsToaster'
 import colors from '../../styles/modules/colors.module.scss'
 
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'login'])),
+      // Will be passed to the page component as props
+    },
+  }
+}
+
 const Login: NextPage = () => {
   const [loading, setIsLoading] = useState<boolean>(false)
-
+  const { t } = useTranslation()
   const handleLogin = () => {
     setIsLoading(true)
     toastAlertService.info('Connexion', "Cette fonctionnalité n'est pas encore implémentée !")
@@ -23,11 +34,11 @@ const Login: NextPage = () => {
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 16px 16px 16px' }}>
         <VsHeader>
           <MessageStyled>
-            Bienvenue sur <b>Budget.</b>
+            {t('login:welcome')} <b>{t('common:app')}</b>
           </MessageStyled>
         </VsHeader>
         <VsInput
-          label="Nom d'utilisateur"
+          label={t('login:username')}
           value=""
           fullWidth
           icon="bx-user"
@@ -35,7 +46,7 @@ const Login: NextPage = () => {
           onEnterKey={handleLogin}
         />
         <VsInput
-          label="Mot de passe"
+          label={t('login:password')}
           value=""
           fullWidth
           icon="bxs-lock"
@@ -43,11 +54,11 @@ const Login: NextPage = () => {
           disabled={loading}
           onEnterKey={handleLogin}
         />
-        <VsCheckBox label="Rester connecté" value={false} compact />
+        <VsCheckBox label={t('login:remember')} value={false} compact />
         <VsButton color="primary" fullWidth style={{ marginTop: '16px' }} onClick={handleLogin}>
-          Connexion
+          {t('login:login')}
         </VsButton>
-        <InfoStyled>Nouveau ici ? Contact moi 😄</InfoStyled>
+        <InfoStyled>{t('login:info')}</InfoStyled>
       </div>
     </VsDialog>
   )

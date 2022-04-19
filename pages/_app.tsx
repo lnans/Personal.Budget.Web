@@ -2,8 +2,9 @@ import '../styles/globals.scss'
 import 'boxicons/css/boxicons.min.css'
 import type { AppProps } from 'next/app'
 import VsToaster from '../components/VsToaster'
+import { appWithTranslation } from 'next-i18next'
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Component {...pageProps} />
@@ -12,4 +13,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default appWithTranslation(MyApp)

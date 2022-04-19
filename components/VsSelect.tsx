@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 import colors from '../styles/modules/colors.module.scss'
 

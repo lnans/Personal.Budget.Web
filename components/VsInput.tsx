@@ -1,4 +1,4 @@
-import React, { ChangeEvent, createRef, HTMLInputTypeAttribute, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, HTMLInputTypeAttribute, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import colors from '../styles/modules/colors.module.scss'
 
