@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import colors from '../styles/modules/colors.module.scss'
 
@@ -9,6 +9,7 @@ export interface VsButtonProps {
   disabled?: boolean
   loading?: boolean
   fullWidth?: boolean
+  style?: CSSProperties
   onClick?: () => void
 }
 
@@ -43,35 +44,40 @@ export default function VsButton(props: VsButtonProps) {
   }
 
   return (
-    <ButtonStyled
-      disabled={styles.disabled}
-      bgColor={styles.bgColor}
-      fullWidth={styles.fullWidth}
-      isLoading={styles.loading}
-      onClick={handleClick}
-    >
-      {isRippling ? (
-        <span
-          className="ripple"
-          style={{
-            left: coords.x,
-            top: coords.y,
-          }}
-        />
-      ) : (
-        ''
-      )}
-      <ButtonContentStyled>{props.children}</ButtonContentStyled>
-      {props.loading && <ButtonLoaderStyled bgColor={styles.loaderBgColor} />}
-    </ButtonStyled>
+    <ButtonContainerStyled fullWidth={styles.fullWidth} style={props.style}>
+      <ButtonStyled
+        fullWidth={styles.fullWidth}
+        disabled={styles.disabled}
+        bgColor={styles.bgColor}
+        isLoading={styles.loading}
+        onClick={handleClick}
+      >
+        {isRippling ? (
+          <span
+            className="ripple"
+            style={{
+              left: coords.x,
+              top: coords.y,
+            }}
+          />
+        ) : (
+          ''
+        )}
+        <ButtonContentStyled>{props.children}</ButtonContentStyled>
+        {props.loading && <ButtonLoaderStyled bgColor={styles.loaderBgColor} />}
+      </ButtonStyled>
+    </ButtonContainerStyled>
   )
 }
 
+const ButtonContainerStyled = styled('div')<{ fullWidth: boolean }>`
+  width: ${(props) => (props.fullWidth ? '100%' : 'fit-content')};
+  margin: ${(props) => (props.fullWidth ? '0' : '5px')};
+`
+
 const ButtonStyled = styled('button')<{ fullWidth: boolean; bgColor: string; isLoading: boolean }>`
-  margin: 5px;
   border-radius: 12px;
   border: 0;
-  transition: all 0.25s ease;
   position: relative;
   user-select: none;
   z-index: 1;

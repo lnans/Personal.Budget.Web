@@ -1,12 +1,16 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
 import VsButton from '../components/VsButton'
+import VsCheckBox from '../components/VsCheckBox'
+import VsDialog from '../components/VsDialog'
+import VsHeader from '../components/VsHeader'
 import VsInput from '../components/VsInput'
 import VsSelect from '../components/VsSelect'
 import { toastAlertService } from '../components/VsToaster'
 
 const Home: NextPage = () => {
   const [load, setLoad] = useState<boolean>(true)
+  const [display, setDisplay] = useState<boolean>(false)
   const testValues = [
     {
       id: '1',
@@ -44,6 +48,9 @@ const Home: NextPage = () => {
         <VsButton color="primary" onClick={() => setLoad(!load)}>
           Set Load
         </VsButton>
+        <VsButton color="primary" onClick={() => setDisplay(true)}>
+          Open Dialog
+        </VsButton>
         <VsButton color="error">Supprimer</VsButton>
         <VsButton
           color="success"
@@ -66,12 +73,31 @@ const Home: NextPage = () => {
           itemValue="value"
           message="Required"
         ></VsSelect>
-        <VsSelect label="Select an option" items={testValues} itemKey="id" itemValue="value" disabled></VsSelect>
+        <VsSelect label="Select an option" items={testValues} itemKey="id" itemValue="value" loading></VsSelect>
       </div>
       <div style={styles}>
         <VsInput label="Type a text" value="" icon="bx-user" message="test" />
         <VsInput label="Type a text" value="" />
       </div>
+      <div style={styles}>
+        <VsCheckBox value={false} label="Option" />
+        <VsInput label="Type a text" value="" />
+      </div>
+
+      <VsDialog show={display} onClose={() => setDisplay(false)} width="350px">
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 16px 16px 16px' }}>
+          <VsHeader>
+            <h4>
+              Bienvenue sur <b>Budget.</b>
+            </h4>
+          </VsHeader>
+          <VsInput label="Nom d'utilisateur" value="" fullWidth icon="bx-user" />
+          <VsInput label="Mot de passe" value="" fullWidth icon="bxs-lock" type="password" />
+          <VsButton color="primary" fullWidth style={{ marginTop: '16px' }}>
+            Connexion
+          </VsButton>
+        </div>
+      </VsDialog>
     </>
   )
 }

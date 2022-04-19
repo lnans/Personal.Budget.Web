@@ -128,6 +128,7 @@ const ToasterContainerStyled = styled('div')`
   pointer-events: none;
   transition: all 0.25s ease;
   bottom: 0;
+  z-index: 99000;
 `
 
 const ToastStyled = styled('div')<{ bgColor: string; textColor: string }>`

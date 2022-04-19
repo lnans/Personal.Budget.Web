@@ -8,13 +8,14 @@ export interface VsInputProps {
   message?: string
   loading?: boolean
   disabled?: boolean
+  fullWidth?: boolean
   icon?: string
   type?: HTMLInputTypeAttribute
   onChange?: (value: string) => void
 }
 
 export default function VsInput(props: VsInputProps) {
-  const { label, message, loading, disabled, icon, onChange, type } = props
+  const { label, message, loading, disabled, icon, onChange, type, fullWidth } = props
   const [value, setValue] = useState(props.value ?? '')
 
   const styles = {
@@ -29,7 +30,7 @@ export default function VsInput(props: VsInputProps) {
   }
 
   return (
-    <InputParentStyled>
+    <InputParentStyled fullWidth={!!fullWidth}>
       <InputContentStyled isDisabled={!!loading || !!disabled}>
         <InputStyled
           textColor={styles.textColor}
@@ -42,8 +43,8 @@ export default function VsInput(props: VsInputProps) {
         <InputLabelStyled hasValue={!!value}>{label}</InputLabelStyled>
         {loading && <InputLoaderStyled loaderColor={styles.loaderColor} />}
         {message && <InputMessageStyled textColor={styles.messageColor}>{message}</InputMessageStyled>}
-        {!!icon && (
-          <InputIconStyled>
+        {!!icon && !loading && (
+          <InputIconStyled textColor={styles.textColor}>
             <i className={`bx ${icon}`} />
           </InputIconStyled>
         )}
@@ -52,7 +53,7 @@ export default function VsInput(props: VsInputProps) {
   )
 }
 
-const InputParentStyled = styled('div')`
+const InputParentStyled = styled('div')<{ fullWidth: boolean }>`
   display: flex;
   align-self: center;
   justify-content: center;
@@ -61,7 +62,7 @@ const InputParentStyled = styled('div')`
   margin: 26px 5px 5px 5px;
   width: 100%;
   min-width: 150px;
-  max-width: 200px;
+  max-width: ${(props) => (props.fullWidth ? 'none' : '200px')};
 `
 
 const InputContentStyled = styled('div')<{ isDisabled: boolean }>`
@@ -82,9 +83,8 @@ const InputStyled = styled('input')<{ textColor: string; hasIcon: boolean }>`
   background: ${() => `rgba(${colors.gray2}, 1)`};
   color: ${(props) => props.textColor};
   border-radius: inherit;
-  transition: all 0.25s ease;
   padding: 7px 13px 7px 10px;
-  width: 200px;
+  width: 100%;
   outline: none;
   padding-right: ${(props) => (props.hasIcon ? '38px' : '0')};
 
@@ -107,7 +107,6 @@ const InputLabelStyled = styled('label')<{ hasValue: boolean }>`
   position: absolute;
   left: 13px;
   font-size: 0.8rem;
-  transition: all 0.25s ease;
   cursor: text;
   user-select: none;
   pointer-events: none;
@@ -180,12 +179,11 @@ const InputMessageStyled = styled('label')<{ textColor: string }>`
   padding-right: 12px;
   font-size: 0.7rem;
   pointer-events: none;
-  transition: all 0.25s ease;
   color: ${(props) => props.textColor};
   bottom: -20px;
 `
 
-const InputIconStyled = styled('span')`
+const InputIconStyled = styled('span')<{ textColor: string }>`
   left: auto;
   right: 0;
   box-shadow: -12px 0 10px -10px rgba(0, 0, 0, 0.05);
@@ -195,8 +193,8 @@ const InputIconStyled = styled('span')`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s ease;
   border-radius: inherit;
   background: ${() => `rgba(${colors.gray2}, 1)`};
   pointer-events: none;
+  color: ${(props) => props.textColor};
 `

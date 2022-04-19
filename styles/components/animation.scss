@@ -52,3 +52,32 @@
     opacity: 0;
   }
 }
+
+@keyframes dialog {
+  0% {
+    transform: scale(0.8);
+  }
+
+  40% {
+    transform: scale(1.08);
+  }
+
+  80% {
+    transform: scale(0.98);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes dialog-leave {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}

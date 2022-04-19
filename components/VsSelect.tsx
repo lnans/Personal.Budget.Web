@@ -123,7 +123,6 @@ const InputStyled = styled('input')<{ bgColor: string; textColor: string; isActi
   border: 2px solid transparent;
   border-radius: ${(props) => (props.isActive ? '12px 12px 0 0' : '12px')};
   cursor: pointer;
-  transition: all 0.25s ease, height 0s;
   background: ${(props) => props.bgColor};
   color: ${(props) => props.textColor};
   min-height: 38px;
@@ -138,7 +137,6 @@ const SelectIconStyled = styled('i')<{ textColor: string; isActive: boolean; isD
   position: absolute;
   right: 15px;
   margin-top: ${(props) => (props.isActive ? '0' : '-2px')};
-  transition: all 0.25s ease;
   pointer-events: none;
   cursor: pointer;
   width: 7px;
@@ -218,7 +216,6 @@ const SelectPlaceHolderStyled = styled('label')<{ hasValue: boolean }>`
   padding-left: 12px;
   font-size: 0.8rem;
   pointer-events: none;
-  transition: all 0.25s ease;
   opacity: ${(props) => (props.hasValue ? '1' : '.4')};
   transform: ${(props) => (props.hasValue ? 'translate(-3%,-32px)' : 'translate(0,0)')};
 `
@@ -229,7 +226,6 @@ const SelectMessageStyled = styled('label')<{ textColor: string }>`
   padding-right: 12px;
   font-size: 0.7rem;
   pointer-events: none;
-  transition: all 0.25s ease;
   color: ${(props) => props.textColor};
   bottom: -20px;
 `
@@ -258,7 +254,7 @@ const SelectListItemStyled = styled('button')<{ textColor: string; hoverTextColo
   margin: 2px 0;
   padding: 6px 10px;
   text-align: left;
-  transition: all 0.25s ease;
+  transition: padding 0.25s ease;
   cursor: pointer;
   color: ${(props) => props.textColor};
 
@@ -277,6 +273,6 @@ const SelectListItemSelectedStyled = styled('button')<{ bgColor: string; textCol
   margin: 2px 0;
   padding: 6px 10px;
   text-align: left;
-  transition: all 0.25s ease;
+  transition: padding 0.25s ease;
   color: ${(props) => props.textColor};
 `
