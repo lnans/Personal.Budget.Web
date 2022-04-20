@@ -1,0 +1,13 @@
+{
+  "app": "Budget.",
+  "pages": {
+    "login": {
+      "welcome": "Welcome to",
+      "username": "Username",
+      "password": "Password",
+      "login": "Sign In",
+      "remember": "Remember me",
+      "info": "New here? Contact me 😄"
+    }
+  }
+}
