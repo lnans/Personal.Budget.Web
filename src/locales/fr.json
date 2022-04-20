@@ -9,5 +9,10 @@
       "remember": "Rester connecté",
       "info": "Nouveau ici ? Contacte moi 😄"
     }
+  },
+  "errors": {
+    "title": "Erreur",
+    "auth_failed": "Echec d'authentification",
+    "unhandled_exception": "Erreur non gérée"
   }
 }

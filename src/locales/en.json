@@ -9,5 +9,10 @@
       "remember": "Remember me",
       "info": "New here? Contact me 😄"
     }
+  },
+  "errors": {
+    "title": "Error",
+    "auth_failed": "Authentication failed",
+    "unhandled_exception": "Unhandled exception"
   }
 }

@@ -12,18 +12,19 @@ import './plugins/i18n'
 import './plugins/axios'
 
 // Components
-import { RsToaster } from './components'
-import { IndexPage, LoginPage } from './pages'
+import { RsToaster, WithAuthLoader } from './components'
+import { IndexPage } from './pages'
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RsToaster />
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<IndexPage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </BrowserRouter>
+    <WithAuthLoader>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<IndexPage />} />
+        </Routes>
+      </BrowserRouter>
+    </WithAuthLoader>
   </React.StrictMode>
 )

@@ -1,16 +1,25 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
-import { toastAlertService, RsDialog, RsHeader, RsInput, RsCheckBox, RsButton } from '../../components'
+import { RsDialog, RsHeader, RsInput, RsCheckBox, RsButton } from '../../components'
+import SignInRequest from '../../models/auth/signInRequest'
+import { authService } from '../../services/authService'
 import colors from '../../styles/_colors.module.scss'
 
-export default function LoginPage() {
+export interface LoginFormProps {
+  onLogged: (res: boolean) => void
+}
+
+export default function LoginForm(props: LoginFormProps) {
+  const [authForm, setAuthForm] = useState<SignInRequest>(new SignInRequest())
   const [loading, setIsLoading] = useState<boolean>(false)
   const { t } = useTranslation()
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setIsLoading(true)
-    toastAlertService.info('Connexion', "Cette fonctionnalité n'est pas encore implémentée !")
-    setTimeout(() => setIsLoading(false), 2000)
+    await authService
+      .signIn(authForm)
+      .then(() => props.onLogged(true))
+      .finally(() => setIsLoading(false))
   }
 
   return (
@@ -28,6 +37,7 @@ export default function LoginPage() {
           icon="bx-user"
           disabled={loading}
           onEnterKey={handleLogin}
+          onChange={(value) => setAuthForm({ ...authForm, username: value })}
         />
         <RsInput
           label={t('pages.login.password')}
@@ -37,9 +47,10 @@ export default function LoginPage() {
           type="password"
           disabled={loading}
           onEnterKey={handleLogin}
+          onChange={(value) => setAuthForm({ ...authForm, password: value })}
         />
         <RsCheckBox label={t('pages.login.remember')} value={false} compact />
-        <RsButton color="primary" fullWidth style={{ marginTop: '16px' }} onClick={handleLogin}>
+        <RsButton color="primary" fullWidth style={{ marginTop: '16px' }} onClick={handleLogin} loading={loading}>
           {t('pages.login.login')}
         </RsButton>
         <InfoStyled>{t('pages.login.info')}</InfoStyled>
