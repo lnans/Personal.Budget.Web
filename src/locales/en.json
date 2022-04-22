@@ -1,18 +1,29 @@
 {
+  "nav": {
+    "dashboard": "Dashboard",
+    "accounts": "Accounts",
+    "test": "Tests"
+  },
   "app": "Budget.",
+  "errors": {
+    "auth_failed": "Authentication failed",
+    "title": "Error",
+    "unhandled_exception": "Unhandled exception"
+  },
   "pages": {
     "login": {
-      "welcome": "Welcome to",
-      "username": "Username",
-      "password": "Password",
+      "info": "New here? Contact me 😄",
       "login": "Sign In",
+      "password": "Password",
       "remember": "Remember me",
-      "info": "New here? Contact me 😄"
+      "username": "Username",
+      "welcome": "Welcome to"
+    },
+    "dashboard": {
+      "summary_title": "Current month"
+    },
+    "accounts": {
+      "title": "Account list"
     }
-  },
-  "errors": {
-    "title": "Error",
-    "auth_failed": "Authentication failed",
-    "unhandled_exception": "Unhandled exception"
   }
 }

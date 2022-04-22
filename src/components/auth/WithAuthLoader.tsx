@@ -14,8 +14,6 @@ export default function WithAuthLoader(props: WithAuthLoaderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const { t } = useTranslation()
 
-  console.log('loader render')
-
   const checkAuthentication = async () => {
     await authService
       .getAuthInfo()

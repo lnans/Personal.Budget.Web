@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { RsButton, RsCheckBox, RsDialog, RsHeader, RsInput, RsSelect, toastAlertService } from '../../components'
 
-export default function HomePage() {
+export default function TestPage() {
   const [load, setLoad] = useState<boolean>(true)
   const [display, setDisplay] = useState<boolean>(false)
   const testValues = [
@@ -36,7 +36,15 @@ export default function HomePage() {
   ]
 
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <div style={styles}>
         <RsButton color="primary" onClick={() => setLoad(!load)}>
           Set Load
@@ -91,7 +99,7 @@ export default function HomePage() {
           </RsButton>
         </div>
       </RsDialog>
-    </>
+    </div>
   )
 }
 
@@ -101,5 +109,5 @@ const styles = {
   display: 'flex',
   margin: '12px auto',
   padding: '20px',
-  maxWidth: '600px',
+  minWidth: '600px',
 }
