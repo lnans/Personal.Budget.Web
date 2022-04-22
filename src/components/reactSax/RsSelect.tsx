@@ -14,11 +14,12 @@ export interface RsSelectProps {
   loading?: boolean
   disabled?: boolean
   message?: string
+  fullWidth?: boolean
   onChange?: (id: string) => void
 }
 
 export default function RsSelect(props: RsSelectProps) {
-  const { label, items, itemKey, itemValue, onChange, loading, disabled, message } = props
+  const { label, items, itemKey, itemValue, onChange, loading, disabled, message, fullWidth } = props
   const [isActive, setIsActive] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string>()
   const [selectedLabel, setLabelValue] = useState<string>()
@@ -45,7 +46,7 @@ export default function RsSelect(props: RsSelectProps) {
     messageColor: `rgba(${colors.error}, 1)`,
   }
   return (
-    <SelectContentSlyled>
+    <SelectContentSlyled fullWidth={!!fullWidth}>
       <SelectStyled isDisabled={!!loading || !!disabled}>
         <InputStyled
           onFocus={() => setIsActive(true)}
@@ -95,12 +96,16 @@ export default function RsSelect(props: RsSelectProps) {
   )
 }
 
-const SelectContentSlyled = styled('div')`
+const SelectContentSlyled = styled('div')<{ fullWidth: boolean }>`
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  margin: 26px 5px 5px 5px;
   width: 100%;
   min-width: 150px;
-  max-width: 200px;
-  margin: 26px 5px 5px 5px;
-  display: flex;
+  max-width: ${(props) => (props.fullWidth ? 'none' : '200px')};
 `
 
 const SelectStyled = styled('div')<{ isDisabled: boolean }>`

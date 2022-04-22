@@ -54,7 +54,7 @@ const DialogBackDropStyled = styled('div')`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.05);
-  backdrop-filter: saturate(180%) blur(15px);
+  backdrop-filter: saturate(180%) blur(8px);
   z-index: 98000;
   align-items: center;
   justify-content: center;

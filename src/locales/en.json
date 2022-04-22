@@ -23,7 +23,15 @@
       "summary_title": "Current month"
     },
     "accounts": {
-      "title": "Account list"
+      "title": "Account list",
+      "form": {
+        "title": "New account",
+        "name": "Account name",
+        "bank": "Bank",
+        "type": "Type",
+        "balance": "Initial amount",
+        "create": "Create account"
+      }
     }
   }
 }

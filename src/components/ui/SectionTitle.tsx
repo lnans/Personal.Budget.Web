@@ -14,6 +14,9 @@ const TitleStyled = styled('p')`
   font-weight: 700;
   font-size: 1.5rem;
   border-bottom: ${() => `1px solid rgba(${colors.gray4}, 1)`};
+  padding-top: 40px;
   padding-bottom: 7px;
+  margin-bottom: 7px;
   width: 100%;
+  display: inline-flex;
 `

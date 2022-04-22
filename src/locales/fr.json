@@ -23,7 +23,15 @@
       "summary_title": "Mois en cours"
     },
     "accounts": {
-      "title": "Liste des comptes"
+      "title": "Liste des comptes",
+      "form": {
+        "title": "Nouveau compte",
+        "name": "Nom du compte",
+        "bank": "Banque",
+        "type": "Type",
+        "balance": "Montant initial",
+        "create": "Créer le compte"
+      }
     }
   }
 }
