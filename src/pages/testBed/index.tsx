@@ -1,5 +1,5 @@
+import { RsButton, toastAlertService, RsSelect, RsInput, RsCheckBox, RsDialog, RsHeader } from '@components'
 import { useState } from 'react'
-import { RsButton, RsCheckBox, RsDialog, RsHeader, RsInput, RsSelect, toastAlertService } from '../../components'
 
 export default function TestPage() {
   const [load, setLoad] = useState<boolean>(true)

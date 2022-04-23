@@ -1,6 +1,6 @@
+import { toastAlertService } from '@components'
+import ErrorResponse from '@models/common/errorResponse'
 import axios, { AxiosResponse } from 'axios'
-import { toastAlertService } from '../components'
-import ErrorResponse from '../models/common/errorResponse'
 import i18n from './i18n'
 
 export type HttpResponse<T> = Promise<AxiosResponse<T>>

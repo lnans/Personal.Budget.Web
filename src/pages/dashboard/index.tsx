@@ -1,5 +1,5 @@
+import { SectionTitle } from '@components'
 import { useTranslation } from 'react-i18next'
-import { SectionTitle } from '../../components'
 
 export default function DashboardPage() {
   const { t } = useTranslation()

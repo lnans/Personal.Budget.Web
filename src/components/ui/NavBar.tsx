@@ -1,8 +1,8 @@
+import { APP_ROUTES } from '@constants'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { APP_ROUTES } from '../../constants'
 import colors from '../../styles/_colors.module.scss'
 
 export default function NavBar() {

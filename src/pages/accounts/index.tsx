@@ -1,8 +1,8 @@
+import { AccountTile, NewAccountTile, RsDialog, SectionTitle } from '@components'
+import { AccountDetailsResponse } from '@models/account/AccountDetailsResponse'
+import { accountsService } from '@services'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AccountTile, NewAccountTile, RsDialog, SectionTitle } from '../../components'
-import { AccountDetailsResponse } from '../../models/account/AccountDetailsResponse'
-import { accountsService } from '../../services/accountsService'
 import CreateAccountForm from './create/CreateAccountForm'
 
 export default function AccountsPage() {

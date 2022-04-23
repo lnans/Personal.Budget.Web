@@ -1,9 +1,9 @@
+import { authService } from '@services'
 import { ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
-import LoginForm from './LoginForm'
 import colors from '../../styles/_colors.module.scss'
-import { authService } from '../../services/authService'
+import LoginForm from './LoginForm'
 
 export interface WithAuthLoaderProps {
   children: ReactNode

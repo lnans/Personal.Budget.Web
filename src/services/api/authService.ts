@@ -1,7 +1,7 @@
-import AuthInfoResponse from '../models/auth/authInfoResponse'
-import SignInRequest from '../models/auth/signInRequest'
-import SignInResponse from '../models/auth/signInResponse'
-import { http, HttpResponse } from './../plugins/axios'
+import AuthInfoResponse from '@models/auth/authInfoResponse'
+import SignInRequest from '@models/auth/signInRequest'
+import SignInResponse from '@models/auth/signInResponse'
+import { http, HttpResponse } from '@plugins/axios'
 
 class AuthService {
   async getAuthInfo(): HttpResponse<AuthInfoResponse> {
@@ -18,4 +18,4 @@ class AuthService {
 
 const authService = new AuthService()
 
-export { authService }
+export default authService

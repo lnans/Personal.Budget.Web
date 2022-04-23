@@ -1,5 +1,5 @@
+import { AccountDetailsResponse } from '@models/account/AccountDetailsResponse'
 import styled, { css } from 'styled-components'
-import { AccountDetailsResponse } from '../../../models/account/AccountDetailsResponse'
 import colors from '../../../styles/_colors.module.scss'
 
 export interface AccountTileProps {

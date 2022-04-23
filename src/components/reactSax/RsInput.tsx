@@ -11,7 +11,7 @@ export interface RsInputProps {
   fullWidth?: boolean
   icon?: string
   type?: HTMLInputTypeAttribute
-  onChange?: (value: string) => void
+  onChange?: (value: string | number) => void
   onEnterKey?: () => void
 }
 
@@ -29,7 +29,7 @@ export default function RsInput(props: RsInputProps) {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
-    onChange && onChange(e.target.value)
+    onChange && onChange(type === 'number' ? Number.parseFloat(e.target.value) : e.target.value)
   }
 
   const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -56,6 +56,7 @@ export default function RsInput(props: RsInputProps) {
           tabIndex={loading || disabled ? -1 : undefined}
           hasIcon={!!icon}
           type={!!type ? type : 'text'}
+          lang={type === 'number' ? 'en' : undefined}
         />
         <InputLabelStyled hasValue={!!value}>{label}</InputLabelStyled>
         {loading && <InputLoaderStyled loaderColor={styles.loaderColor} />}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
+
 export interface RsDialogProps {
   show: boolean
   onClose?: () => void

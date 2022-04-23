@@ -1,9 +1,9 @@
+import { RsButton, RsCheckBox, RsDialog, RsHeader, RsInput } from '@components'
+import SignInRequest from '@models/auth/signInRequest'
+import { authService } from '@services'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
-import { RsDialog, RsHeader, RsInput, RsCheckBox, RsButton } from '../../components'
-import SignInRequest from '../../models/auth/signInRequest'
-import { authService } from '../../services/authService'
 import colors from '../../styles/_colors.module.scss'
 
 export interface LoginFormProps {
@@ -37,7 +37,7 @@ export default function LoginForm(props: LoginFormProps) {
           icon="bx-user"
           disabled={loading}
           onEnterKey={handleLogin}
-          onChange={(value) => setAuthForm({ ...authForm, username: value })}
+          onChange={(value) => setAuthForm({ ...authForm, username: value.toString() })}
         />
         <RsInput
           label={t('pages.login.password')}
@@ -47,7 +47,7 @@ export default function LoginForm(props: LoginFormProps) {
           type="password"
           disabled={loading}
           onEnterKey={handleLogin}
-          onChange={(value) => setAuthForm({ ...authForm, password: value })}
+          onChange={(value) => setAuthForm({ ...authForm, password: value.toString() })}
         />
         <RsCheckBox label={t('pages.login.remember')} value={false} compact />
         <RsButton color="primary" fullWidth style={{ marginTop: '16px' }} onClick={handleLogin} loading={loading}>
