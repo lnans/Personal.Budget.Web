@@ -53,7 +53,7 @@ export default function RsInput(props: RsInputProps) {
           value={value ?? ''}
           onChange={handleChange}
           onKeyUp={handleEnterKey}
-          tabIndex={loading || disabled ? -1 : undefined}
+          disabled={!!loading || !!disabled}
           hasIcon={!!icon}
           type={!!type ? type : 'text'}
           lang={type === 'number' ? 'en' : undefined}

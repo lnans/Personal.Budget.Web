@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // styles
 import 'boxicons/css/boxicons.min.css'
-import './styles/globals.scss'
+import './app.scss'
 
 // plugins
 import '@plugins/i18n'

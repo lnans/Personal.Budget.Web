@@ -1,4 +1,4 @@
-import { RsButton, toastAlertService, RsSelect, RsInput, RsCheckBox, RsDialog, RsHeader } from '@components'
+import { Button, toastAlertService, RsSelect, CheckBox, RsDialog, RsHeader, TextField, SelectField } from '@components'
 import { useState } from 'react'
 
 export default function TestPage() {
@@ -46,43 +46,44 @@ export default function TestPage() {
       }}
     >
       <div style={styles}>
-        <RsButton color="primary" onClick={() => setLoad(!load)}>
+        <Button color="primary" onClick={() => setLoad(!load)}>
           Set Load
-        </RsButton>
-        <RsButton color="primary" onClick={() => setDisplay(true)}>
+        </Button>
+        <Button color="primary" onClick={() => setDisplay(true)}>
           Open Dialog
-        </RsButton>
-        <RsButton color="error">Supprimer</RsButton>
-        <RsButton
+        </Button>
+        <Button color="error">Supprimer</Button>
+        <Button
           color="success"
           onClick={() => toastAlertService.info('Action', 'Nouvelle opération créé avec succès !')}
         >
           Toast !
-        </RsButton>
-        <RsButton color="primary" disabled>
+        </Button>
+        <Button color="primary" disabled>
           disabled
-        </RsButton>
-        <RsButton color="primary" loading={load}>
+        </Button>
+        <Button color="primary" loading={load}>
           loading
-        </RsButton>
+        </Button>
       </div>
       <div style={styles}>
-        <RsSelect
+        <SelectField
           label="Select an option"
           items={testValues}
           itemKey="id"
           itemValue="value"
           message="Required"
-        ></RsSelect>
-        <RsSelect label="Select an option" items={testValues} itemKey="id" itemValue="value" loading></RsSelect>
+        ></SelectField>
+        <RsSelect label="Select an option" items={testValues} itemKey="id" itemValue="value"></RsSelect>
       </div>
       <div style={styles}>
-        <RsInput label="Type a text" value="" icon="bx-user" message="test" />
-        <RsInput label="Type a text" value="" />
+        <TextField label="Type a text" value="" icon="bx-user" message="test" />
+        <TextField label="I'm disabled" value="" disabled />
+        <TextField label="I'm disabled" value="" loading />
       </div>
       <div style={styles}>
-        <RsCheckBox value={false} label="Option" />
-        <RsInput label="Type a text" value="" />
+        <CheckBox value={false} label="Option" />
+        <TextField label="Type a text" value="" />
       </div>
 
       <RsDialog show={display} onClose={() => setDisplay(false)} width="350px">
@@ -92,11 +93,11 @@ export default function TestPage() {
               Bienvenue sur <b>Budget.</b>
             </h4>
           </RsHeader>
-          <RsInput label="Nom d'utilisateur" value="" fullWidth icon="bx-user" />
-          <RsInput label="Mot de passe" value="" fullWidth icon="bxs-lock" type="password" />
-          <RsButton color="primary" fullWidth style={{ marginTop: '16px' }}>
+          <TextField label="Nom d'utilisateur" value="" fullWidth icon="bx-user" />
+          <TextField label="Mot de passe" value="" fullWidth icon="bxs-lock" type="password" />
+          <Button color="primary" fullWidth style={{ marginTop: '16px' }}>
             Connexion
-          </RsButton>
+          </Button>
         </div>
       </RsDialog>
     </div>
@@ -109,5 +110,5 @@ const styles = {
   display: 'flex',
   margin: '12px auto',
   padding: '20px',
-  minWidth: '600px',
+  minWidth: '650px',
 }
