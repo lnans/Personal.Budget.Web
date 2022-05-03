@@ -1,18 +1,19 @@
-export { default as WithAuthLoader } from './auth/WithAuthLoader'
-export { default as RsButton } from './reactSax/RsButton'
-export { default as RsCheckBox } from './reactSax/RsCheckBox'
-export { default as RsDialog } from './reactSax/RsDialog'
-export { default as RsHeader } from './reactSax/RsHeader'
-export { default as RsInput } from './reactSax/RsInput'
-export { default as RsSelect } from './reactSax/RsSelect'
-export { default as RsToaster, toastAlertService } from './reactSax/RsToaster'
-export { default as AccountTile } from './ui/account/AccountTile'
-export { default as NewAccountTile } from './ui/account/NewAccountTile'
-export { default as MainContainer } from './ui/MainContainer'
-export { default as NavBar } from './ui/NavBar'
-export { default as SectionTitle } from './ui/SectionTitle'
-
+// controls
 export { default as Button } from './controls/button/button'
 export { default as CheckBox } from './controls/check-box/check-box'
 export { default as TextField } from './controls/text-field/text-field'
 export { default as SelectField } from './controls/select-field/select-field'
+
+// ui
+export { default as Toaster } from './ui/toaster/toaster'
+export { default as Main } from './ui/main/main'
+export { default as NavBar } from './ui/navbar/navbar'
+export { default as SectionTitle } from './ui/section-title/section-title'
+export { default as Dialog } from './ui/dialog/dialog'
+export { toastSender } from './ui/toaster/toast-sender'
+
+// functional
+export { default as AccountTile } from './functional/account/account-tile/account-tile'
+export { default as AccountTileNew } from './functional/account/account-tile-new/account-tile-new'
+
+export { default as WithAuthLoader } from './auth/WithAuthLoader'

@@ -1,4 +1,4 @@
-import { AccountTile, NewAccountTile, RsDialog, SectionTitle } from '@components'
+import { AccountTile, AccountTileNew, Dialog, SectionTitle } from '@components'
 import { AccountDetailsResponse } from '@models/account/AccountDetailsResponse'
 import { accountsService } from '@services'
 import { useEffect, useState } from 'react'
@@ -30,11 +30,11 @@ export default function AccountsPage() {
           onClick={(id) => setSelectedAccount(id)}
         />
       ))}
-      <NewAccountTile onClick={() => setCreateAccount(true)} />
+      <AccountTileNew onClick={() => setCreateAccount(true)} />
 
-      <RsDialog show={isCreating} onClose={() => setCreateAccount(false)} closable>
+      <Dialog show={isCreating} onClose={() => setCreateAccount(false)} closable>
         <CreateAccountForm />
-      </RsDialog>
+      </Dialog>
     </>
   )
 }

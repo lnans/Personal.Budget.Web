@@ -1,4 +1,4 @@
-import { RsButton, RsHeader, RsInput, RsSelect } from '@components'
+import { Button, TextField, SelectField } from '@components'
 import { AccountType } from '@models/account/AccountTypeEnum'
 import { CreateAccountRequest } from '@models/account/CreateAccountRequest'
 import { useEffect, useState } from 'react'
@@ -24,28 +24,20 @@ export default function CreateAccountForm() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 16px 16px 16px' }}>
-      <RsHeader>{t('pages.accounts.form.title')}</RsHeader>
       <div style={{ display: 'flex' }}>
-        <RsInput
+        <TextField
           label={t('pages.accounts.form.name')}
           value={form.name ?? ''}
           onChange={(value) => setForm({ ...form, name: value.toString() })}
         />
-        <RsInput
+        <TextField
           label={t('pages.accounts.form.bank')}
           value={form.bank ?? ''}
           onChange={(value) => setForm({ ...form, bank: value.toString() })}
         />
       </div>
       <div style={{ display: 'flex' }}>
-        <RsInput
-          label={t('pages.accounts.form.balance')}
-          value={form.initialBalance === 0 ? '' : form.initialBalance.toString()}
-          type="number"
-          icon="bx-euro"
-          onChange={(value) => setForm({ ...form, initialBalance: Number.parseFloat(value.toString()) })}
-        />
-        <RsSelect
+        <SelectField
           label={t('pages.accounts.form.type')}
           itemKey="id"
           itemValue="label"
@@ -54,9 +46,9 @@ export default function CreateAccountForm() {
         />
       </div>
 
-      <RsButton color="primary" style={{ margin: '16px 5px 0 5px', alignSelf: 'center' }}>
+      <Button color="primary" style={{ margin: '16px 5px 0 5px', alignSelf: 'center' }}>
         {t('pages.accounts.form.create')}
-      </RsButton>
+      </Button>
     </div>
   )
 }

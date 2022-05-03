@@ -1,4 +1,4 @@
-import { Button, toastAlertService, RsSelect, CheckBox, RsDialog, RsHeader, TextField, SelectField } from '@components'
+import { Button, CheckBox, Dialog, TextField, SelectField, toastSender } from '@components'
 import { useState } from 'react'
 
 export default function TestPage() {
@@ -53,10 +53,7 @@ export default function TestPage() {
           Open Dialog
         </Button>
         <Button color="error">Supprimer</Button>
-        <Button
-          color="success"
-          onClick={() => toastAlertService.info('Action', 'Nouvelle opération créé avec succès !')}
-        >
+        <Button color="success" onClick={() => toastSender.info('Action', 'Nouvelle opération créé avec succès !')}>
           Toast !
         </Button>
         <Button color="primary" disabled>
@@ -74,7 +71,7 @@ export default function TestPage() {
           itemValue="value"
           message="Required"
         ></SelectField>
-        <RsSelect label="Select an option" items={testValues} itemKey="id" itemValue="value"></RsSelect>
+        <SelectField label="Select an option" items={testValues} itemKey="id" itemValue="value"></SelectField>
       </div>
       <div style={styles}>
         <TextField label="Type a text" value="" icon="bx-user" message="test" />
@@ -86,20 +83,15 @@ export default function TestPage() {
         <TextField label="Type a text" value="" />
       </div>
 
-      <RsDialog show={display} onClose={() => setDisplay(false)} width="350px">
+      <Dialog title="Bienvenue sur Budget." show={display} onClose={() => setDisplay(false)} width="350px">
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 16px 16px 16px' }}>
-          <RsHeader>
-            <h4>
-              Bienvenue sur <b>Budget.</b>
-            </h4>
-          </RsHeader>
           <TextField label="Nom d'utilisateur" value="" fullWidth icon="bx-user" />
           <TextField label="Mot de passe" value="" fullWidth icon="bxs-lock" type="password" />
           <Button color="primary" fullWidth style={{ marginTop: '16px' }}>
             Connexion
           </Button>
         </div>
-      </RsDialog>
+      </Dialog>
     </div>
   )
 }

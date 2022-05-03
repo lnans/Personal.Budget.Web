@@ -37,8 +37,8 @@ export default function Dialog(props: DialogProps) {
   return (
     <>
       {isDisplay && (
-        <div className={dialogClasses} style={{ minWidth: width ?? '300px' }} data-testid="dialog">
-          <div className="dialog">
+        <div className="dialog-backdrop">
+          <div className={dialogClasses} style={{ minWidth: width ?? '300px' }} data-testid="dialog">
             {(closable === undefined || !!closable) && (
               <button className="dialog-button" onClick={handleClose} data-testid="dialog-button">
                 <i className="dialog-button-icon" />

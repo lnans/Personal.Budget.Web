@@ -12,7 +12,7 @@ import '@plugins/i18n'
 import '@plugins/axios'
 
 // Components
-import { MainContainer, NavBar, RsToaster, WithAuthLoader } from '@components'
+import { Main, NavBar, Toaster, WithAuthLoader } from '@components'
 import { AccountsPage, DashboardPage, TestPage } from './pages'
 import { APP_ROUTES } from '@constants'
 
@@ -22,15 +22,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <WithAuthLoader>
       <BrowserRouter>
         <NavBar />
-        <MainContainer>
+        <Main>
           <Routes>
             <Route path={APP_ROUTES.dashboard.path} element={<DashboardPage />} />
             <Route path={APP_ROUTES.accounts.path} element={<AccountsPage />} />
             <Route path={APP_ROUTES.test.path} element={<TestPage />} />
           </Routes>
-        </MainContainer>
+        </Main>
       </BrowserRouter>
     </WithAuthLoader>
-    <RsToaster />
+    <Toaster />
   </React.StrictMode>
 )
