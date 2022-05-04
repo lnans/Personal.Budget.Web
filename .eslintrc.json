@@ -1,5 +1,6 @@
 {
   "root": true,
+  "ignorePatterns": ["setupTest.ts"],
   "plugins": ["@typescript-eslint", "react", "css-modules"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
