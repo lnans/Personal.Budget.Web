@@ -1,4 +1,4 @@
-import { Button, CheckBox, Dialog, TextField, SelectField, toastSender } from '@components'
+import { Button, CheckBox, Dialog, TextInput, SelectInput, toastSender } from '@components'
 import { useState } from 'react'
 
 export default function TestBedPage() {
@@ -64,29 +64,29 @@ export default function TestBedPage() {
         </Button>
       </div>
       <div style={styles}>
-        <SelectField
+        <SelectInput
           label="Select an option"
           items={testValues}
           itemKey="id"
           itemValue="value"
           message="Required"
-        ></SelectField>
-        <SelectField label="Select an option" items={testValues} itemKey="id" itemValue="value"></SelectField>
+        ></SelectInput>
+        <SelectInput label="Select an option" items={testValues} itemKey="id" itemValue="value"></SelectInput>
       </div>
       <div style={styles}>
-        <TextField label="Type a text" value="" icon="bx-user" message="test" />
-        <TextField label="I'm disabled" value="" disabled />
-        <TextField label="I'm disabled" value="" loading />
+        <TextInput label="Type a text" value="" icon="bx-user" message="test" />
+        <TextInput label="I'm disabled" value="" disabled />
+        <TextInput label="I'm disabled" value="" loading />
       </div>
       <div style={styles}>
         <CheckBox value={false} label="Option" />
-        <TextField label="Type a text" value="" />
+        <TextInput label="Type a text" value="" />
       </div>
 
       <Dialog title="Bienvenue sur Budget." show={display} onClose={() => setDisplay(false)} width="350px">
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 16px 16px 16px' }}>
-          <TextField label="Nom d'utilisateur" value="" fullWidth icon="bx-user" />
-          <TextField label="Mot de passe" value="" fullWidth icon="bxs-lock" type="password" />
+          <TextInput label="Nom d'utilisateur" value="" fullWidth icon="bx-user" />
+          <TextInput label="Mot de passe" value="" fullWidth icon="bxs-lock" type="password" />
           <Button color="primary" fullWidth style={{ marginTop: '16px' }}>
             Connexion
           </Button>

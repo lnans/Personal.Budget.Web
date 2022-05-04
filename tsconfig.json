@@ -21,8 +21,7 @@
       "@pages": ["pages"],
       "@plugins/*": ["plugins/*"],
       "@models/*": ["models/*"],
-      "@services": ["services"],
-      "@constants": ["constants"]
+      "@services": ["services"]
     }
   },
   "include": ["src"],

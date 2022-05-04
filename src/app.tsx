@@ -1,10 +1,8 @@
-import { Main, Toaster, AuthProvider } from '@components'
-import { APP_ROUTES } from '@constants'
+import { Main, NavBar } from '@components'
 import { AccountsPage, DashboardPage, TestBedPage } from '@pages'
-import NavBar, { NavBarRoute } from 'components/ui/Navbar/Navbar'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './app.scss'
 
 export default function App() {
@@ -13,7 +11,12 @@ export default function App() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
-  const routes: NavBarRoute[] = Object.keys(APP_ROUTES).map((key: string) => APP_ROUTES[key])
+
+  const appRoutes = {
+    dashboard: { path: '/', name: t('nav.dashboard'), icon: 'bx bx-tachometer' },
+    accounts: { path: '/accounts', name: t('nav.accounts'), icon: 'bx bxs-wallet' },
+    test: { path: '/test', name: t('nav.test'), icon: 'bx bx-test-tube' },
+  }
 
   useEffect(() => {
     setCurrentPath(location.pathname)
@@ -21,19 +24,14 @@ export default function App() {
 
   return (
     <>
-      <AuthProvider>
-        <BrowserRouter>
-          <NavBar title={t('app')} routes={routes} currentPath={currentPath} onNavigate={navigate} />
-          <Main>
-            <Routes>
-              <Route path={APP_ROUTES.dashboard.path} element={<DashboardPage />} />
-              <Route path={APP_ROUTES.accounts.path} element={<AccountsPage />} />
-              <Route path={APP_ROUTES.test.path} element={<TestBedPage />} />
-            </Routes>
-          </Main>
-        </BrowserRouter>
-      </AuthProvider>
-      <Toaster />
+      <NavBar title={t('app')} routes={appRoutes} currentPath={currentPath} onNavigate={navigate} />
+      <Main>
+        <Routes>
+          <Route path={appRoutes.dashboard.path} element={<DashboardPage />} />
+          <Route path={appRoutes.accounts.path} element={<AccountsPage />} />
+          <Route path={appRoutes.test.path} element={<TestBedPage />} />
+        </Routes>
+      </Main>
     </>
   )
 }

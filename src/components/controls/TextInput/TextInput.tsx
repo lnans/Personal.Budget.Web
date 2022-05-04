@@ -62,7 +62,7 @@ export default function TextField(props: TextFieldProps) {
           onKeyUp={handleEnterKey}
           disabled={!!loading || !!disabled}
           type={type ?? 'text'}
-          autoComplete="false"
+          autoComplete="off"
         />
         <label htmlFor={uid} className="input__label">
           {label}

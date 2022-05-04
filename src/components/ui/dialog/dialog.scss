@@ -16,6 +16,7 @@
 
 .dialog {
   display: flex;
+  flex-direction: column;
   background: #fff;
   min-height: 150px;
   border-radius: 20px;
