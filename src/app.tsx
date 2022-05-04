@@ -1,36 +1,39 @@
-// React
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
-// styles
-import 'boxicons/css/boxicons.min.css'
+import { Main, Toaster, AuthProvider } from '@components'
+import { APP_ROUTES } from '@constants'
+import { AccountsPage, DashboardPage, TestBedPage } from '@pages'
+import NavBar, { NavBarRoute } from 'components/ui/Navbar/Navbar'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './app.scss'
 
-// plugins
-import '@plugins/i18n'
-import '@plugins/axios'
+export default function App() {
+  const [currentPath, setCurrentPath] = useState<string>('/')
 
-// Components
-import { Main, NavBar, Toaster, WithAuthLoader } from '@components'
-import { AccountsPage, DashboardPage, TestPage } from './pages'
-import { APP_ROUTES } from '@constants'
+  const { t } = useTranslation()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const routes: NavBarRoute[] = Object.keys(APP_ROUTES).map((key: string) => APP_ROUTES[key])
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <WithAuthLoader>
-      <BrowserRouter>
-        <NavBar />
-        <Main>
-          <Routes>
-            <Route path={APP_ROUTES.dashboard.path} element={<DashboardPage />} />
-            <Route path={APP_ROUTES.accounts.path} element={<AccountsPage />} />
-            <Route path={APP_ROUTES.test.path} element={<TestPage />} />
-          </Routes>
-        </Main>
-      </BrowserRouter>
-    </WithAuthLoader>
-    <Toaster />
-  </React.StrictMode>
-)
+  useEffect(() => {
+    setCurrentPath(location.pathname)
+  }, [location])
+
+  return (
+    <>
+      <AuthProvider>
+        <BrowserRouter>
+          <NavBar title={t('app')} routes={routes} currentPath={currentPath} onNavigate={navigate} />
+          <Main>
+            <Routes>
+              <Route path={APP_ROUTES.dashboard.path} element={<DashboardPage />} />
+              <Route path={APP_ROUTES.accounts.path} element={<AccountsPage />} />
+              <Route path={APP_ROUTES.test.path} element={<TestBedPage />} />
+            </Routes>
+          </Main>
+        </BrowserRouter>
+      </AuthProvider>
+      <Toaster />
+    </>
+  )
+}

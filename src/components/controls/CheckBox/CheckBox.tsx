@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useUID } from 'react-uid'
-import './check-box.scss'
+import './CheckBox.scss'
 
 export interface CheckBoxProps {
   label: string

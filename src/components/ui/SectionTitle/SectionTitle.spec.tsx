@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import SectionTitle from './section-title'
+import SectionTitle from './SectionTitle'
 
 describe('● Render:', () => {
   test('should render childrens', () => {

@@ -1,19 +1,19 @@
 // controls
-export { default as Button } from './controls/button/button'
-export { default as CheckBox } from './controls/check-box/check-box'
-export { default as TextField } from './controls/text-field/text-field'
-export { default as SelectField } from './controls/select-field/select-field'
+export { default as Button } from './controls/Button/Button'
+export { default as CheckBox } from './controls/CheckBox/CheckBox'
+export { default as TextInput } from './controls/TextInput/TextInput'
+export { default as SelectInput } from './controls/SelectInput/SelectInput'
 
 // ui
-export { default as Toaster } from './ui/toaster/toaster'
-export { default as Main } from './ui/main/main'
-export { default as NavBar } from './ui/navbar/navbar'
-export { default as SectionTitle } from './ui/section-title/section-title'
-export { default as Dialog } from './ui/dialog/dialog'
-export { toastSender } from './ui/toaster/toast-sender'
+export { default as Toaster } from './ui/Toaster/Toaster'
+export { default as Main } from './ui/Main/Main'
+export { default as NavBar } from './ui/Navbar/Navbar'
+export { default as SectionTitle } from './ui/SectionTitle/SectionTitle'
+export { default as Dialog } from './ui/Dialog/Dialog'
+export { toastSender } from './ui/Toaster/ToastSender'
 
 // functional
-export { default as AccountTile } from './functional/account/account-tile/account-tile'
-export { default as AccountTileNew } from './functional/account/account-tile-new/account-tile-new'
-
-export { default as WithAuthLoader } from './auth/WithAuthLoader'
+export { default as AuthProvider } from './functional/auth-provider/AuthProvider'
+export { default as AuthForm } from './functional/auth-form/AuthForm'
+export { default as AccountTile } from './functional/account/AccountTile/AccountTile'
+export { default as AccountTileNew } from './functional/account/AccountTileNew/AccountTileNew'

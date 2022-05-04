@@ -1,7 +1,7 @@
 import { Button, CheckBox, Dialog, TextField, SelectField, toastSender } from '@components'
 import { useState } from 'react'
 
-export default function TestPage() {
+export default function TestBedPage() {
   const [load, setLoad] = useState<boolean>(true)
   const [display, setDisplay] = useState<boolean>(false)
   const testValues = [

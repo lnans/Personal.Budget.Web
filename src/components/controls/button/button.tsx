@@ -1,6 +1,6 @@
 import { CSSProperties, useEffect, useState } from 'react'
 import clsx from 'clsx'
-import './button.scss'
+import './Button.scss'
 
 export type ButtonColor = 'primary' | 'success' | 'error' | 'default'
 export interface ButtonProps {

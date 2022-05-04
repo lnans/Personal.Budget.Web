@@ -10,15 +10,17 @@
     "title": "Error",
     "unhandled_exception": "Unhandled exception"
   },
-  "pages": {
-    "login": {
+  "components": {
+    "auth_form": {
       "info": "New here? Contact me 😄",
       "login": "Sign In",
       "password": "Password",
       "remember": "Remember me",
       "username": "Username",
       "welcome": "Welcome to"
-    },
+    }
+  },
+  "pages": {
     "dashboard": {
       "summary_title": "Current month"
     },

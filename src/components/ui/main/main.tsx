@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import './main.scss'
+import './Main.scss'
 
 export interface MainProps {
   children: ReactNode

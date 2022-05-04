@@ -1,4 +1,4 @@
-import { toastReceiver } from './toast-receiver'
+import { toastReceiver } from './ToastReceiver'
 
 export type ToastType = 'success' | 'info' | 'warning' | 'error'
 

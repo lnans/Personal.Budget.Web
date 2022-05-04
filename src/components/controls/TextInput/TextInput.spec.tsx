@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import TextField from './text-field'
+import TextField from './TextInput'
 
 describe('● Render:', () => {
   test('default should render active', async () => {

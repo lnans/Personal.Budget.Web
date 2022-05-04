@@ -10,15 +10,17 @@
     "title": "Erreur",
     "unhandled_exception": "Erreur non gérée"
   },
-  "pages": {
-    "login": {
+  "components": {
+    "auth_form": {
       "info": "Nouveau ici ? Contacte moi 😄",
       "login": "Connexion",
       "password": "Mot de passe",
       "remember": "Rester connecté",
       "username": "Nom d'utilisateur",
       "welcome": "Bienvenue sur"
-    },
+    }
+  },
+  "pages": {
     "dashboard": {
       "summary_title": "Mois en cours"
     },

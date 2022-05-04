@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { ReactNode, useEffect, useState } from 'react'
-import './dialog.scss'
+import './Dialog.scss'
 
 export interface DialogProps {
   show: boolean

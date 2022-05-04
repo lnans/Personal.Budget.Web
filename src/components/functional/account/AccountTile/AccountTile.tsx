@@ -1,6 +1,6 @@
 import { AccountDetailsResponse } from '@models/account/AccountDetailsResponse'
 import clsx from 'clsx'
-import './account-tile.scss'
+import './AccountTile.scss'
 
 export interface AccountTileProps {
   account: AccountDetailsResponse

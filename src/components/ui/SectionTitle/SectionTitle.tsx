@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import './section-title.scss'
+import './SectionTitle.scss'
 
 export interface SectionTitleProps {
   children: ReactNode

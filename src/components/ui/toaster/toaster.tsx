@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { toastReceiver } from './toast-receiver'
-import { ToastMessage } from './toast-sender'
-import './toaster.scss'
+import { toastReceiver } from './ToastReceiver'
+import { ToastMessage } from './ToastSender'
+import './Toaster.scss'
 
 export default function Toaster() {
   const [toastList, setToastList] = useState<ToastMessage[]>([])

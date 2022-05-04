@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react'
-import CheckBox from './check-box'
+import CheckBox from './CheckBox'
 
 describe('● Render:', () => {
   test('should render checked', async () => {

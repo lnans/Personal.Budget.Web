@@ -1,4 +1,4 @@
-import './account-tile-new.scss'
+import './AccountTileNew.scss'
 
 export interface AccounTileNewProps {
   onClick: () => void

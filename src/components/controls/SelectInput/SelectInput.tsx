@@ -1,8 +1,7 @@
 import clsx from 'clsx'
-import { RsSelectItem } from 'components/reactSax/RsSelect'
 import { Fragment, useEffect, useState } from 'react'
 import { useUID } from 'react-uid'
-import './select-field.scss'
+import './SelectInput.scss'
 
 export type SelectItem = {
   [key in string]: string
@@ -45,7 +44,7 @@ export default function SelectField(props: SelectProps) {
     }
   }
 
-  const handleOnSelect = (item: RsSelectItem) => {
+  const handleOnSelect = (item: SelectItem) => {
     setSelectedValue(item[itemKey])
     setLabelValue(item[itemValue])
     setIsActive(false)

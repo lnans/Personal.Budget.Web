@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useUID } from 'react-uid'
-import './text-field.scss'
+import './TextInput.scss'
 
 export type TestFieldType = 'text' | 'password'
 

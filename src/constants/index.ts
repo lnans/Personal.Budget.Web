@@ -5,7 +5,7 @@ export interface AppNavRoute {
 }
 export type AppNavNames = 'dashboard' | 'accounts' | 'test'
 export type AppNavRoutes = {
-  [key in AppNavNames]: AppNavRoute
+  [key in string]: AppNavRoute
 }
 export const APP_ROUTES: AppNavRoutes = {
   dashboard: {

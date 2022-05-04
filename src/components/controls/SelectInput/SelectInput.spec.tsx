@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import SelectField from './select-field'
+import SelectField from './SelectInput'
 
 const items = [
   { id: '1', value: 'Label 1' },
