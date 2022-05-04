@@ -2,18 +2,18 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import NavBar from './Navbar'
 
-const routes = [
-  {
+const routes = {
+  home: {
     icon: '',
     path: '/',
     name: 'home',
   },
-  {
+  accounts: {
     icon: '',
     path: '/accounts',
     name: 'accounts',
   },
-]
+}
 
 describe('● Render:', () => {
   test('default should render navbar with items', async () => {

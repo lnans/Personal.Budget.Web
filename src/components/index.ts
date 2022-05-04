@@ -13,7 +13,7 @@ export { default as Dialog } from './ui/Dialog/Dialog'
 export { toastSender } from './ui/Toaster/ToastSender'
 
 // functional
-export { default as AuthProvider } from './functional/auth-provider/AuthProvider'
-export { default as AuthForm } from './functional/auth-form/AuthForm'
+export { default as AuthProvider } from './functional/AuthProvider/AuthProvider'
+export { default as AuthForm } from './functional/AuthForm/AuthForm'
 export { default as AccountTile } from './functional/account/AccountTile/AccountTile'
 export { default as AccountTileNew } from './functional/account/AccountTileNew/AccountTileNew'

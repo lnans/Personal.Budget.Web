@@ -1,4 +1,5 @@
 import { toastReceiver } from './ToastReceiver'
+import crypto from 'crypto'
 
 export type ToastType = 'success' | 'info' | 'warning' | 'error'
 

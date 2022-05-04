@@ -28,13 +28,15 @@ export default function AccountTile(props: AccountTileProps) {
   })
 
   return (
-    <div className={containerClasses} onClick={handleClick}>
+    <div className={containerClasses} onClick={handleClick} data-testid="account-tile-container">
       <h4 className="account-tile-title">{account.name}</h4>
       <div className="account-tile-balance-container">
         <div className="account-tile-icon">
           <i className="bx bx-coin"></i>
         </div>
-        <p className={balanceClasses}>{account.balance.toString().replace('.', ',')} €</p>
+        <p className={balanceClasses} data-testid="account-tile-balance">
+          {account.balance.toString().replace('.', ',')} €
+        </p>
       </div>
       <div className="account-tile-info">
         <p>{account.bank}</p>

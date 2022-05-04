@@ -5,7 +5,7 @@ import i18n from './i18n'
 
 export type HttpResponse<T> = Promise<AxiosResponse<T>>
 
-export const http = axios.create({ baseURL: import.meta.env.VITE_API_BASE_URL })
+export const http = axios.create({ baseURL: process.env.VITE_API_BASE_URL })
 
 http.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')

@@ -2,10 +2,11 @@ import { defineConfig } from 'vite'
 import eslintPlugin from 'vite-plugin-eslint'
 import react from '@vitejs/plugin-react'
 import * as path from 'path'
+import EnvironmentPlugin from 'vite-plugin-environment'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), eslintPlugin({ exclude: '**/*.(scss|scss?used)' })],
+  plugins: [react(), eslintPlugin({ exclude: '**/*.(scss|scss?used)' }), EnvironmentPlugin('all', { prefix: 'VITE_' })],
   envDir: 'env',
   resolve: {
     alias: {

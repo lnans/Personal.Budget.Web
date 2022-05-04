@@ -18,7 +18,7 @@ export default function Toaster() {
   }, [])
 
   return (
-    <div className="toast-container">
+    <div className="toast-container" data-testid="toast-container">
       {toastList.map((toast) => (
         <Toast key={toast.id} toast={toast} duration={3000} onClose={onCloseToast} />
       ))}
@@ -79,7 +79,7 @@ function Toast(props: ToastProps) {
   })
 
   return (
-    <div className={toastClasses}>
+    <div className={toastClasses} data-testid="toast">
       <div className="toast-message-container">
         <i className={iconClasses}></i>
         <div className="toast-message-content">
@@ -89,7 +89,7 @@ function Toast(props: ToastProps) {
           <p className="toast-message">{toast.message}</p>
         </div>
       </div>
-      <button className="toast-close-button" onClick={handleClose}>
+      <button className="toast-close-button" onClick={handleClose} data-testid="toast-close-button">
         <i className="toast-close-icon"></i>
       </button>
     </div>

@@ -1,5 +1,10 @@
 export default {
-  collectCoverageFrom: ['./src/components/**/*.{js,jsx,tsx}', '!**/node_modules/**', '!**/dist/**'],
+  collectCoverageFrom: [
+    './src/components/**/*.{js,jsx,tsx,ts}',
+    '!./src/components/index.ts',
+    '!**/node_modules/**',
+    '!**/dist/**',
+  ],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/dist', 'public', 'env'],
   verbose: true,
@@ -7,7 +12,20 @@ export default {
     '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
   moduleNameMapper: {
+    '@models/(.*)': '<rootDir>/src/models/$1',
+    '@components': '<rootDir>/src/components',
+    '@services': '<rootDir>/src/services',
+    '@plugins/(.*)': '<rootDir>/src/plugins/$1',
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },
-  setupFilesAfterEnv: ['<rootDir>/test.config.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTest.ts'],
+  maxWorkers: 1,
+  coverageThreshold: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+    },
+  },
 }

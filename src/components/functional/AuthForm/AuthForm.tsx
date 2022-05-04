@@ -23,7 +23,7 @@ export default function AuthForm(props: AuthFormProps) {
 
   return (
     <Dialog show={true} closable={false} width="350px">
-      <div className="auth-form-container">
+      <div className="auth-form-container" data-testid="auth-form">
         <header className="auth-form-header">
           <h4>
             {t('components.auth_form.welcome')} <b>{t('app')}</b>
