@@ -76,7 +76,7 @@ describe('● Render', () => {
   })
 })
 
-describe('When user close toast', () => {
+describe('● When user close toast', () => {
   test('should remove toast', () => {
     render(<Toaster />)
     act(() => {

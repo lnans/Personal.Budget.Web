@@ -1,5 +1,5 @@
 import { AuthForm } from '@components'
-import { authService } from '@services'
+import { AuthService } from '@services'
 import { ReactNode, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import './AuthProvider.scss'
@@ -14,10 +14,15 @@ export default function AuthProvider(props: AuthProviderProps) {
   const { t } = useTranslation()
 
   const checkAuthentication = async () => {
-    await authService
-      .getAuthInfo()
-      .then(() => setIsAuthenticated(true))
-      .finally(() => setIsLoading(false))
+    try {
+      const authService = new AuthService()
+      await authService
+        .getAuthInfo()
+        .then(() => setIsAuthenticated(true))
+        .finally(() => setIsLoading(false))
+    } catch {
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {

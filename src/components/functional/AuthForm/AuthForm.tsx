@@ -1,7 +1,9 @@
 import { Button, CheckBox, Dialog, TextInput } from '@components'
-import SignInRequest from '@models/auth/signInRequest'
-import { authService } from '@services'
+import { SignInRequest, SignInRequestValidator } from '@models/auth/signInRequest'
+import { AuthService } from '@services'
+import { useFormValidator } from '@hooks/useFormWithSchema'
 import { useState } from 'react'
+import { SubmitHandler } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import './AuthForm.scss'
 
@@ -10,20 +12,27 @@ export interface AuthFormProps {
 }
 
 export default function AuthForm(props: AuthFormProps) {
-  const [authForm, setAuthForm] = useState<SignInRequest>(new SignInRequest())
   const [loading, setIsLoading] = useState<boolean>(false)
   const { t } = useTranslation()
-  const handleLogin = async () => {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useFormValidator<SignInRequest>(SignInRequestValidator)
+
+  const onSubmit: SubmitHandler<SignInRequest> = async (form: SignInRequest) => {
     setIsLoading(true)
+    const authService = new AuthService()
     await authService
-      .signIn(authForm)
+      .signIn(form)
       .then(() => props.onLogged(true))
       .finally(() => setIsLoading(false))
   }
 
   return (
     <Dialog show={true} closable={false} width="350px">
-      <div className="auth-form-container" data-testid="auth-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="auth-form-container" data-testid="auth-form">
         <header className="auth-form-header">
           <h4>
             {t('components.auth_form.welcome')} <b>{t('app')}</b>
@@ -31,29 +40,31 @@ export default function AuthForm(props: AuthFormProps) {
         </header>
         <TextInput
           label={t('components.auth_form.username')}
-          value=""
+          defaultValue=""
           fullWidth
           icon="bx-user"
           disabled={loading}
-          onEnterKey={handleLogin}
-          onChange={(value) => setAuthForm({ ...authForm, username: value.toString() })}
+          register={register}
+          name="username"
+          error={!!errors.username?.message ? t(errors.username.message) : undefined}
         />
         <TextInput
           label={t('components.auth_form.password')}
-          value=""
+          defaultValue=""
           fullWidth
           icon="bxs-lock"
           type="password"
           disabled={loading}
-          onEnterKey={handleLogin}
-          onChange={(value) => setAuthForm({ ...authForm, password: value.toString() })}
+          register={register}
+          name="password"
+          error={!!errors.password?.message ? t(errors.password.message) : undefined}
         />
         <CheckBox label={t('components.auth_form.remember')} value={false} compact />
-        <Button color="primary" fullWidth style={{ marginTop: '16px' }} onClick={handleLogin} loading={loading}>
+        <Button color="primary" fullWidth style={{ marginTop: '16px' }} loading={loading}>
           {t('components.auth_form.login')}
         </Button>
         <div className="auth-form-info">{t('components.auth_form.info')}</div>
-      </div>
+      </form>
     </Dialog>
   )
 }

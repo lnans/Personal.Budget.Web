@@ -3,6 +3,7 @@ export { default as Button } from './controls/Button/Button'
 export { default as CheckBox } from './controls/CheckBox/CheckBox'
 export { default as TextInput } from './controls/TextInput/TextInput'
 export { default as SelectInput } from './controls/SelectInput/SelectInput'
+export { default as CurrencyInput } from './controls/CurrencyInput/CurrencyInput'
 
 // ui
 export { default as Toaster } from './ui/Toaster/Toaster'

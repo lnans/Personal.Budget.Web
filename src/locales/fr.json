@@ -8,7 +8,8 @@
   "errors": {
     "auth_failed": "Echec d'authentification",
     "title": "Erreur",
-    "unhandled_exception": "Erreur non gérée"
+    "unhandled_exception": "Erreur non gérée",
+    "required": "Obligatoire"
   },
   "components": {
     "auth_form": {

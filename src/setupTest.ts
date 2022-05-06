@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
 import { AxiosResponse } from 'axios'
+import crypto from 'crypto'
 
 jest.useFakeTimers()
 jest.mock('@plugins/i18n', () => ({
@@ -17,6 +18,12 @@ jest.mock('react-i18next', () => ({
     }
   },
 }))
+
+Object.defineProperty(global.self, 'crypto', {
+  value: {
+    randomUUID: () => crypto.randomUUID(),
+  },
+})
 
 export function createAxiosResponse<T>(data: T) {
   const axiosResponse: AxiosResponse<T, any> = {

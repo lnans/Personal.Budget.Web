@@ -1,44 +1,59 @@
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { UseFormRegister, Path, RefCallBack, ChangeHandler } from 'react-hook-form'
 import { useUID } from 'react-uid'
 import './TextInput.scss'
 
 export type TestFieldType = 'text' | 'password'
 
-export interface TextFieldProps {
+type RegisterTypes = {
+  onBlur: ChangeHandler
+  name: string
+  min?: string | number | undefined
+  max?: string | number | undefined
+  maxLength?: number | undefined
+  minLength?: number | undefined
+  pattern?: string | undefined
+  required?: boolean | undefined
+  disabled?: boolean | undefined
+}
+
+export interface TextFieldProps<TFormValues> {
   label: string
-  value: string
-  message?: string
+  defaultValue: string
+  error?: string
   loading?: boolean
   disabled?: boolean
   fullWidth?: boolean
   icon?: string
   type?: TestFieldType
-  onChange?: (value: string | number) => void
-  onEnterKey?: () => void
+  register?: UseFormRegister<TFormValues>
+  name?: Path<TFormValues>
 }
 
-export default function TextField(props: TextFieldProps) {
-  const { label, message, loading, disabled, icon, fullWidth, type, onChange, onEnterKey } = props
-  const [value, setValue] = useState(props.value)
+export default function TextField<TFormValues>(props: TextFieldProps<TFormValues>) {
+  const { label, defaultValue, error, loading, disabled, icon, fullWidth, type, name, register } = props
   const uid = useUID()
+  const [isEmpty, setIsEmpty] = useState<boolean>(!defaultValue)
 
-  const ref = useRef<HTMLInputElement>(null)
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-    onChange && onChange(e.target.value)
+  // Conditional hook form settings
+  let ref: RefCallBack | undefined
+  let onChange: ChangeHandler | undefined
+  let formRegister: RegisterTypes | undefined
+  if (register && name) {
+    ;({ ref, onChange, ...formRegister } = register(name))
   }
 
-  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onEnterKey && onEnterKey()
-    }
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsEmpty(!e.target.value)
+    onChange && onChange(e)
   }
 
   useEffect(() => {
-    if ((disabled || loading) && ref?.current) {
-      ref.current.blur()
+    if ((disabled || loading) && inputRef?.current) {
+      inputRef.current.blur()
     }
   }, [disabled, loading])
 
@@ -47,7 +62,7 @@ export default function TextField(props: TextFieldProps) {
     'input--fullWidth': fullWidth,
     'input--disabled': disabled,
     'input--hasIcon': !!icon,
-    'input--hasValue': !!value,
+    'input--hasValue': !isEmpty,
   })
 
   return (
@@ -56,10 +71,13 @@ export default function TextField(props: TextFieldProps) {
         <input
           id={uid}
           className="input"
-          ref={ref}
-          defaultValue={value}
-          onChange={handleChange}
-          onKeyUp={handleEnterKey}
+          ref={(e) => {
+            ref && ref(e)
+            inputRef.current = e
+          }}
+          {...formRegister}
+          onChange={handleOnChange}
+          defaultValue={defaultValue}
           disabled={!!loading || !!disabled}
           type={type ?? 'text'}
           autoComplete="off"
@@ -68,9 +86,9 @@ export default function TextField(props: TextFieldProps) {
           {label}
         </label>
         {loading && <div className="input__loader" />}
-        {message && (
+        {error && (
           <label htmlFor={uid} className="input__message">
-            {message}
+            {error}
           </label>
         )}
         {!!icon && !loading && (

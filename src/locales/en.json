@@ -8,7 +8,8 @@
   "errors": {
     "auth_failed": "Authentication failed",
     "title": "Error",
-    "unhandled_exception": "Unhandled exception"
+    "unhandled_exception": "Unhandled exception",
+    "required": "required"
   },
   "components": {
     "auth_form": {

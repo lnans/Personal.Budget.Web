@@ -13,6 +13,7 @@ export default {
   },
   moduleNameMapper: {
     '@models/(.*)': '<rootDir>/src/models/$1',
+    '@hooks/(.*)': '<rootDir>/src/hooks/$1',
     '@components': '<rootDir>/src/components',
     '@services': '<rootDir>/src/services',
     '@plugins/(.*)': '<rootDir>/src/plugins/$1',

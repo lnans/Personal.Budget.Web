@@ -21,6 +21,7 @@
       "@pages": ["pages"],
       "@plugins/*": ["plugins/*"],
       "@models/*": ["models/*"],
+      "@hooks/*": ["hooks/*"],
       "@services": ["services"]
     }
   },

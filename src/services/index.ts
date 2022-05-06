@@ -1,2 +1,2 @@
 export { default as accountsService } from './api/accountsService'
-export { default as authService } from './api/authService'
+export { default as AuthService } from './api/authService'

@@ -1,19 +1,30 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
+import { UseFormRegister } from 'react-hook-form'
 import TextField from './TextInput'
+
+type TestRequest = { value: string }
+const onChange = jest.fn()
+const register: UseFormRegister<TestRequest> = () => ({
+  ref: () => jest.fn(),
+  onChange,
+  onBlur: jest.fn(),
+  name: 'value',
+})
 
 describe('● Render:', () => {
   test('default should render active', async () => {
-    render(<TextField label="Field" value="Value" />)
+    render(<TextField label="Field" defaultValue="Value" register={register} name="value" />)
 
     const input = await screen.findByRole('textbox')
 
     expect(input).toBeTruthy()
     expect(input).toBeInTheDocument()
+    expect(input).not.toBeDisabled()
   })
 
   test('loading should render disabled', async () => {
-    render(<TextField label="Field" value="Value" loading />)
+    render(<TextField label="Field" defaultValue="Value" register={register} name="value" loading />)
 
     const input = await screen.findByRole('textbox')
 
@@ -23,7 +34,7 @@ describe('● Render:', () => {
   })
 
   test('disabled should render disabled', async () => {
-    render(<TextField label="Field" value="Value" disabled />)
+    render(<TextField label="Field" defaultValue="Value" register={register} name="value" disabled />)
 
     const input = await screen.findByRole('textbox')
 
@@ -32,17 +43,17 @@ describe('● Render:', () => {
     expect(input).toBeDisabled()
   })
 
-  test('with message should render error label', async () => {
-    render(<TextField label="Field" value="Value" message="error" />)
+  test('with errors should render error label', async () => {
+    render(<TextField label="Field" defaultValue="Value" register={register} name="value" error="error" />)
 
-    const input = await screen.findByLabelText('error')
+    const error = await screen.findByLabelText('error')
 
-    expect(input).toBeTruthy()
-    expect(input).toBeInTheDocument()
+    expect(error).toBeTruthy()
+    expect(error).toBeInTheDocument()
   })
 
   test('with icon should render span icon', async () => {
-    render(<TextField label="Field" value="Value" icon="error" />)
+    render(<TextField label="Field" defaultValue="Value" register={register} name="value" icon="error" />)
 
     const input = await screen.findAllByTestId('input__icon')
 
@@ -52,7 +63,7 @@ describe('● Render:', () => {
   })
 
   test('password should render with password type', async () => {
-    render(<TextField label="Field" value="Value" type="password" />)
+    render(<TextField label="Field" defaultValue="Value" register={register} name="value" type="password" />)
 
     const input = await screen.findByLabelText('Field')
 
@@ -62,35 +73,20 @@ describe('● Render:', () => {
   })
 })
 
-describe('● When user type:', () => {
-  test('something should trigger value', async () => {
-    // Arrange
-    const onChange = jest.fn()
-    render(<TextField label="Field" value="" onChange={(value) => onChange(value)} />)
+describe('● When user type', () => {
+  test('should trigger onChange', async () => {
+    const { onChange } = register('value')
+    render(<TextField label="Field" defaultValue="Value" register={register} name="value" />)
     const input = await screen.findByRole('textbox')
 
-    // Act
     act(() => {
       fireEvent.change(input, { target: { value: 'v' } })
     })
 
+    expect(input).toBeTruthy()
+    expect(input).toBeInTheDocument()
+
     // Assert
     expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange).toHaveBeenCalledWith('v')
-  })
-
-  test('"Enter" should trigger onEnterKey', async () => {
-    // Arrange
-    const onEnter = jest.fn()
-    render(<TextField label="Field" value="" onEnterKey={onEnter} />)
-    const input = await screen.findByRole('textbox')
-
-    // Act
-    act(() => {
-      fireEvent.keyUp(input, { key: 'Enter', code: 'Enter', charCode: 13 })
-    })
-
-    // Assert
-    expect(onEnter).toHaveBeenCalledTimes(1)
   })
 })
