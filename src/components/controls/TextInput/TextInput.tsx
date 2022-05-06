@@ -1,22 +1,11 @@
+import { useRegisterOrUndefined } from '@hooks/useRegisterOrUndefined'
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { UseFormRegister, Path, RefCallBack, ChangeHandler } from 'react-hook-form'
+import { Path, UseFormRegister } from 'react-hook-form'
 import { useUID } from 'react-uid'
 import './TextInput.scss'
 
 export type TestFieldType = 'text' | 'password'
-
-type RegisterTypes = {
-  onBlur: ChangeHandler
-  name: string
-  min?: string | number | undefined
-  max?: string | number | undefined
-  maxLength?: number | undefined
-  minLength?: number | undefined
-  pattern?: string | undefined
-  required?: boolean | undefined
-  disabled?: boolean | undefined
-}
 
 export interface TextFieldProps<TFormValues> {
   label: string
@@ -36,15 +25,8 @@ export default function TextField<TFormValues>(props: TextFieldProps<TFormValues
   const uid = useUID()
   const [isEmpty, setIsEmpty] = useState<boolean>(!defaultValue)
 
-  // Conditional hook form settings
-  let ref: RefCallBack | undefined
-  let onChange: ChangeHandler | undefined
-  let formRegister: RegisterTypes | undefined
-  if (register && name) {
-    ;({ ref, onChange, ...formRegister } = register(name))
-  }
-
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const { inputRef, onChange, formRegister } = useRegisterOrUndefined(register, name)
+  const _inputRef = useRef<HTMLInputElement | null>(null)
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsEmpty(!e.target.value)
@@ -52,8 +34,8 @@ export default function TextField<TFormValues>(props: TextFieldProps<TFormValues
   }
 
   useEffect(() => {
-    if ((disabled || loading) && inputRef?.current) {
-      inputRef.current.blur()
+    if ((disabled || loading) && _inputRef?.current) {
+      _inputRef.current.blur()
     }
   }, [disabled, loading])
 
@@ -72,8 +54,8 @@ export default function TextField<TFormValues>(props: TextFieldProps<TFormValues
           id={uid}
           className="input"
           ref={(e) => {
-            ref && ref(e)
-            inputRef.current = e
+            inputRef && inputRef(e)
+            _inputRef.current = e
           }}
           {...formRegister}
           onChange={handleOnChange}

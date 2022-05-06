@@ -1,18 +1,24 @@
 import { useOuterClick } from '@hooks/useOuterClick'
+import { useRegisterOrUndefined } from '@hooks/useRegisterOrUndefined'
 import clsx from 'clsx'
 import { useState } from 'react'
+import { Path, UseFormRegister } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useUID } from 'react-uid'
 import './DatePicker.scss'
 import { DayDetails, daysMap, getLocaleDateString, getMonthDetails, monthMap } from './DatePickerFunctions'
 
-export interface DatePickerProps {
+export interface DatePickerProps<TFormValues> {
   label: string
+  defaultValue?: string
+  register?: UseFormRegister<TFormValues>
+  name?: Path<TFormValues>
 }
 
-export default function DatePicker(props: DatePickerProps) {
-  const { label } = props
-  const [value, setValue] = useState<string>('')
+export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValues>) {
+  const { label, defaultValue, register, name } = props
+
+  const [value, setValue] = useState<string>(defaultValue ?? '')
   const [labelValue, setLabelValue] = useState<string>('')
   const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear())
   const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth())
@@ -20,6 +26,7 @@ export default function DatePicker(props: DatePickerProps) {
 
   const uid = useUID()
   const calendarRef = useOuterClick<HTMLDivElement>(() => setIsActive(false))
+  const { inputRef, onChange, formRegister } = useRegisterOrUndefined(register, name)
   const {
     t,
     i18n: { language },
@@ -86,7 +93,17 @@ export default function DatePicker(props: DatePickerProps) {
   return (
     <div ref={calendarRef} className={containerClasses}>
       <div className="date-picker-content">
-        <input id={uid} readOnly value={value} className="date-picker" type="text" onFocus={() => setIsActive(true)} />
+        <input
+          id={uid}
+          readOnly
+          ref={inputRef}
+          onChange={onChange}
+          {...formRegister}
+          value={value}
+          className="date-picker"
+          type="text"
+          onFocus={() => setIsActive(true)}
+        />
         <label htmlFor={uid} className="date-picker__label">
           {label}
         </label>

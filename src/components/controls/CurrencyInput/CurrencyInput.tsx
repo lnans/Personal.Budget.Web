@@ -1,21 +1,10 @@
 //import { useState } from 'react'
+import { useRegisterOrUndefined } from '@hooks/useRegisterOrUndefined'
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { ChangeHandler, Path, RefCallBack, UseFormRegister } from 'react-hook-form'
+import { Path, UseFormRegister } from 'react-hook-form'
 import { useUID } from 'react-uid'
 import './CurrencyInput.scss'
-
-type RegisterTypes = {
-  onBlur: ChangeHandler
-  name: string
-  min?: string | number | undefined
-  max?: string | number | undefined
-  maxLength?: number | undefined
-  minLength?: number | undefined
-  pattern?: string | undefined
-  required?: boolean | undefined
-  disabled?: boolean | undefined
-}
 
 export interface CurrencyInputProps<TFormValues> {
   label: string
@@ -32,15 +21,10 @@ export default function CurrencyInput<TFormValues>(props: CurrencyInputProps<TFo
   const defaultMask = '__.__€'
   const uid = useUID()
   const [mask, setMask] = useState(defaultMask)
-  const inputRef = useRef<HTMLInputElement | null>(null)
 
   // Conditional hook form settings
-  let ref: RefCallBack | undefined
-  let onChange: ChangeHandler | undefined
-  let formRegister: RegisterTypes | undefined
-  if (register && name) {
-    ;({ ref, onChange, ...formRegister } = register(name))
-  }
+  const { inputRef, onChange, formRegister } = useRegisterOrUndefined(register, name)
+  const _inputRef = useRef<HTMLInputElement | null>(null)
 
   const calculateMask = (value: string): string => {
     let mask = ''
@@ -58,8 +42,8 @@ export default function CurrencyInput<TFormValues>(props: CurrencyInputProps<TFo
   }, [])
 
   useEffect(() => {
-    if (disabled && inputRef?.current) {
-      inputRef.current.blur()
+    if (disabled && _inputRef?.current) {
+      _inputRef.current.blur()
     }
   }, [disabled])
 
@@ -92,8 +76,8 @@ export default function CurrencyInput<TFormValues>(props: CurrencyInputProps<TFo
       <div className="currency-input-content">
         <input
           ref={(e) => {
-            ref && ref(e)
-            inputRef.current = e
+            inputRef && inputRef(e)
+            _inputRef.current = e
           }}
           {...formRegister}
           id={uid}
