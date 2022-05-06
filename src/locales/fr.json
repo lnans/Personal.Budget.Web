@@ -19,6 +19,31 @@
       "remember": "Rester connecté",
       "username": "Nom d'utilisateur",
       "welcome": "Bienvenue sur"
+    },
+    "calendar": {
+      "day": {
+        "sunday": "Dim.",
+        "monday": "Lu.",
+        "tuesday": "Ma.",
+        "wednesday": "Mer.",
+        "thursday": "Jeu.",
+        "friday": "Ven.",
+        "saturday": "Sam."
+      },
+      "month": {
+        "january": "Janvier",
+        "february": "Février",
+        "march": "Mars",
+        "april": "Avril",
+        "may": "Mai",
+        "june": "Juin",
+        "july": "Juillet",
+        "august": "Août",
+        "september": "Septembre",
+        "october": "Octobre",
+        "november": "Novembre",
+        "december": "Décembre"
+      }
     }
   },
   "pages": {

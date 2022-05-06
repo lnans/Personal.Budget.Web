@@ -1,4 +1,4 @@
-import { Button, CheckBox, Dialog, TextInput, SelectInput, toastSender, CurrencyInput } from '@components'
+import { Button, CheckBox, Dialog, TextInput, SelectInput, toastSender, CurrencyInput, DatePicker } from '@components'
 import { useFormValidator } from '@hooks/useFormWithSchema'
 import { useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
@@ -90,6 +90,10 @@ export default function TestBedPage() {
         <Button color="primary" loading={load}>
           loading
         </Button>
+      </div>
+
+      <div style={styles}>
+        <DatePicker label="Date d'ouverture" />
       </div>
       <div style={styles}>
         <SelectInput
