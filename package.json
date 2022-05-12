@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --mode dev",
-    "lint": "eslint src && prettier -w --loglevel warn .",
+    "lint": "eslint src && prettier -w src",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest --no-cache",
