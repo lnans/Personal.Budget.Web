@@ -49,6 +49,11 @@
   padding: 7px 13px 7px 10px;
   width: 100%;
   outline: none;
+  transition: background-color 0.25s ease;
+
+  &:focus {
+    background-color: rgba(var(--color-gray3), 1);
+  }
 
   &:focus ~ .input__label {
     opacity: 1;

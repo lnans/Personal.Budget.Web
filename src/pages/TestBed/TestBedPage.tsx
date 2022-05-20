@@ -1,17 +1,19 @@
 import { Button, CheckBox, Dialog, TextInput, SelectInput, toastSender, CurrencyInput, DatePicker } from '@components'
 import { useFormValidator } from '@hooks/useFormWithSchema'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
 import * as Yup from 'yup'
 
 type TestForm = {
   user: string
   amount: number
+  date: string
 }
 
 const TestFormValidator = Yup.object().shape({
   user: Yup.string().required('errors.required'),
   amount: Yup.number().typeError('type error').required('errors.required'),
+  date: Yup.string().required('errors.required'),
 })
 
 export default function TestBedPage() {
@@ -22,7 +24,13 @@ export default function TestBedPage() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useFormValidator<TestForm>(TestFormValidator)
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => console.log(value, name, type))
+    return () => subscription.unsubscribe()
+  }, [watch])
 
   const onSubmit: SubmitHandler<TestForm> = (data: TestForm) => {
     console.log(data)
@@ -92,9 +100,29 @@ export default function TestBedPage() {
         </Button>
       </div>
 
-      <div style={styles}>
-        <DatePicker label="Date d'ouverture" />
-      </div>
+      <form style={styles} onSubmit={handleSubmit(onSubmit, onError)}>
+        <TextInput
+          fullWidth
+          label="User"
+          defaultValue=""
+          register={register}
+          name="user"
+          icon="bx-user"
+          error={errors?.user?.message ?? ''}
+        />
+        <CurrencyInput
+          fullWidth
+          label="Montant"
+          defaultValue={10}
+          register={register}
+          name="amount"
+          error={errors.amount?.message ?? ''}
+        />
+        <DatePicker label="Date d'ouverture" register={register} name="date" defaultValue="" disabled />
+        <Button color="primary" style={{ marginTop: '26px' }}>
+          Test
+        </Button>
+      </form>
       <div style={styles}>
         <SelectInput
           label="Select an option"
@@ -114,28 +142,6 @@ export default function TestBedPage() {
         <CheckBox value={false} label="Option" />
         <TextInput label="Type a text" defaultValue="" />
       </div>
-      <form style={styles} onSubmit={handleSubmit(onSubmit, onError)}>
-        <TextInput
-          fullWidth
-          label="User"
-          defaultValue=""
-          register={register}
-          name="user"
-          icon="bx-user"
-          error={errors?.user?.message ?? ''}
-        />
-        <CurrencyInput
-          fullWidth
-          label="Montant"
-          defaultValue={10}
-          register={register}
-          name="amount"
-          error={errors.amount?.message ?? ''}
-        />
-        <Button color="primary" style={{ marginTop: '26px' }}>
-          Test
-        </Button>
-      </form>
 
       <Dialog title="Bienvenue sur Budget." show={display} onClose={() => setDisplay(false)} width="350px">
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 16px 16px 16px' }}>

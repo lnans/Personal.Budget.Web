@@ -20,6 +20,7 @@
   }
 
   &.select--isActive .select {
+    background-color: rgba(var(--color-bg-white), 1);
     border-radius: 12px 12px 0 0 !important;
     box-shadow: 0 5px 25px -4px rgba(0, 0, 0, 0.05);
   }
@@ -57,6 +58,7 @@
   padding: 7px 30px 7px 13px;
   width: 100%;
   outline: none;
+  transition: background-color 0.25s ease;
 
   &:disabled,
   &:disabled ~ .select__icon {
@@ -155,7 +157,7 @@
 
 .select-list-items {
   position: absolute;
-  background-color: rgba(var(--color-gray2));
+  background-color: rgba(var(--color-bg-white), 1);
   max-height: 200px;
   width: 100%;
   top: 22px;

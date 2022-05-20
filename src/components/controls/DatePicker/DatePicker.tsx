@@ -1,7 +1,7 @@
 import { useOuterClick } from '@hooks/useOuterClick'
 import { useRegisterOrUndefined } from '@hooks/useRegisterOrUndefined'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { Path, UseFormRegister } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useUID } from 'react-uid'
@@ -11,12 +11,13 @@ import { DayDetails, daysMap, getLocaleDateString, getMonthDetails, monthMap } f
 export interface DatePickerProps<TFormValues> {
   label: string
   defaultValue?: string
+  disabled?: boolean
   register?: UseFormRegister<TFormValues>
   name?: Path<TFormValues>
 }
 
 export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValues>) {
-  const { label, defaultValue, register, name } = props
+  const { label, defaultValue, disabled, register, name } = props
 
   const [value, setValue] = useState<string>(defaultValue ?? '')
   const [labelValue, setLabelValue] = useState<string>('')
@@ -27,10 +28,32 @@ export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValu
   const uid = useUID()
   const calendarRef = useOuterClick<HTMLDivElement>(() => setIsActive(false))
   const { inputRef, onChange, formRegister } = useRegisterOrUndefined(register, name)
+  const _inputRef = useRef<HTMLInputElement | null>(null)
   const {
     t,
     i18n: { language },
   } = useTranslation()
+
+  /**
+   * Select event on calendar
+   * Trigger native input event to use value input and react hook form
+   * @param {DayDetails} day Selected day
+   */
+  const onSelectDate = (day: DayDetails) => {
+    setLabelValue(getLocaleDateString(language, day.timeStamp))
+
+    const nativeInputSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set
+    nativeInputSetter?.call(_inputRef.current, new Date(day.timeStamp).toISOString())
+
+    const e = new Event('input', { bubbles: true })
+    _inputRef.current?.dispatchEvent(e)
+  }
+
+  const nativeInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+    setIsActive(false)
+    onChange && onChange(e)
+  }
 
   const changeYear = (offset: number) => {
     setCurrentYear((old) => old + offset)
@@ -50,44 +73,11 @@ export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValu
     setCurrentMonth(month)
   }
 
-  const onSelectDate = (day: DayDetails) => {
-    setValue(new Date(day.timeStamp).toISOString())
-    setLabelValue(getLocaleDateString(language, day.timeStamp))
-  }
-
-  const Calendar = () => {
-    const days = getMonthDetails(currentYear, currentMonth).map((day, index) => {
-      return (
-        <div
-          className={'calendar-day-container' + (day.month !== 0 ? ' disabled' : '')}
-          key={index}
-          onClick={() => day.month === 0 && onSelectDate(day)}
-        >
-          <div className={`calendar-day` + (new Date(day.timeStamp).toISOString() === value ? ' current' : '')}>
-            {day.date}
-          </div>
-        </div>
-      )
-    })
-
-    return (
-      <div className="calendar-container">
-        <div className="calendar-header">
-          {daysMap.map((d, i) => (
-            <div key={i} className="calendar-header-days">
-              {t(d)}
-            </div>
-          ))}
-        </div>
-        <div className="calendar-body">{days}</div>
-      </div>
-    )
-  }
-
   const containerClasses = clsx({
     'date-picker-container': true,
     'date-picker--isActive': isActive,
     'date-picker--hasValue': !!value,
+    'date-picker--disabled': disabled,
   })
 
   return (
@@ -95,28 +85,41 @@ export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValu
       <div className="date-picker-content">
         <input
           id={uid}
+          data-testid="date-picker"
           readOnly
-          ref={inputRef}
-          onChange={onChange}
+          disabled={!!disabled}
+          ref={(e) => {
+            inputRef && inputRef(e)
+            _inputRef.current = e
+          }}
           {...formRegister}
-          value={value}
+          onChange={nativeInputChange}
+          defaultValue={defaultValue}
           className="date-picker"
           type="text"
           onFocus={() => setIsActive(true)}
+          autoComplete="off"
         />
+        <span className="date-picker__icon">
+          <i className="bx bx-calendar" />
+        </span>
+
         <label htmlFor={uid} className="date-picker__label">
           {label}
         </label>
         <label htmlFor={uid} className="date-picker__value">
           {labelValue}
         </label>
+
+        {/* Calendar container */}
         {isActive && (
-          <div id="test" className="date-picker-calendar">
+          <div className="date-picker-calendar" data-testid="date-picker-calendar">
+            {/* Calendar controls */}
             <div className="date-picker-calendar__header">
-              <button className="date-picker-calendar_button" onClick={() => changeYear(-1)}>
+              <button type="button" className="date-picker-calendar_button" onClick={() => changeYear(-1)}>
                 <i className="bx bx-chevrons-left" />
               </button>
-              <button className="date-picker-calendar_button" onClick={() => changeMonth(-1)}>
+              <button type="button" className="date-picker-calendar_button" onClick={() => changeMonth(-1)}>
                 <i className="bx bx-chevron-left" />
               </button>
               <div className="date-picker-calendar__current">
@@ -125,15 +128,44 @@ export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValu
                   {t(`components.calendar.month.${monthMap[currentMonth]}`)}
                 </p>
               </div>
-              <button className="date-picker-calendar_button" onClick={() => changeMonth(1)}>
+              <button type="button" className="date-picker-calendar_button" onClick={() => changeMonth(1)}>
                 <i className="bx bx-chevron-right" />
               </button>
-              <button className="date-picker-calendar_button" onClick={() => changeYear(1)}>
+              <button type="button" className="date-picker-calendar_button" onClick={() => changeYear(1)}>
                 <i className="bx bx-chevrons-right" />
               </button>
             </div>
+
+            {/* Calendar Body */}
             <div className="date-picker-calendar__body">
-              <Calendar />
+              <div className="calendar-container">
+                {/* Calendar week days labels */}
+                <div className="calendar-header">
+                  {daysMap.map((d, i) => (
+                    <div key={i} className="calendar-header-days">
+                      {t(d)}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Calendar days list */}
+                <div className="calendar-body">
+                  {getMonthDetails(currentYear, currentMonth).map((day, index) => (
+                    <div
+                      className={'calendar-day-container' + (day.month !== 0 ? ' disabled' : '')}
+                      key={index}
+                      data-testid="date-picker-day"
+                      onClick={() => day.month === 0 && onSelectDate(day)}
+                    >
+                      <div
+                        className={`calendar-day` + (new Date(day.timeStamp).toISOString() === value ? ' current' : '')}
+                      >
+                        {day.date}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}

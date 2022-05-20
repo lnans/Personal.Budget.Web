@@ -39,6 +39,11 @@
   font-size: 0.9rem;
   max-height: 36px;
   font-weight: bold;
+  transition: background-color 0.25s ease;
+
+  &:focus {
+    background-color: rgba(var(--color-gray3), 1);
+  }
 
   &:focus ~ .currency-input__label {
     transform: translate(-3%, -77%);
