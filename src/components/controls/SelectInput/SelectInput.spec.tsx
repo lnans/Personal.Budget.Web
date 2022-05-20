@@ -47,8 +47,8 @@ describe('● Render:', () => {
     expect(input).toBeDisabled()
   })
 
-  test('with message should render error label', async () => {
-    render(<SelectField label="Select" itemKey="id" itemValue="value" items={items} message="error" />)
+  test('with error should render error label', async () => {
+    render(<SelectField label="Select" itemKey="id" itemValue="value" items={items} error="error" />)
 
     const input = await screen.findByLabelText('error')
 

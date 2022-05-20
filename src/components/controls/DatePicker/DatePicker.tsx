@@ -12,12 +12,13 @@ export interface DatePickerProps<TFormValues> {
   label: string
   defaultValue?: string
   disabled?: boolean
+  error?: string
   register?: UseFormRegister<TFormValues>
   name?: Path<TFormValues>
 }
 
 export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValues>) {
-  const { label, defaultValue, disabled, register, name } = props
+  const { label, defaultValue, disabled, error, register, name } = props
 
   const [value, setValue] = useState<string>(defaultValue ?? '')
   const [labelValue, setLabelValue] = useState<string>('')
@@ -110,6 +111,11 @@ export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValu
         <label htmlFor={uid} className="date-picker__value">
           {labelValue}
         </label>
+        {error && (
+          <label className="date-picker__error" htmlFor={uid}>
+            {error}
+          </label>
+        )}
 
         {/* Calendar container */}
         {isActive && (

@@ -124,7 +124,13 @@ export default function TestBedPage() {
           />
         </div>
         <div style={{ display: 'flex' }}>
-          <DatePicker label="Date d'ouverture" register={register} name="date" defaultValue="" />
+          <DatePicker
+            label="Date d'ouverture"
+            register={register}
+            name="date"
+            defaultValue=""
+            error={errors.date?.message ?? ''}
+          />
           <SelectInput
             label="Select an option"
             items={testValues}
@@ -132,6 +138,7 @@ export default function TestBedPage() {
             itemValue="value"
             register={register}
             name="select"
+            error={errors.select?.message ?? ''}
           />
         </div>
         <Button color="primary" style={{ marginTop: '26px' }}>
@@ -144,7 +151,7 @@ export default function TestBedPage() {
           items={testValues}
           itemKey="id"
           itemValue="value"
-          message="Required"
+          error="Required"
         ></SelectInput>
         <SelectInput label="Select an option" items={testValues} itemKey="id" itemValue="value"></SelectInput>
       </div>

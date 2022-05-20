@@ -18,15 +18,14 @@ export interface SelectProps<TFormValues> {
   items: SelectItem[]
   loading?: boolean
   disabled?: boolean
-  message?: string
+  error?: string
   fullWidth?: boolean
   register?: UseFormRegister<TFormValues>
   name?: Path<TFormValues>
 }
 
 export default function SelectField<TFormValues>(props: SelectProps<TFormValues>) {
-  const { label, defaultValue, items, itemKey, itemValue, loading, disabled, message, fullWidth, register, name } =
-    props
+  const { label, defaultValue, items, itemKey, itemValue, loading, disabled, error, fullWidth, register, name } = props
   const [isActive, setIsActive] = useState(false)
   const [value, setValue] = useState<string>()
   const [labelValue, setLabelValue] = useState<string>()
@@ -99,9 +98,9 @@ export default function SelectField<TFormValues>(props: SelectProps<TFormValues>
           {labelValue}
         </label>
         {!loading ? <i className="select__icon" /> : <div className="select__loader" />}
-        {message && (
-          <label className="select__message" htmlFor={uid}>
-            {message}
+        {error && (
+          <label className="select__error" htmlFor={uid}>
+            {error}
           </label>
         )}
 

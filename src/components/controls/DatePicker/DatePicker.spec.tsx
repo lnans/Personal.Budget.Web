@@ -31,6 +31,15 @@ describe('● Render:', () => {
     expect(input).toBeInTheDocument()
     expect(input).toBeDisabled()
   })
+
+  test('with error should render error label', async () => {
+    render(<DatePicker label="test" defaultValue="" register={register} name="value" error="error" />)
+
+    const input = await screen.findByLabelText('error')
+
+    expect(input).toBeTruthy()
+    expect(input).toBeInTheDocument()
+  })
 })
 
 describe('● When user', () => {
