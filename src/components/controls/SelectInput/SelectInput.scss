@@ -4,7 +4,7 @@
   justify-content: center;
   flex-direction: column;
   position: relative;
-  margin: 26px 5px 5px 5px;
+  margin: var(--form-control-margin);
   width: 100%;
   min-width: 150px;
   max-width: 200px;
@@ -22,7 +22,7 @@
   &.select--isActive .select {
     background-color: rgba(var(--color-bg-white), 1);
     border-radius: 12px 12px 0 0 !important;
-    box-shadow: 0 5px 25px -4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 25px -4px rgba(0, 0, 0, 0.1);
   }
 
   &.select--isActive .select__icon {
@@ -53,7 +53,7 @@
   border: 2px solid transparent;
   border-radius: 12px;
   background-color: rgba(var(--color-gray2));
-  color: rgba(var(--color-text));
+  color: transparent;
   min-height: 38px;
   padding: 7px 30px 7px 13px;
   width: 100%;
@@ -143,6 +143,15 @@
   font-size: 0.8rem;
   pointer-events: none;
   opacity: 0.4;
+}
+
+.select__value {
+  position: absolute;
+  left: 0;
+  padding-left: 12px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  color: rgba(var(--color-text), 1);
 }
 
 .select__message {

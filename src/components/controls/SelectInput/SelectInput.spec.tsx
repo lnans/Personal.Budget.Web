@@ -1,6 +1,16 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
+import { UseFormRegister } from 'react-hook-form'
 import SelectField from './SelectInput'
+
+type TestRequest = { value: string }
+const onChange = jest.fn()
+const register: UseFormRegister<TestRequest> = () => ({
+  ref: () => jest.fn(),
+  onChange,
+  onBlur: jest.fn(),
+  name: 'value',
+})
 
 const items = [
   { id: '1', value: 'Label 1' },
@@ -96,30 +106,11 @@ describe('● When user focus:', () => {
   })
 })
 
-describe('● When user blur:', () => {
-  test('should hide select items', async () => {
-    render(<SelectField label="Select" itemKey="id" itemValue="value" items={items} />)
-
-    const input = await screen.findByRole('textbox')
-
-    act(() => {
-      fireEvent.focus(input)
-    })
-    act(() => {
-      fireEvent.blur(input)
-    })
-
-    const selectItems = screen.queryAllByTestId('select-item')
-
-    expect(selectItems).toBeTruthy()
-    expect(selectItems.length).toBe(0)
-  })
-})
-
 describe('● When user select an item', () => {
+  afterEach(() => jest.clearAllMocks())
   test('not selected should trigger onChange with item id and hide item list', async () => {
-    const onChange = jest.fn()
-    render(<SelectField label="Select" itemKey="id" itemValue="value" items={items} onChange={(id) => onChange(id)} />)
+    const { onChange } = register('value')
+    render(<SelectField label="Select" itemKey="id" itemValue="value" items={items} register={register} name="value" />)
 
     const input = await screen.findByRole('textbox')
 
@@ -138,19 +129,20 @@ describe('● When user select an item', () => {
     selectItems = screen.queryAllByTestId('select-item')
     expect(selectItems).toBeTruthy()
     expect(selectItems.length).toBe(0)
-    expect(onChange).toHaveBeenCalledWith(items[0].id)
+    expect(onChange).toHaveBeenCalledTimes(1)
   })
 
   test('already selected should not trigger onChange and not hide item list', async () => {
-    const onChange = jest.fn()
+    const { onChange } = register('value')
     render(
       <SelectField
         label="Select"
-        value="1"
+        defaultValue="1"
         itemKey="id"
         itemValue="value"
         items={items}
-        onChange={(id) => onChange(id)}
+        register={register}
+        name="value"
       />
     )
 
@@ -171,6 +163,6 @@ describe('● When user select an item', () => {
     selectItems = screen.queryAllByTestId('select-item')
     expect(selectItems).toBeTruthy()
     expect(selectItems.length).toBe(2)
-    expect(onChange).not.toHaveBeenCalledWith(items[0].id)
+    expect(onChange).not.toHaveBeenCalled()
   })
 })

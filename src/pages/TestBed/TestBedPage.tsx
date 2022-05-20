@@ -8,12 +8,14 @@ type TestForm = {
   user: string
   amount: number
   date: string
+  select: string
 }
 
 const TestFormValidator = Yup.object().shape({
   user: Yup.string().required('errors.required'),
   amount: Yup.number().typeError('type error').required('errors.required'),
   date: Yup.string().required('errors.required'),
+  select: Yup.string().required('errors.required'),
 })
 
 export default function TestBedPage() {
@@ -100,27 +102,40 @@ export default function TestBedPage() {
         </Button>
       </div>
 
-      <form style={styles} onSubmit={handleSubmit(onSubmit, onError)}>
-        <TextInput
-          fullWidth
-          label="User"
-          defaultValue=""
-          register={register}
-          name="user"
-          icon="bx-user"
-          error={errors?.user?.message ?? ''}
-        />
-        <CurrencyInput
-          fullWidth
-          label="Montant"
-          defaultValue={10}
-          register={register}
-          name="amount"
-          error={errors.amount?.message ?? ''}
-        />
-        <DatePicker label="Date d'ouverture" register={register} name="date" defaultValue="" disabled />
+      <form
+        style={{ ...styles, flexDirection: 'column', alignItems: 'center' }}
+        onSubmit={handleSubmit(onSubmit, onError)}
+      >
+        <div style={{ display: 'flex' }}>
+          <TextInput
+            label="User"
+            defaultValue=""
+            register={register}
+            name="user"
+            icon="bx-user"
+            error={errors?.user?.message ?? ''}
+          />
+          <CurrencyInput
+            label="Montant"
+            defaultValue={10}
+            register={register}
+            name="amount"
+            error={errors.amount?.message ?? ''}
+          />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <DatePicker label="Date d'ouverture" register={register} name="date" defaultValue="" />
+          <SelectInput
+            label="Select an option"
+            items={testValues}
+            itemKey="id"
+            itemValue="value"
+            register={register}
+            name="select"
+          />
+        </div>
         <Button color="primary" style={{ marginTop: '26px' }}>
-          Test
+          Test Form validation
         </Button>
       </form>
       <div style={styles}>
