@@ -1,26 +1,22 @@
+import { useRegisterOrUndefined } from '@hooks/useRegisterOrUndefined'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { Path, UseFormRegister } from 'react-hook-form'
 import { useUID } from 'react-uid'
 import './CheckBox.scss'
 
-export interface CheckBoxProps {
+export interface CheckBoxProps<TFormValues> {
   label: string
-  value: boolean
+  defaultValue: boolean
   compact?: boolean
   disabled?: boolean
-  onChange?: (value: boolean) => void
+  register?: UseFormRegister<TFormValues>
+  name?: Path<TFormValues>
 }
 
-export default function CheckBox(props: CheckBoxProps) {
-  const { label, value, disabled, compact, onChange } = props
-  const [isChecked, setIsChecked] = useState<boolean>(value)
+export default function CheckBox<TFormValues>(props: CheckBoxProps<TFormValues>) {
+  const { label, defaultValue, disabled, compact, register, name } = props
   const uid = useUID()
-
-  const handleChange = () => {
-    const value = !isChecked
-    setIsChecked(value)
-    onChange && onChange(value)
-  }
+  const { inputRef, onChange, formRegister } = useRegisterOrUndefined(register, name)
 
   const containerClasses = clsx({
     'checkbox-container': true,
@@ -33,10 +29,14 @@ export default function CheckBox(props: CheckBoxProps) {
       <div className="checkbox-content">
         <input
           id={uid}
+          ref={(e) => {
+            inputRef && inputRef(e)
+          }}
           className="checkbox-input"
           type="checkbox"
-          defaultChecked={isChecked}
-          onChange={handleChange}
+          defaultChecked={defaultValue}
+          {...formRegister}
+          onChange={onChange}
           disabled={!!disabled}
         />
         <div className="checkbox-mask">

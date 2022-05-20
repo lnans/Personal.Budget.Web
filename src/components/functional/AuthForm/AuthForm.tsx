@@ -59,7 +59,7 @@ export default function AuthForm(props: AuthFormProps) {
           name="password"
           error={!!errors.password?.message ? t(errors.password.message) : undefined}
         />
-        <CheckBox label={t('components.auth_form.remember')} value={false} compact />
+        <CheckBox label={t('components.auth_form.remember')} defaultValue={false} compact disabled={loading} />
         <Button color="primary" fullWidth style={{ marginTop: '16px' }} loading={loading}>
           {t('components.auth_form.login')}
         </Button>

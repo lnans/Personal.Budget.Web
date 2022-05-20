@@ -5,7 +5,7 @@ import { Path, UseFormRegister } from 'react-hook-form'
 import { useUID } from 'react-uid'
 import './TextInput.scss'
 
-export type TestFieldType = 'text' | 'password'
+export type TextFieldType = 'text' | 'password'
 
 export interface TextFieldProps<TFormValues> {
   label: string
@@ -15,7 +15,7 @@ export interface TextFieldProps<TFormValues> {
   disabled?: boolean
   fullWidth?: boolean
   icon?: string
-  type?: TestFieldType
+  type?: TextFieldType
   register?: UseFormRegister<TFormValues>
   name?: Path<TFormValues>
 }

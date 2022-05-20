@@ -9,6 +9,7 @@ type TestForm = {
   amount: number
   date: string
   select: string
+  check: boolean
 }
 
 const TestFormValidator = Yup.object().shape({
@@ -16,6 +17,7 @@ const TestFormValidator = Yup.object().shape({
   amount: Yup.number().typeError('type error').required('errors.required'),
   date: Yup.string().required('errors.required'),
   select: Yup.string().required('errors.required'),
+  check: Yup.boolean(),
 })
 
 export default function TestBedPage() {
@@ -141,6 +143,7 @@ export default function TestBedPage() {
             error={errors.select?.message ?? ''}
           />
         </div>
+        <CheckBox label="Checkbox" defaultValue={false} register={register} name="check" />
         <Button color="primary" style={{ marginTop: '26px' }}>
           Test Form validation
         </Button>
@@ -161,8 +164,8 @@ export default function TestBedPage() {
         <TextInput label="I'm disabled" defaultValue="" loading />
       </div>
       <div style={styles}>
-        <CheckBox value={false} label="Option" />
-        <CheckBox value={false} label="Disabled" disabled />
+        <CheckBox defaultValue={false} label="Option" />
+        <CheckBox defaultValue={false} label="Disabled" disabled />
         <TextInput label="Type a text" defaultValue="" />
       </div>
 

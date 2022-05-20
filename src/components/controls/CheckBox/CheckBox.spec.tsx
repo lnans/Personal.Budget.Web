@@ -1,9 +1,19 @@
 import { act, fireEvent, render, screen } from '@testing-library/react'
+import { UseFormRegister } from 'react-hook-form'
 import CheckBox from './CheckBox'
+
+type TestRequest = { value: boolean }
+const onChange = jest.fn()
+const register: UseFormRegister<TestRequest> = () => ({
+  ref: () => jest.fn(),
+  onChange,
+  onBlur: jest.fn(),
+  name: 'value',
+})
 
 describe('● Render:', () => {
   test('should render checked', async () => {
-    render(<CheckBox label="Test" value={true} />)
+    render(<CheckBox label="Test" defaultValue={true} />)
 
     const checkbox = await screen.findByRole('checkbox')
 
@@ -13,7 +23,7 @@ describe('● Render:', () => {
   })
 
   test('should render unchecked', async () => {
-    render(<CheckBox label="Test" value={false} />)
+    render(<CheckBox label="Test" defaultValue={false} />)
 
     const checkbox = await screen.findByRole('checkbox')
 
@@ -23,7 +33,7 @@ describe('● Render:', () => {
   })
 
   test('should render disabled', async () => {
-    render(<CheckBox label="Test" value={false} disabled />)
+    render(<CheckBox label="Test" defaultValue={false} disabled />)
 
     const checkbox = await screen.findByRole('checkbox')
 
@@ -34,27 +44,10 @@ describe('● Render:', () => {
 })
 
 describe('● When user click:', () => {
-  test('should trigger "true" when is active and unchecked', async () => {
-    const onClick = jest.fn()
+  test('should trigger onChange when is active', async () => {
+    const { onChange } = register('value')
 
-    render(<CheckBox label="Test" value={false} onChange={(value) => onClick(value)} />)
-
-    const checkbox = await screen.findByRole('checkbox')
-
-    // Act
-    act(() => {
-      fireEvent.click(checkbox)
-    })
-
-    // Assert
-    expect(onClick).toHaveBeenCalledTimes(1)
-    expect(onClick).toHaveBeenCalledWith(true)
-  })
-
-  test('should trigger "false" when is active and checked', async () => {
-    const onClick = jest.fn()
-
-    render(<CheckBox label="Test" value={true} onChange={(value) => onClick(value)} />)
+    render(<CheckBox label="Test" defaultValue={false} register={register} name="value" />)
 
     const checkbox = await screen.findByRole('checkbox')
 
@@ -64,7 +57,6 @@ describe('● When user click:', () => {
     })
 
     // Assert
-    expect(onClick).toHaveBeenCalledTimes(1)
-    expect(onClick).toHaveBeenCalledWith(false)
+    expect(onChange).toHaveBeenCalledTimes(1)
   })
 })
