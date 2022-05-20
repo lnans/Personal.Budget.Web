@@ -7,11 +7,12 @@ export interface CheckBoxProps {
   label: string
   value: boolean
   compact?: boolean
+  disabled?: boolean
   onChange?: (value: boolean) => void
 }
 
 export default function CheckBox(props: CheckBoxProps) {
-  const { label, value, compact, onChange } = props
+  const { label, value, disabled, compact, onChange } = props
   const [isChecked, setIsChecked] = useState<boolean>(value)
   const uid = useUID()
 
@@ -24,12 +25,20 @@ export default function CheckBox(props: CheckBoxProps) {
   const containerClasses = clsx({
     'checkbox-container': true,
     'checkbox--compact': compact,
+    'checkbox--disabled': disabled,
   })
 
   return (
     <div className={containerClasses}>
       <div className="checkbox-content">
-        <input id={uid} className="checkbox-input" type="checkbox" defaultChecked={isChecked} onChange={handleChange} />
+        <input
+          id={uid}
+          className="checkbox-input"
+          type="checkbox"
+          defaultChecked={isChecked}
+          onChange={handleChange}
+          disabled={!!disabled}
+        />
         <div className="checkbox-mask">
           <i className="checkbox-mask-icon">
             <span className="checkbox-icon-container">

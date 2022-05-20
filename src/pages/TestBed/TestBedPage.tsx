@@ -162,6 +162,7 @@ export default function TestBedPage() {
       </div>
       <div style={styles}>
         <CheckBox value={false} label="Option" />
+        <CheckBox value={false} label="Disabled" disabled />
         <TextInput label="Type a text" defaultValue="" />
       </div>
 

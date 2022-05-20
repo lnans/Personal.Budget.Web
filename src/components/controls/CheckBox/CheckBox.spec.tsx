@@ -21,6 +21,16 @@ describe('● Render:', () => {
     expect(checkbox).toBeInTheDocument()
     expect(checkbox).not.toBeChecked()
   })
+
+  test('should render disabled', async () => {
+    render(<CheckBox label="Test" value={false} disabled />)
+
+    const checkbox = await screen.findByRole('checkbox')
+
+    expect(checkbox).toBeTruthy()
+    expect(checkbox).toBeInTheDocument()
+    expect(checkbox).toBeDisabled()
+  })
 })
 
 describe('● When user click:', () => {

@@ -7,6 +7,11 @@
   &.checkbox--compact {
     margin: 5px;
   }
+  &.checkbox--disabled {
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.6;
+  }
 }
 
 .checkbox-content {
