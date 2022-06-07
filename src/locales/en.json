@@ -19,6 +19,9 @@
       "remember": "Remember me",
       "username": "Username",
       "welcome": "Welcome to"
+    },
+    "operations_table": {
+      "no_data": "Aucune opérations"
     }
   },
   "pages": {
@@ -27,6 +30,7 @@
     },
     "accounts": {
       "title": "Account list",
+      "operations": "Operations list",
       "form": {
         "title": "New account",
         "name": "Account name",

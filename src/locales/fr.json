@@ -44,6 +44,9 @@
         "november": "Novembre",
         "december": "Décembre"
       }
+    },
+    "operations_table": {
+      "no_data": "Aucune opérations"
     }
   },
   "pages": {
@@ -52,6 +55,7 @@
     },
     "accounts": {
       "title": "Liste des comptes",
+      "operations": "Liste des opérations",
       "form": {
         "title": "Nouveau compte",
         "name": "Nom du compte",
