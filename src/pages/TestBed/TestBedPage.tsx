@@ -1,4 +1,4 @@
-import { Button, CheckBox, CurrencyInput, DatePicker, Dialog, SelectInput, TextInput, toastSender } from '@components'
+import { Button, CheckBox, CurrencyInput, DatePicker, Dialog, SelectInput, SwitchInput, TextInput, toastSender } from '@components'
 import { useFormValidator } from '@hooks/useFormWithSchema'
 import { useEffect, useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
@@ -101,6 +101,10 @@ export default function TestBedPage() {
         <Button color="primary" loading={load}>
           loading
         </Button>
+      </div>
+
+      <div style={styles}>
+        <SwitchInput textOn="Archivé" textOff="Archivé" onChange={(val) => console.log(val)} />
       </div>
 
       <form style={{ ...styles, flexDirection: 'column', alignItems: 'center' }} onSubmit={handleSubmit(onSubmit, onError)}>

@@ -5,6 +5,7 @@ export { default as TextInput } from './controls/TextInput/TextInput'
 export { default as SelectInput } from './controls/SelectInput/SelectInput'
 export { default as CurrencyInput } from './controls/CurrencyInput/CurrencyInput'
 export { default as DatePicker } from './controls/DatePicker/DatePicker'
+export { default as SwitchInput } from './controls/Switch/SwitchInput'
 
 // ui
 export { default as Toaster } from './ui/Toaster/Toaster'
