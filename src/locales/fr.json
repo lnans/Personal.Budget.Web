@@ -67,11 +67,16 @@
       "operations": "Liste des opérations",
       "form": {
         "title": "Nouveau compte",
+        "title_edit": "Modifier le compte",
         "name": "Nom",
         "bank": "Banque",
         "type": "Type",
         "balance": "Montant initial",
-        "create": "Créer le compte"
+        "create": "Créer le compte",
+        "patch": "Mettre à jour",
+        "archive": "Archiver",
+        "activate": "Activer",
+        "delete": "Supprimer"
       }
     }
   }

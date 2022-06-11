@@ -6,13 +6,18 @@ export interface AccountTileProps {
   account: AccountDetailsResponse
   isSelected?: boolean
   onClick?: (id: string) => void
+  onEdit?: () => void
 }
 
 export default function AccountTile(props: AccountTileProps) {
-  const { account, isSelected, onClick } = props
+  const { account, isSelected, onClick, onEdit } = props
 
   const handleClick = () => {
-    onClick && onClick(account.id)
+    !isSelected && onClick && onClick(account.id)
+  }
+
+  const handleEdit = () => {
+    onEdit && onEdit()
   }
 
   const containerClasses = clsx({
@@ -41,6 +46,11 @@ export default function AccountTile(props: AccountTileProps) {
       <div className="account-tile-info">
         <p>{account.bank}</p>
       </div>
+      {isSelected && (
+        <div className="account-edit" onClick={handleEdit}>
+          <i className="bx bxs-edit"></i>
+        </div>
+      )}
     </div>
   )
 }

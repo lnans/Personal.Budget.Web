@@ -88,9 +88,12 @@ async function parseResponse<TResult>(response: Response): Promise<TResult> {
 
   // OK result
   if (response.ok) {
-    const responseJson = await res.json()
-    const result = responseJson as TResult
-    return Promise.resolve(result)
+    const responseAsText = await res.text()
+    if (responseAsText.length) {
+      const result = JSON.parse(responseAsText) as TResult
+      return Promise.resolve(result)
+    }
+    return Promise.resolve({} as TResult)
   }
 
   // Else reject with HttpError, handle by onError from queryClient()

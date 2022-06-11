@@ -6,11 +6,13 @@ import { useTranslation } from 'react-i18next'
 import { useQuery } from 'react-query'
 import './AccountsPage.scss'
 import AddAccountForm from './AddAccount/AddAccountForm'
+import EditAccountForm from './EditAccount/EditAccountForm'
 
 export default function AccountsPage() {
-  const [selectedAccount, setSelectedAccount] = useState<string | null>(null)
+  const [selectedAccount, setSelectedAccount] = useState<AccountDetailsResponse | null>(null)
   const [archived, setArchived] = useState<boolean>(false)
   const [isCreatingAccount, setIsCreatingAccount] = useState<boolean>(false)
+  const [isEditingAccount, setIsEditingAccount] = useState<boolean>(false)
   const { t } = useTranslation()
   const { data: accounts, refetch } = useQuery<AccountDetailsResponse[]>(accountsRoutes.CACHE_KEY, accountsRoutes.getAccounts({ archived }))
 
@@ -21,7 +23,7 @@ export default function AccountsPage() {
 
   useEffect(() => {
     if (accounts?.length) {
-      setSelectedAccount(accounts[0].id)
+      setSelectedAccount(accounts[0])
     }
   }, [accounts])
 
@@ -33,7 +35,16 @@ export default function AccountsPage() {
           <SwitchInput textOn="Archivé" textOff="Archivé" onChange={setArchived} highlight={true} />
         </div>
         <div className="accounts-page-content">
-          {accounts && accounts.map((account) => <AccountTile key={account.id} account={account} isSelected={selectedAccount === account.id} onClick={setSelectedAccount} />)}
+          {accounts &&
+            accounts.map((account) => (
+              <AccountTile
+                key={account.id}
+                account={account}
+                isSelected={selectedAccount?.id === account.id}
+                onClick={() => setSelectedAccount(account)}
+                onEdit={() => setIsEditingAccount(true)}
+              />
+            ))}
           <AccountTileNew onClick={() => setIsCreatingAccount(true)} />
         </div>
       </div>
@@ -43,13 +54,14 @@ export default function AccountsPage() {
           <>
             <SectionTitle>{t('pages.accounts.operations')}</SectionTitle>
             <div className="accounts-page-content">
-              <OperationsTable accountId={selectedAccount} />
+              <OperationsTable accountId={selectedAccount.id} />
             </div>
           </>
         )}
         <ButtonFloating icon="bx bx-add-to-queue" />
       </div>
       <AddAccountForm show={isCreatingAccount} onClose={() => setIsCreatingAccount(false)} />
+      {selectedAccount && <EditAccountForm account={selectedAccount} show={isEditingAccount} onClose={() => setIsEditingAccount(false)} />}
     </div>
   )
 }

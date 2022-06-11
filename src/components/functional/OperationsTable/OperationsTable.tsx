@@ -27,7 +27,7 @@ export default function OperationsTable(props: OperationsTableProps) {
     let byDays: OperationsGroupByDays | undefined
     data?.pages.forEach((page) => {
       page.data.forEach((op) => {
-        const key = op.executionDate ? formatShortDate(i18n.language, op.creationDate) : 'none'
+        const key = op.executionDate ? formatShortDate('en', op.creationDate) : 'none'
         if (!byDays) {
           byDays = {}
         }
