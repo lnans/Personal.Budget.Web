@@ -14,6 +14,10 @@
   transition: all 0.25s ease;
   overflow: hidden;
 
+  &.highlight {
+    border: 1px solid rgba(var(--color-primary), 0.1);
+  }
+
   &:hover {
     background: rgba(var(--color-gray4), 1);
   }

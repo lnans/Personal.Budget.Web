@@ -1,15 +1,17 @@
+import clsx from 'clsx'
 import { ChangeEvent, useState } from 'react'
 import './SwitchInput.scss'
 
 export interface SwitchInputProps {
   textOn: string
   textOff: string
+  highlight?: boolean
   defaultChecked?: boolean
   onChange?: (checked: boolean) => void
 }
 
 export default function SwitchInput(props: SwitchInputProps) {
-  const { textOn, textOff, defaultChecked, onChange } = props
+  const { textOn, textOff, highlight, defaultChecked, onChange } = props
   const [value, setValue] = useState<boolean>(defaultChecked ?? false)
 
   const onSwitchChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,8 +19,13 @@ export default function SwitchInput(props: SwitchInputProps) {
     onChange && onChange(e.target.checked)
   }
 
+  const classes = clsx({
+    switch: true,
+    highlight: highlight,
+  })
+
   return (
-    <div className="switch">
+    <div className={classes}>
       <input className="switch__input" type="checkbox" checked={value} onChange={onSwitchChangeInput} />
       <div className="switch__circle" />
       <div className="switch__text on">{textOn}</div>
