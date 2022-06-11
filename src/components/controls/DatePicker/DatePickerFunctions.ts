@@ -7,20 +7,7 @@ const daysMap = [
   'components.calendar.day.saturday',
   'components.calendar.day.sunday',
 ]
-const monthMap = [
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december',
-]
+const monthMap = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
 
 const dateShortFormat: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' }
 
@@ -38,13 +25,7 @@ const getLocaleDateString = (lang: string, timeStamp: number): string => {
   return new Date(timeStamp).toLocaleDateString(lang, dateShortFormat)
 }
 
-const getDayDetails = (
-  index: number,
-  numberOfDays: number,
-  firstDay: number,
-  year: number,
-  month: number
-): DayDetails => {
+const getDayDetails = (index: number, numberOfDays: number, firstDay: number, year: number, month: number): DayDetails => {
   const date = index - firstDay
   const day = index % 7
 

@@ -22,7 +22,8 @@
       "@plugins/*": ["plugins/*"],
       "@models/*": ["models/*"],
       "@hooks/*": ["hooks/*"],
-      "@services": ["services"]
+      "@api/*": ["api/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],

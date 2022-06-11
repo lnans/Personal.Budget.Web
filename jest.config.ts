@@ -1,10 +1,5 @@
 export default {
-  collectCoverageFrom: [
-    './src/components/**/*.{js,jsx,tsx,ts}',
-    '!./src/components/index.ts',
-    '!**/node_modules/**',
-    '!**/dist/**',
-  ],
+  collectCoverageFrom: ['./src/components/**/*.{js,jsx,tsx,ts}', '!./src/components/index.ts', '!**/node_modules/**', '!**/dist/**'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/dist', 'public', 'env'],
   verbose: true,
@@ -12,11 +7,12 @@ export default {
     '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
   moduleNameMapper: {
+    '@api/(.*)': '<rootDir>/src/api/$1',
     '@models/(.*)': '<rootDir>/src/models/$1',
     '@hooks/(.*)': '<rootDir>/src/hooks/$1',
     '@components': '<rootDir>/src/components',
-    '@services': '<rootDir>/src/services',
     '@plugins/(.*)': '<rootDir>/src/plugins/$1',
+    '@utils/(.*)': '<rootDir>/src/utils/$1',
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTest.ts'],

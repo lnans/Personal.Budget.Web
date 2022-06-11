@@ -134,17 +134,7 @@ describe('● When user select an item', () => {
 
   test('already selected should not trigger onChange and not hide item list', async () => {
     const { onChange } = register('value')
-    render(
-      <SelectField
-        label="Select"
-        defaultValue="1"
-        itemKey="id"
-        itemValue="value"
-        items={items}
-        register={register}
-        name="value"
-      />
-    )
+    render(<SelectField label="Select" defaultValue="1" itemKey="id" itemValue="value" items={items} register={register} name="value" />)
 
     const input = await screen.findByRole('textbox')
 

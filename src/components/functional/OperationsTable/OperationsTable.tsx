@@ -1,74 +1,99 @@
+import { operationsRoutes } from '@api/endpoints/operationsEndPoints'
+import { PaginatedData } from '@models/common/paginatedData'
 import { OperationDetailsResponse } from '@models/operations/OperationDetailsResponse'
 import { OperationType } from '@models/operations/OperationTypeEnum'
-import { Fragment } from 'react'
+import { formatLongDate, formatShortDate, isValidDate } from '@utils/date'
+import clsx from 'clsx'
+import { Fragment, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InfiniteData, useInfiniteQuery } from 'react-query'
 import './OperationsTable.scss'
 
+type OperationsGroupByDays = {
+  [key in string]: OperationDetailsResponse[]
+}
+
 export interface OperationsTableProps {
-  operations: OperationDetailsResponse
-  onLoadMore: () => void
+  accountId?: string
 }
 
 export default function OperationsTable(props: OperationsTableProps) {
-  const { operations } = props
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation()
+  const { accountId } = props
+  const { t, i18n } = useTranslation()
+  const [operationsByDays, setOperationsByDays] = useState<OperationsGroupByDays>()
 
-  const formatDate = (date: string) => {
-    if (isNaN(Date.parse(date))) return 'a venir'
-    return new Intl.DateTimeFormat(language, { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(date))
+  // Group API result by days
+  const onDataFetch = (data: InfiniteData<PaginatedData<OperationDetailsResponse>>) => {
+    let byDays: OperationsGroupByDays | undefined
+    data?.pages.forEach((page) => {
+      page.data.forEach((op) => {
+        const key = op.executionDate ? formatShortDate(i18n.language, op.creationDate) : 'none'
+        if (!byDays) {
+          byDays = {}
+        }
+        if (!byDays[key]) {
+          byDays[key] = []
+        }
+        byDays[key].push(op)
+      })
+    })
+    setOperationsByDays(byDays)
   }
 
-  const formatIcon = (type: OperationType) => {
-    switch (type) {
-      case OperationType.Expense:
-        return 'bx bxs-credit-card'
-      case OperationType.Income:
-        return 'bx bx-trending-up'
-      case OperationType.Fixed:
-        return 'bx bx-trending-down'
-      case OperationType.Transfer:
-        return 'bx bx-transfer'
-      case OperationType.Budget:
-        return 'bx bx-wallet'
-      default:
-        return ''
-    }
+  useInfiniteQuery<PaginatedData<OperationDetailsResponse>>([operationsRoutes.CACHE_KEY, accountId], operationsRoutes.getOperations({ accountId }), {
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    onSuccess: onDataFetch,
+  })
+
+  const formatOperationHeader = (date: string) => {
+    if (!isValidDate(date)) return 'a venir'
+    return formatLongDate(i18n.language, date)
   }
 
-  const formatAmount = (amount: number) => {
-    if (amount < 0) return 'negative'
-    if (amount === 0) return 'zero'
-    return 'positive'
+  const iconClass = (type: OperationType) => {
+    return clsx({
+      bx: true,
+      'bxs-credit-card': type === OperationType.Expense,
+      'bx-trending-up': type === OperationType.Income,
+      'bx-trending-down': type === OperationType.Fixed,
+      'bx-transfer': type === OperationType.Transfer,
+      'bx-wallet': type === OperationType.Budget,
+    })
+  }
+
+  const amountClass = (amount: number) => {
+    return clsx({
+      negative: amount < 0,
+      zero: amount === 0,
+      positive: amount > 0,
+    })
   }
 
   return (
     <div className="operations-table-container">
       <div className="operations-table-content">
-        {operations.total === 0 ? (
+        {!operationsByDays ? (
           <p>{t('components.operations_table.no_data')}</p>
         ) : (
           <table className="operations-table">
             <tbody>
-              {Object.keys(operations.operationsByDays).map((day) => (
+              {Object.keys(operationsByDays).map((day) => (
                 <Fragment key={day}>
                   <tr className="operations-table__header">
                     <td className={day === 'none' ? 'upcoming' : ''}>
                       <div>
                         {day === 'none' && <i className="bx bx-stopwatch" />}
-                        {formatDate(day)}
+                        {formatOperationHeader(day)}
                       </div>
                     </td>
                   </tr>
 
-                  {operations.operationsByDays[day].map((operation) => (
+                  {operationsByDays[day].map((operation) => (
                     <tr className="operations-table__line" key={operation.id}>
                       <td>
                         <div className="operations-table__line-content">
                           <div className="operations-table__line-type">
-                            <i className={formatIcon(operation.type)}></i>
+                            <i className={iconClass(operation.type)}></i>
                           </div>
 
                           <div className="operations-table__line-description__content">
@@ -87,7 +112,7 @@ export default function OperationsTable(props: OperationsTableProps) {
                               <p>{operation.tagName}</p>
                             </div>
                           )}
-                          <div className={`operations-table__line-amount ${formatAmount(operation.amount)}`}>
+                          <div className={`operations-table__line-amount ${amountClass(operation.amount)}`}>
                             {operation.amount > 0 && <>+</>} {operation.amount.toString().replace('.', ',')} €
                           </div>
                         </div>

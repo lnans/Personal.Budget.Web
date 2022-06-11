@@ -1,7 +1,9 @@
+import { authenticationRoutes } from '@api/endpoints/authEndPoints'
 import { AuthForm } from '@components'
-import { AuthService } from '@services'
-import { ReactNode, useEffect, useState } from 'react'
+import { AuthInfoResponse } from '@models/auth/authInfoResponse'
+import { ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from 'react-query'
 import './AuthProvider.scss'
 
 export interface AuthProviderProps {
@@ -9,28 +11,16 @@ export interface AuthProviderProps {
 }
 
 export default function AuthProvider(props: AuthProviderProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const { t } = useTranslation()
 
-  const checkAuthentication = async () => {
-    try {
-      const authService = new AuthService()
-      await authService
-        .getAuthInfo()
-        .then(() => setIsAuthenticated(true))
-        .finally(() => setIsLoading(false))
-    } catch {
-      setIsLoading(false)
-    }
-  }
+  const { isFetching } = useQuery<AuthInfoResponse>(authenticationRoutes.CACHE_KEY, authenticationRoutes.getAuthInfo(), {
+    onSuccess: () => setIsAuthenticated(true),
+  })
 
-  useEffect(() => {
-    checkAuthentication()
-  }, [])
   return (
     <>
-      {isLoading ? (
+      {isFetching ? (
         <div className="auth-loader-container">
           <p>{t('app')}</p>
           <div className="auth-loader" />

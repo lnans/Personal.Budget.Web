@@ -109,20 +109,11 @@ export default function SelectField<TFormValues>(props: SelectProps<TFormValues>
             {items.map((item) => (
               <Fragment key={item[itemKey]}>
                 {item.id === value ? (
-                  <button
-                    id={`selectItem_${item[itemKey]}`}
-                    className="select-list__item select-list__item--selected"
-                    data-testid="select-item"
-                  >
+                  <button id={`selectItem_${item[itemKey]}`} className="select-list__item select-list__item--selected" data-testid="select-item">
                     {item[itemValue]}
                   </button>
                 ) : (
-                  <button
-                    id={`selectItem_${item[itemKey]}`}
-                    className="select-list__item"
-                    onClick={() => onSelectItem(item)}
-                    data-testid="select-item"
-                  >
+                  <button id={`selectItem_${item[itemKey]}`} className="select-list__item" onClick={() => onSelectItem(item)} data-testid="select-item">
                     {item[itemValue]}
                   </button>
                 )}

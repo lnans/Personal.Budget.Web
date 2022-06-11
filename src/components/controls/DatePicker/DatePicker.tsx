@@ -130,9 +130,7 @@ export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValu
               </button>
               <div className="date-picker-calendar__current">
                 <p className="date-picker-calendar__current-year">{currentYear}</p>
-                <p className="date-picker-calendar__current-month">
-                  {t(`components.calendar.month.${monthMap[currentMonth]}`)}
-                </p>
+                <p className="date-picker-calendar__current-month">{t(`components.calendar.month.${monthMap[currentMonth]}`)}</p>
               </div>
               <button type="button" className="date-picker-calendar_button" onClick={() => changeMonth(1)}>
                 <i className="bx bx-chevron-right" />
@@ -163,11 +161,7 @@ export default function DatePicker<TFormValues>(props: DatePickerProps<TFormValu
                       data-testid="date-picker-day"
                       onClick={() => day.month === 0 && onSelectDate(day)}
                     >
-                      <div
-                        className={`calendar-day` + (new Date(day.timeStamp).toISOString() === value ? ' current' : '')}
-                      >
-                        {day.date}
-                      </div>
+                      <div className={`calendar-day` + (new Date(day.timeStamp).toISOString() === value ? ' current' : '')}>{day.date}</div>
                     </div>
                   ))}
                 </div>

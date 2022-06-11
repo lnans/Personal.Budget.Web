@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
-import { AxiosResponse } from 'axios'
 import crypto from 'crypto'
+import { QueryClient, setLogger } from 'react-query'
 
 jest.useFakeTimers()
 jest.mock('@plugins/i18n', () => ({
@@ -25,13 +25,18 @@ Object.defineProperty(global.self, 'crypto', {
   },
 })
 
-export function createAxiosResponse<T>(data: T) {
-  const axiosResponse: AxiosResponse<T, any> = {
-    data,
-    status: 200,
-    config: {},
-    headers: {},
-    statusText: 'OK',
-  }
-  return axiosResponse
-}
+export const queryClientForTest = new QueryClient({
+  defaultOptions: {
+    queries: { retry: false, refetchOnWindowFocus: false, cacheTime: Infinity },
+    mutations: {
+      retry: false,
+    },
+  },
+})
+
+setLogger({
+  log: console.log,
+  warn: console.warn,
+  // ✅ no more errors on the console
+  error: () => {},
+})

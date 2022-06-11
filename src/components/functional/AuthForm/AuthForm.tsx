@@ -1,10 +1,11 @@
+import { authenticationRoutes } from '@api/endpoints/authEndPoints'
 import { Button, CheckBox, Dialog, TextInput } from '@components'
-import { SignInRequest, SignInRequestValidator } from '@models/auth/signInRequest'
-import { AuthService } from '@services'
 import { useFormValidator } from '@hooks/useFormWithSchema'
-import { useState } from 'react'
+import { SignInRequest, SignInRequestValidator } from '@models/auth/signInRequest'
+import { SignInResponse } from '@models/auth/signInResponse'
 import { SubmitHandler } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { useMutation } from 'react-query'
 import './AuthForm.scss'
 
 export interface AuthFormProps {
@@ -12,22 +13,23 @@ export interface AuthFormProps {
 }
 
 export default function AuthForm(props: AuthFormProps) {
-  const [loading, setIsLoading] = useState<boolean>(false)
+  const { onLogged } = props
   const { t } = useTranslation()
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useFormValidator<SignInRequest>(SignInRequestValidator)
 
-  const onSubmit: SubmitHandler<SignInRequest> = async (form: SignInRequest) => {
-    setIsLoading(true)
-    const authService = new AuthService()
-    await authService
-      .signIn(form)
-      .then(() => props.onLogged(true))
-      .finally(() => setIsLoading(false))
+  const onSuccess = (data: SignInResponse) => {
+    localStorage.setItem('token', data.token ?? '')
+    onLogged(true)
+  }
+
+  const { mutate: signIn, isLoading } = useMutation(authenticationRoutes.signIn, { onSuccess })
+
+  const onSubmit: SubmitHandler<SignInRequest> = (form: SignInRequest) => {
+    signIn(form)
   }
 
   return (
@@ -43,7 +45,7 @@ export default function AuthForm(props: AuthFormProps) {
           defaultValue=""
           fullWidth
           icon="bx-user"
-          disabled={loading}
+          disabled={isLoading}
           register={register}
           name="username"
           error={!!errors.username?.message ? t(errors.username.message) : undefined}
@@ -54,13 +56,13 @@ export default function AuthForm(props: AuthFormProps) {
           fullWidth
           icon="bxs-lock"
           type="password"
-          disabled={loading}
+          disabled={isLoading}
           register={register}
           name="password"
           error={!!errors.password?.message ? t(errors.password.message) : undefined}
         />
-        <CheckBox label={t('components.auth_form.remember')} defaultValue={false} compact disabled={loading} />
-        <Button color="primary" fullWidth style={{ marginTop: '16px' }} loading={loading}>
+        <CheckBox label={t('components.auth_form.remember')} defaultValue={false} compact disabled={isLoading} />
+        <Button color="primary" fullWidth style={{ marginTop: '16px' }} loading={isLoading}>
           {t('components.auth_form.login')}
         </Button>
         <div className="auth-form-info">{t('components.auth_form.info')}</div>

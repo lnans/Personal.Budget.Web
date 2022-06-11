@@ -1,4 +1,4 @@
-import { Button, CheckBox, Dialog, TextInput, SelectInput, toastSender, CurrencyInput, DatePicker } from '@components'
+import { Button, CheckBox, CurrencyInput, DatePicker, Dialog, SelectInput, TextInput, toastSender } from '@components'
 import { useFormValidator } from '@hooks/useFormWithSchema'
 import { useEffect, useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
@@ -23,7 +23,6 @@ const TestFormValidator = Yup.object().shape({
 export default function TestBedPage() {
   const [load, setLoad] = useState<boolean>(true)
   const [display, setDisplay] = useState<boolean>(false)
-
   const {
     register,
     handleSubmit,
@@ -104,44 +103,14 @@ export default function TestBedPage() {
         </Button>
       </div>
 
-      <form
-        style={{ ...styles, flexDirection: 'column', alignItems: 'center' }}
-        onSubmit={handleSubmit(onSubmit, onError)}
-      >
+      <form style={{ ...styles, flexDirection: 'column', alignItems: 'center' }} onSubmit={handleSubmit(onSubmit, onError)}>
         <div style={{ display: 'flex' }}>
-          <TextInput
-            label="User"
-            defaultValue=""
-            register={register}
-            name="user"
-            icon="bx-user"
-            error={errors?.user?.message ?? ''}
-          />
-          <CurrencyInput
-            label="Montant"
-            defaultValue={10}
-            register={register}
-            name="amount"
-            error={errors.amount?.message ?? ''}
-          />
+          <TextInput label="User" defaultValue="" register={register} name="user" icon="bx-user" error={errors?.user?.message ?? ''} />
+          <CurrencyInput label="Montant" defaultValue={10} register={register} name="amount" error={errors.amount?.message ?? ''} />
         </div>
         <div style={{ display: 'flex' }}>
-          <DatePicker
-            label="Date d'ouverture"
-            register={register}
-            name="date"
-            defaultValue=""
-            error={errors.date?.message ?? ''}
-          />
-          <SelectInput
-            label="Select an option"
-            items={testValues}
-            itemKey="id"
-            itemValue="value"
-            register={register}
-            name="select"
-            error={errors.select?.message ?? ''}
-          />
+          <DatePicker label="Date d'ouverture" register={register} name="date" defaultValue="" error={errors.date?.message ?? ''} />
+          <SelectInput label="Select an option" items={testValues} itemKey="id" itemValue="value" register={register} name="select" error={errors.select?.message ?? ''} />
         </div>
         <CheckBox label="Checkbox" defaultValue={false} register={register} name="check" />
         <Button color="primary" style={{ marginTop: '26px' }}>
@@ -149,13 +118,7 @@ export default function TestBedPage() {
         </Button>
       </form>
       <div style={styles}>
-        <SelectInput
-          label="Select an option"
-          items={testValues}
-          itemKey="id"
-          itemValue="value"
-          error="Required"
-        ></SelectInput>
+        <SelectInput label="Select an option" items={testValues} itemKey="id" itemValue="value" error="Required"></SelectInput>
         <SelectInput label="Select an option" items={testValues} itemKey="id" itemValue="value"></SelectInput>
       </div>
       <div style={styles}>

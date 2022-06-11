@@ -5,6 +5,4 @@ export interface OperationDetailsRequest {
   description?: string
   tagIds?: string[]
   type?: OperationType
-  pageSize?: number
-  skip?: number
 }
