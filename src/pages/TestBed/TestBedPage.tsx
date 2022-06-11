@@ -1,4 +1,4 @@
-import { Button, CheckBox, CurrencyInput, DatePicker, Dialog, SelectInput, SwitchInput, TextInput, toastSender } from '@components'
+import { Button, ButtonFloating, CheckBox, CurrencyInput, DatePicker, Dialog, SelectInput, SwitchInput, TextInput, toastSender } from '@components'
 import { useFormValidator } from '@hooks/useFormWithSchema'
 import { useEffect, useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
@@ -84,6 +84,7 @@ export default function TestBedPage() {
         justifyContent: 'center',
       }}
     >
+      <ButtonFloating icon="bx bx-add-to-queue" />
       <div style={styles}>
         <Button color="primary" onClick={() => setLoad(!load)}>
           Set Load

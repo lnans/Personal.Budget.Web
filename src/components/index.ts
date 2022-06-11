@@ -1,5 +1,6 @@
 // controls
 export { default as Button } from './controls/Button/Button'
+export { default as ButtonFloating } from './controls/ButtonFloating/ButtonFloating'
 export { default as CheckBox } from './controls/CheckBox/CheckBox'
 export { default as TextInput } from './controls/TextInput/TextInput'
 export { default as SelectInput } from './controls/SelectInput/SelectInput'
