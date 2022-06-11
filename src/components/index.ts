@@ -8,12 +8,12 @@ export { default as DatePicker } from './controls/DatePicker/DatePicker'
 export { default as SwitchInput } from './controls/Switch/SwitchInput'
 
 // ui
-export { default as Toaster } from './ui/Toaster/Toaster'
-export { default as Main } from './ui/Main/Main'
-export { default as NavBar } from './ui/Navbar/Navbar'
+export { default as Toaster } from './ui/toaster/toaster'
+export { default as Main } from './ui/main/main'
+export { default as NavBar } from './ui/navbar/navbar'
 export { default as SectionTitle } from './ui/SectionTitle/SectionTitle'
-export { default as Dialog } from './ui/Dialog/Dialog'
-export { toastSender } from './ui/Toaster/ToastSender'
+export { default as Dialog } from './ui/dialog/dialog'
+export { toastSender } from './ui/toaster/ToastSender'
 
 // functional
 export { default as AuthProvider } from './functional/AuthProvider/AuthProvider'

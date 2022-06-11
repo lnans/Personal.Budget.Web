@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import Dialog from './Dialog'
+import Dialog from './dialog'
 
 describe('● Render:', () => {
   test('closable should render with close button', () => {
