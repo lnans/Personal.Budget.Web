@@ -11,6 +11,12 @@
     "unhandled_exception": "Erreur non gérée",
     "required": "Obligatoire"
   },
+  "enums": {
+    "account_type": {
+      "Expenses": "Dépense",
+      "Savings": "Épargne"
+    }
+  },
   "components": {
     "auth_form": {
       "info": "Nouveau ici ? Contacte moi 😄",
@@ -58,7 +64,7 @@
       "operations": "Liste des opérations",
       "form": {
         "title": "Nouveau compte",
-        "name": "Nom du compte",
+        "name": "Nom",
         "bank": "Banque",
         "type": "Type",
         "balance": "Montant initial",

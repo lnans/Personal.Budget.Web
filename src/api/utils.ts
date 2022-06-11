@@ -1,9 +1,18 @@
 import { toastSender } from '@components'
 import { ErrorResponse, HttpError } from '@models/common/errorResponse'
 import i18n from '@plugins/i18n'
+import { QueryClient } from 'react-query'
 
 const apiUrl = process.env.VITE_API_BASE_URL
 const tokenKey = 'token'
+const apiClient = new QueryClient({
+  defaultOptions: {
+    queries: { retry: false, refetchOnWindowFocus: false },
+    mutations: {
+      retry: false,
+    },
+  },
+})
 
 /**
  * Create an authorization Header
@@ -130,4 +139,4 @@ const objectToQueryString = <TQuery>(initialObj: TQuery): string => {
   return query.length > 0 ? query : ''
 }
 
-export { apiUrl, getAuthorizedHeader, objectToQueryString, parseResponse, Get, Post, Patch, Put, Delete }
+export { apiUrl, apiClient, getAuthorizedHeader, objectToQueryString, parseResponse, Get, Post, Patch, Put, Delete }

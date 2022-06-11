@@ -11,6 +11,12 @@
     "unhandled_exception": "Unhandled exception",
     "required": "required"
   },
+  "enums": {
+    "account_type": {
+      "Expenses": "Expenses",
+      "Savings": "Savings"
+    }
+  },
   "components": {
     "auth_form": {
       "info": "New here? Contact me 😄",

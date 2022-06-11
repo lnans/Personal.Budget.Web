@@ -1,14 +1,16 @@
 import { accountsRoutes } from '@api/endpoints/accountsEndPoints'
-import { AccountTile, OperationsTable, SectionTitle, SwitchInput } from '@components'
+import { AccountTile, AccountTileNew, ButtonFloating, OperationsTable, SectionTitle, SwitchInput } from '@components'
 import { AccountDetailsResponse } from '@models/account/AccountDetailsResponse'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery } from 'react-query'
 import './AccountsPage.scss'
+import AddAccountForm from './AddAccount/AddAccountForm'
 
 export default function AccountsPage() {
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null)
   const [archived, setArchived] = useState<boolean>(false)
+  const [isCreatingAccount, setIsCreatingAccount] = useState<boolean>(false)
   const { t } = useTranslation()
   const { data: accounts, refetch } = useQuery<AccountDetailsResponse[]>(accountsRoutes.CACHE_KEY, accountsRoutes.getAccounts({ archived }))
 
@@ -32,6 +34,7 @@ export default function AccountsPage() {
         </div>
         <div className="accounts-page-content">
           {accounts && accounts.map((account) => <AccountTile key={account.id} account={account} isSelected={selectedAccount === account.id} onClick={setSelectedAccount} />)}
+          <AccountTileNew onClick={() => setIsCreatingAccount(true)} />
         </div>
       </div>
 
@@ -44,7 +47,9 @@ export default function AccountsPage() {
             </div>
           </>
         )}
+        <ButtonFloating icon="bx bx-add-to-queue" />
       </div>
+      <AddAccountForm show={isCreatingAccount} onClose={() => setIsCreatingAccount(false)} />
     </div>
   )
 }
