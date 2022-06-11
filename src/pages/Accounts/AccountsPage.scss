@@ -19,6 +19,7 @@
   max-height: calc(100vh - 50px);
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
 }
 
 .accounts-filter-switch {

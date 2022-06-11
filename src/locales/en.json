@@ -9,7 +9,10 @@
     "auth_failed": "Authentication failed",
     "title": "Error",
     "unhandled_exception": "Unhandled exception",
-    "required": "required"
+    "required": "required",
+    "account": {
+      "already_exist": "Account already exist"
+    }
   },
   "enums": {
     "account_type": {

@@ -9,7 +9,10 @@
     "auth_failed": "Echec d'authentification",
     "title": "Erreur",
     "unhandled_exception": "Erreur non gérée",
-    "required": "Obligatoire"
+    "required": "Obligatoire",
+    "account": {
+      "already_exist": "Ce compte existe déjà"
+    }
   },
   "enums": {
     "account_type": {

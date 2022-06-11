@@ -23,10 +23,12 @@ export default function AddAccountForm(props: AddAccountFormProps) {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useFormValidator<CreateAccountRequest>(CreateAccountRequestValidator)
 
   const onSuccess = () => {
     apiClient.invalidateQueries(accountsRoutes.CACHE_KEY)
+    reset()
     onClose()
   }
 
@@ -61,12 +63,14 @@ export default function AddAccountForm(props: AddAccountFormProps) {
           <CurrencyInput
             label={t('pages.accounts.form.balance')}
             defaultValue={0}
+            disabled={isLoading}
             register={register}
             name="initialBalance"
             error={!!errors.initialBalance?.message ? t(errors.initialBalance.message) : undefined}
           />
           <SelectInput
             label={t('pages.accounts.form.type')}
+            disabled={isLoading}
             items={accountTypes}
             itemKey="id"
             itemValue="value"
