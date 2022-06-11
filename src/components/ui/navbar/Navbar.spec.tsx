@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import NavBar from './navbar'
+import NavBar from './Navbar'
 
 const routes = {
   home: {
