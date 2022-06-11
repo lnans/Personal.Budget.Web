@@ -8,10 +8,11 @@
   "errors": {
     "auth_failed": "Echec d'authentification",
     "title": "Erreur",
-    "unhandled_exception": "Erreur non gérée"
+    "unhandled_exception": "Erreur non gérée",
+    "required": "Obligatoire"
   },
-  "pages": {
-    "login": {
+  "components": {
+    "auth_form": {
       "info": "Nouveau ici ? Contacte moi 😄",
       "login": "Connexion",
       "password": "Mot de passe",
@@ -19,11 +20,50 @@
       "username": "Nom d'utilisateur",
       "welcome": "Bienvenue sur"
     },
+    "calendar": {
+      "day": {
+        "sunday": "Dim.",
+        "monday": "Lu.",
+        "tuesday": "Ma.",
+        "wednesday": "Mer.",
+        "thursday": "Jeu.",
+        "friday": "Ven.",
+        "saturday": "Sam."
+      },
+      "month": {
+        "january": "Janvier",
+        "february": "Février",
+        "march": "Mars",
+        "april": "Avril",
+        "may": "Mai",
+        "june": "Juin",
+        "july": "Juillet",
+        "august": "Août",
+        "september": "Septembre",
+        "october": "Octobre",
+        "november": "Novembre",
+        "december": "Décembre"
+      }
+    },
+    "operations_table": {
+      "no_data": "Aucune opérations"
+    }
+  },
+  "pages": {
     "dashboard": {
       "summary_title": "Mois en cours"
     },
     "accounts": {
-      "title": "Liste des comptes"
+      "title": "Liste des comptes",
+      "operations": "Liste des opérations",
+      "form": {
+        "title": "Nouveau compte",
+        "name": "Nom du compte",
+        "bank": "Banque",
+        "type": "Type",
+        "balance": "Montant initial",
+        "create": "Créer le compte"
+      }
     }
   }
 }

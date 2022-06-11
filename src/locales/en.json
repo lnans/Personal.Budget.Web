@@ -8,10 +8,11 @@
   "errors": {
     "auth_failed": "Authentication failed",
     "title": "Error",
-    "unhandled_exception": "Unhandled exception"
+    "unhandled_exception": "Unhandled exception",
+    "required": "required"
   },
-  "pages": {
-    "login": {
+  "components": {
+    "auth_form": {
       "info": "New here? Contact me 😄",
       "login": "Sign In",
       "password": "Password",
@@ -19,11 +20,25 @@
       "username": "Username",
       "welcome": "Welcome to"
     },
+    "operations_table": {
+      "no_data": "Aucune opérations"
+    }
+  },
+  "pages": {
     "dashboard": {
       "summary_title": "Current month"
     },
     "accounts": {
-      "title": "Account list"
+      "title": "Account list",
+      "operations": "Operations list",
+      "form": {
+        "title": "New account",
+        "name": "Account name",
+        "bank": "Bank",
+        "type": "Type",
+        "balance": "Initial amount",
+        "create": "Create account"
+      }
     }
   }
 }

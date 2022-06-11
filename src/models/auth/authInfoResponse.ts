@@ -1,4 +1,4 @@
-export default class AuthInfoResponse {
-  id = ''
-  username = ''
+export type AuthInfoResponse = {
+  id?: string
+  username?: string
 }

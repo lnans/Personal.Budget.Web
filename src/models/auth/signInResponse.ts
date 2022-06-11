@@ -1,4 +1,4 @@
-export default class SignInResponse {
-  username = ''
-  token = ''
+export type SignInResponse = {
+  username?: string
+  token?: string
 }
