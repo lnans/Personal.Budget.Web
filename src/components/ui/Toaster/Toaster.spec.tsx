@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import Toaster from './toaster'
+import Toaster from './Toaster'
 import { toastSender } from './ToastSender'
 
 describe('● Render', () => {
