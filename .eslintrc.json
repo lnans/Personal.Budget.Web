@@ -1,13 +1,7 @@
 {
   "root": true,
-  "ignorePatterns": ["setupTest.ts"],
-  "plugins": ["@typescript-eslint", "react", "css-modules"],
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "prettier",
-    "plugin:css-modules/recommended"
-  ],
+  "plugins": ["@typescript-eslint", "react"],
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaVersion": 6,
     "ecmaFeatures": {
@@ -21,9 +15,6 @@
     }
   },
   "rules": {
-    // I suggest you add those two rules:
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
     "react/react-in-jsx-scope": "off"
   }
 }

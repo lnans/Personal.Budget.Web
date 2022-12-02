@@ -1,25 +1,20 @@
-import { apiClient } from '@api/utils'
-import { AuthProvider, Toaster } from '@components'
-import '@plugins/i18n'
-import 'boxicons/css/boxicons.min.css'
+import { Auth0Provider } from '@auth0/auth0-react'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
-import { BrowserRouter } from 'react-router-dom'
-import App from './app'
+import App from './App'
+
+const auth0Config = {
+  domain: import.meta.env.VITE_AUTH_DOMAIN,
+  clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
+  audience: import.meta.env.VITE_AUTH_AUDIENCE,
+  redirectUri: window.location.origin,
+}
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={apiClient}>
-      <AuthProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AuthProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-    <Toaster />
+    <Auth0Provider {...auth0Config}>
+      <App />
+    </Auth0Provider>
   </StrictMode>
 )
