@@ -41,7 +41,7 @@ function AuthLoader({ children }: AuthLoaderProps) {
   }
 
   if (!isAuthenticated) {
-    loginWithRedirect({ redirectUri: window.location.href })
+    loginWithRedirect()
     return <Loader message="SignIn ..." />
   }
 

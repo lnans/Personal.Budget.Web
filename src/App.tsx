@@ -1,18 +1,34 @@
+import { AppState, Auth0Provider, User } from '@auth0/auth0-react'
 import { AuthLoader } from 'components'
-import { BrowserRouter } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Router } from 'router'
 
 import ThemeProvider from 'theme'
 
 function App() {
+  const navigate = useNavigate()
+
+  const onRedirectCallback = (appState?: AppState | undefined, user?: User | undefined) => {
+    console.log(appState)
+    navigate(appState && appState.returnTo ? appState.returnTo : window.location.pathname)
+  }
+
+  const auth0Config = {
+    domain: import.meta.env.VITE_AUTH_DOMAIN,
+    clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
+    audience: import.meta.env.VITE_AUTH_AUDIENCE,
+    redirectUri: window.location.origin,
+    onRedirectCallback,
+  }
+
   return (
-    <ThemeProvider>
-      <AuthLoader>
-        <BrowserRouter>
+    <Auth0Provider {...auth0Config}>
+      <ThemeProvider>
+        <AuthLoader>
           <Router />
-        </BrowserRouter>
-      </AuthLoader>
-    </ThemeProvider>
+        </AuthLoader>
+      </ThemeProvider>
+    </Auth0Provider>
   )
 }
 
