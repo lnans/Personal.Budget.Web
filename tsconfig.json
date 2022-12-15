@@ -20,11 +20,14 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
+      "api/*": ["api/*"],
       "components": ["components"],
       "pages/*": ["pages/*"],
+      "hooks": ["hooks"],
       "layouts": ["layouts"],
-      "theme": ["theme"],
-      "router": ["router"]
+      "theme/*": ["theme/*"],
+      "router": ["router"],
+      "utils": ["utils"]
     }
   },
   "include": ["src"],

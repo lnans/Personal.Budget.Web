@@ -1,38 +1,22 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Avatar, Box, Drawer, Link, Typography } from '@mui/material'
-import { alpha, styled } from '@mui/material/styles'
 import { Logo } from 'components'
 import { routes } from 'router'
 
 import NavBarSection from './NavBarSection'
-
-const NAV_WIDTH = 280
-
-const StyledAccount = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(2, 2.5),
-  borderRadius: Number(theme.shape.borderRadius) * 1.5,
-  backgroundColor: alpha(theme.palette.grey[500], 0.12),
-}))
+import * as Styled from './Styles'
 
 function NavBar() {
   const { user } = useAuth0()
 
   return (
-    <Box
-      component="nav"
-      sx={{
-        flexShrink: { lg: 0 },
-        width: { lg: NAV_WIDTH },
-      }}
-    >
+    <Box component="nav" sx={{ width: Styled.NAVBAR.WIDTH }}>
       <Drawer
         open
         variant="permanent"
         PaperProps={{
           sx: {
-            width: NAV_WIDTH,
+            width: Styled.NAVBAR.WIDTH,
             bgcolor: 'background.default',
             borderRightStyle: 'dashed',
           },
@@ -43,7 +27,7 @@ function NavBar() {
         </Box>
         <Box sx={{ mb: 5, mx: 2.5 }}>
           <Link underline="none">
-            <StyledAccount>
+            <Styled.Account>
               <Avatar src={user?.picture} alt="photoURL" />
 
               <Box sx={{ ml: 2 }}>
@@ -51,10 +35,10 @@ function NavBar() {
                   {user?.name}
                 </Typography>
               </Box>
-            </StyledAccount>
+            </Styled.Account>
           </Link>
         </Box>
-        <NavBarSection links={routes} />
+        <NavBarSection title={routes.subheader} routerItems={routes.items} />
         <Box sx={{ flexGrow: 1 }} />
       </Drawer>
     </Box>

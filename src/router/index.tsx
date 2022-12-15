@@ -1,28 +1,40 @@
 import { DashboardLayout, SimpleLayout } from 'layouts'
 import { Navigate, useRoutes } from 'react-router-dom'
 
-import Accounts from 'pages/Accounts'
+import AccountsList from 'pages/accounts/list/AccountsList'
 import Dashboard from 'pages/Dashboard'
 import Settings from 'pages/Settings'
 import Page404 from 'pages/Page404'
+import Operations from 'pages/Operations'
 
-const routes = [
-  {
-    title: 'dashboard',
-    path: '/app',
-    icon: 'ic_analytics',
-  },
-  {
-    title: 'comptes',
-    path: '/accounts',
-    icon: 'ic_banking',
-  },
-  {
-    title: 'paramètres',
-    path: '/settings',
-    icon: 'ic_settings',
-  },
-]
+export type NavItemLink = {
+  title: string
+  path: string
+  children?: NavItemLink[]
+  icon?: string
+}
+
+export type RoutesDefinition = {
+  subheader: string
+  items: NavItemLink[]
+}
+
+const routes: RoutesDefinition = {
+  subheader: 'nav.title',
+  items: [
+    { title: 'nav.links.dashboard', path: '/dashboard', icon: 'ic_analytics' },
+    {
+      title: 'nav.links.finances',
+      icon: 'ic_banking',
+      path: '/finance',
+      children: [
+        { title: 'nav.links.accounts', path: '/finance/accounts' },
+        { title: 'nav.links.operations', path: '/finance/operations' },
+      ],
+    },
+    { title: 'nav.links.settings', path: '/settings', icon: 'ic_settings' },
+  ],
+}
 
 function Router() {
   const routes = useRoutes([
@@ -30,9 +42,10 @@ function Router() {
       path: '/',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/app" />, index: true },
-        { path: 'app', element: <Dashboard /> },
-        { path: 'accounts', element: <Accounts /> },
+        { element: <Navigate to="/dashboard" />, index: true },
+        { path: 'dashboard', element: <Dashboard /> },
+        { path: 'finance/accounts', element: <AccountsList /> },
+        { path: 'finance/operations', element: <Operations /> },
         { path: 'settings', element: <Settings /> },
       ],
     },
@@ -43,10 +56,6 @@ function Router() {
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
-    },
-    {
-      path: '*',
-      element: <div>not found</div>,
     },
   ])
 

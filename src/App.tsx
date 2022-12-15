@@ -1,4 +1,4 @@
-import { AppState, Auth0Provider, User } from '@auth0/auth0-react'
+import { AppState, Auth0Provider } from '@auth0/auth0-react'
 import { AuthLoader } from 'components'
 import { useNavigate } from 'react-router-dom'
 import { Router } from 'router'
@@ -8,8 +8,7 @@ import ThemeProvider from 'theme'
 function App() {
   const navigate = useNavigate()
 
-  const onRedirectCallback = (appState?: AppState | undefined, user?: User | undefined) => {
-    console.log(appState)
+  const onRedirectCallback = (appState?: AppState | undefined) => {
     navigate(appState && appState.returnTo ? appState.returnTo : window.location.pathname)
   }
 
