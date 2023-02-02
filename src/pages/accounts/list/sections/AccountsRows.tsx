@@ -23,7 +23,7 @@ function AccountsRows({ accounts, loading }: AccountsRowsProps) {
           </TableCell>
         </TableRow>
       ) : (
-        <TableRow hover>
+        <TableRow hover={!!accounts && !!accounts.items.length}>
           {accounts && accounts.items.length ? (
             accounts.items.map((account) => (
               <Fragment key={account.id}>

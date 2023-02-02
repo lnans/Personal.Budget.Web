@@ -1,4 +1,5 @@
 export { default as AuthLoader } from './auth-loader/AuthLoader'
+export { default as HeaderBreadcrumbs } from './breadcrumbs/HeaderBreadCrumbs'
 export { default as EmptyContent } from './empty-content/EmptyContent'
 export { default as Header } from './header/Header'
 export { default as Iconify } from './iconify/Iconify'

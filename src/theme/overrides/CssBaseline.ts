@@ -37,6 +37,9 @@ export default function CssBaseline() {
           display: 'block',
           maxWidth: '100%',
         },
+        a: {
+          textDecoration: 'none',
+        },
       },
     },
   }

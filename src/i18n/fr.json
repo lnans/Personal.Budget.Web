@@ -1,6 +1,8 @@
 {
   "common": {
-    "no_data": "Aucune donnée"
+    "no_data": "Aucune donnée",
+    "list": "Liste",
+    "create": "Création"
   },
   "action": {
     "activate": "Activer",
@@ -25,6 +27,7 @@
     }
   },
   "account": {
+    "create": "Nouveau compte",
     "search": "Chercher un compte...",
     "name": "Nom",
     "bank": "Banque",

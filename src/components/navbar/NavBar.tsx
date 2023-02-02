@@ -1,10 +1,34 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Avatar, Box, Drawer, Link, Typography } from '@mui/material'
 import { Logo } from 'components'
-import { routes } from 'router'
+import { PATH_ROUTES } from 'router'
 
 import NavBarSection from './NavBarSection'
 import * as Styled from './Styles'
+
+export type NavItemLink = {
+  title: string
+  path: string
+  children?: NavItemLink[]
+  icon?: string
+}
+
+export type NavDefinition = {
+  subheader: string
+  items: NavItemLink[]
+}
+
+const NAV_ROUTES: NavDefinition = {
+  subheader: 'nav.title',
+  items: [
+    PATH_ROUTES.dashboard,
+    {
+      ...PATH_ROUTES.finance,
+      children: [PATH_ROUTES.finance.accounts, PATH_ROUTES.finance.operations],
+    },
+    PATH_ROUTES.settings,
+  ],
+}
 
 function NavBar() {
   const { user } = useAuth0()
@@ -38,7 +62,7 @@ function NavBar() {
             </Styled.Account>
           </Link>
         </Box>
-        <NavBarSection title={routes.subheader} routerItems={routes.items} />
+        <NavBarSection title={NAV_ROUTES.subheader} routerItems={NAV_ROUTES.items} />
         <Box sx={{ flexGrow: 1 }} />
       </Drawer>
     </Box>

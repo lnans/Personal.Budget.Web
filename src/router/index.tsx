@@ -3,37 +3,39 @@ import { Navigate, useRoutes } from 'react-router-dom'
 
 import AccountsList from 'pages/accounts/list/AccountsList'
 import Dashboard from 'pages/Dashboard'
-import Settings from 'pages/Settings'
-import Page404 from 'pages/Page404'
 import Operations from 'pages/Operations'
+import Page404 from 'pages/Page404'
+import Settings from 'pages/Settings'
+import AccountForm from 'pages/accounts/new/AccountForm'
 
-export type NavItemLink = {
-  title: string
-  path: string
-  children?: NavItemLink[]
-  icon?: string
-}
-
-export type RoutesDefinition = {
-  subheader: string
-  items: NavItemLink[]
-}
-
-const routes: RoutesDefinition = {
-  subheader: 'nav.title',
-  items: [
-    { title: 'nav.links.dashboard', path: '/dashboard', icon: 'ic_analytics' },
-    {
-      title: 'nav.links.finances',
-      icon: 'ic_banking',
-      path: '/finance',
-      children: [
-        { title: 'nav.links.accounts', path: '/finance/accounts' },
-        { title: 'nav.links.operations', path: '/finance/operations' },
-      ],
+const PATH_ROUTES = {
+  dashboard: {
+    title: 'nav.links.dashboard',
+    path: '/dashboard',
+    icon: 'ic_analytics',
+  },
+  finance: {
+    title: 'nav.links.finances',
+    path: '/finance',
+    icon: 'ic_banking',
+    accounts: {
+      title: 'nav.links.accounts',
+      path: '/finance/accounts',
+      new: {
+        title: 'nav.links.accounts',
+        path: '/finance/accounts/new',
+      },
     },
-    { title: 'nav.links.settings', path: '/settings', icon: 'ic_settings' },
-  ],
+    operations: {
+      title: 'nav.links.operations',
+      path: '/finance/operations',
+    },
+  },
+  settings: {
+    title: 'nav.links.settings',
+    path: '/settings',
+    icon: 'ic_settings',
+  },
 }
 
 function Router() {
@@ -42,17 +44,18 @@ function Router() {
       path: '/',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard" />, index: true },
-        { path: 'dashboard', element: <Dashboard /> },
-        { path: 'finance/accounts', element: <AccountsList /> },
-        { path: 'finance/operations', element: <Operations /> },
-        { path: 'settings', element: <Settings /> },
+        { element: <Navigate to={PATH_ROUTES.dashboard.path} />, index: true },
+        { path: PATH_ROUTES.dashboard.path, element: <Dashboard /> },
+        { path: PATH_ROUTES.finance.accounts.path, element: <AccountsList /> },
+        { path: PATH_ROUTES.finance.accounts.new.path, element: <AccountForm /> },
+        { path: PATH_ROUTES.finance.operations.path, element: <Operations /> },
+        { path: PATH_ROUTES.settings.path, element: <Settings /> },
       ],
     },
     {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/app" />, index: true },
+        { element: <Navigate to="app" />, index: true },
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
@@ -62,4 +65,4 @@ function Router() {
   return routes
 }
 
-export { Router, routes }
+export { Router, PATH_ROUTES }

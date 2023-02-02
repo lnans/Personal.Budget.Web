@@ -1,10 +1,14 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import { Box, Card, Container, Divider, Tab, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, Tabs, Typography } from '@mui/material'
+import { Box, Button, Card, Container, Divider, Tab, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow, Tabs } from '@mui/material'
 import { useGetAccounts } from 'api/hooks'
 import { GetAccountsRequest } from 'api/models'
+import { HeaderBreadcrumbs, Iconify } from 'components'
 import { useTabs } from 'hooks'
 import { SyntheticEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PATH_ROUTES } from 'router'
+import { Link as RouterLink } from 'react-router-dom'
+
 import AccountsFilters from './sections/AccountsFilters'
 import AccountsRows from './sections/AccountsRows'
 
@@ -37,9 +41,21 @@ function Accounts() {
   const { t } = useTranslation()
   return (
     <Container>
-      <Typography variant="h4" sx={{ mb: 5 }}>
-        {t('nav.links.accounts')}
-      </Typography>
+      <HeaderBreadcrumbs
+        heading={t(PATH_ROUTES.finance.accounts.title)}
+        links={[
+          { name: t(PATH_ROUTES.finance.title), href: PATH_ROUTES.finance.path },
+          { name: t(PATH_ROUTES.finance.accounts.title), href: PATH_ROUTES.finance.accounts.path },
+          { name: t('common.list') },
+        ]}
+        action={
+          <RouterLink to={PATH_ROUTES.finance.accounts.new.path}>
+            <Button variant="contained" startIcon={<Iconify icon={'eva:plus-fill'} />}>
+              {t('account.create')}
+            </Button>
+          </RouterLink>
+        }
+      />
       <Card>
         <Tabs allowScrollButtonsMobile variant="scrollable" scrollButtons="auto" value={currentTab} onChange={handleFilterStatus} sx={{ px: 2, bgcolor: 'background.neutral' }}>
           {STATUS_OPTIONS.map((tab) => (
