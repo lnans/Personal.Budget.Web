@@ -16,12 +16,11 @@ function App() {
     domain: import.meta.env.VITE_AUTH_DOMAIN,
     clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
     audience: import.meta.env.VITE_AUTH_AUDIENCE,
-    redirectUri: window.location.origin,
     onRedirectCallback,
   }
 
   return (
-    <Auth0Provider {...auth0Config}>
+    <Auth0Provider {...auth0Config} authorizationParams={{ redirect_uri: window.location.origin }}>
       <ThemeProvider>
         <AuthLoader>
           <Router />

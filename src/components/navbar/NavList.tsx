@@ -1,7 +1,7 @@
 import { Collapse, List } from '@mui/material'
 import { useState } from 'react'
 import { matchPath, useLocation } from 'react-router-dom'
-import { NavItemLink } from 'router'
+import { NavItemLink } from './NavBar'
 import { NavItemRoot, NavItemSub } from './NavItem'
 
 const getActive = (path: string, pathname: string) => (path ? !!matchPath({ path, end: false }, pathname) : false)

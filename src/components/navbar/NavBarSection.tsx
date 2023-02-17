@@ -1,6 +1,6 @@
 import { Box, List } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { NavItemLink } from 'router'
+import { NavItemLink } from './NavBar'
 
 import NavListRoot from './NavList'
 import * as Styled from './Styles'

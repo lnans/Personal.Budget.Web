@@ -1,12 +1,12 @@
-import { Box, BoxProps, SxProps } from '@mui/material'
+import { Box, SxProps } from '@mui/material'
 
 type ImageProps = {
   src: string
   alt: string
   sx: SxProps
-} & BoxProps
+}
 
-export default function Image({ src, alt, sx }: ImageProps) {
+export default function ImageBox({ src, alt, sx }: ImageProps) {
   return (
     <Box
       component="span"

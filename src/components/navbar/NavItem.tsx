@@ -2,7 +2,7 @@ import { Box, ListItemText } from '@mui/material'
 import { Iconify, SvgColor } from 'components'
 import { useTranslation } from 'react-i18next'
 import { NavLink as RouterLink } from 'react-router-dom'
-import { NavItemLink } from 'router'
+import { NavItemLink } from './NavBar'
 
 import * as Styled from './Styles'
 
