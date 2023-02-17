@@ -1,0 +1,37 @@
+{
+  "common": {
+    "no_data": "Aucune donnée",
+    "list": "Liste",
+    "create": "Création"
+  },
+  "action": {
+    "activate": "Activer",
+    "edit": "Modifier",
+    "archive": "Archiver",
+    "delete": "Supprimer"
+  },
+  "enum": {
+    "account_type": {
+      "Expenses": "Débit",
+      "Savings": "Epargne"
+    }
+  },
+  "nav": {
+    "title": "Menu",
+    "links": {
+      "dashboard": "Dashboard",
+      "finances": "Finances",
+      "accounts": "Comptes",
+      "operations": "Operations",
+      "settings": "Paramètres"
+    }
+  },
+  "account": {
+    "create": "Nouveau compte",
+    "search": "Chercher un compte...",
+    "name": "Nom",
+    "bank": "Banque",
+    "type": "Type",
+    "balance": "Solde"
+  }
+}

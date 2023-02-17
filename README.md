@@ -11,12 +11,10 @@ Technical information:
 
 - React 18
 - React Router
-- React Hook Form
-- React Query
-- Yup
-- I18n Next
-- Boxicons
-- SASS
+- MUI
+- Emotion
+- Auth0
+- Iconify
 
 # Getting Started
 

@@ -1,0 +1,1 @@
+export { numberWithSpaces } from './number'
