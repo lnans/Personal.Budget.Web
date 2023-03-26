@@ -13,31 +13,36 @@
     "lint": "eslint src && prettier --check ."
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.0.0",
+    "@auth0/auth0-react": "^2.0.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^2.9.11",
     "@iconify/react": "^4.1.0",
-    "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.11.9",
-    "@tanstack/react-query": "^4.24.6",
-    "@tanstack/react-query-devtools": "^4.24.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/lab": "^5.0.0-alpha.121",
+    "@mui/material": "^5.11.11",
+    "@tanstack/react-query": "^4.24.10",
+    "@tanstack/react-query-devtools": "^4.24.12",
     "i18next": "^22.4.10",
+    "notistack": "^2.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^12.1.5",
-    "react-router-dom": "^6.8.1"
+    "react-hook-form": "^7.43.3",
+    "react-i18next": "^12.2.0",
+    "react-router-dom": "^6.8.2",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
-    "@types/node": "^18.13.0",
+    "@types/node": "^18.14.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@typescript-eslint/parser": "^5.52.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "@vitejs/plugin-react": "^3.1.0",
-    "eslint": "^8.34.0",
+    "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5",
-    "vite": "^4.1.2"
+    "vite": "^4.1.4"
   }
 }

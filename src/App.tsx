@@ -1,32 +1,30 @@
-import { AppState, Auth0Provider } from '@auth0/auth0-react'
-import { AuthLoader } from 'components'
-import { useNavigate } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ToastMessageProvider } from 'components'
+import { AuthProvider } from 'contexts/AuthContext'
+import { BrowserRouter } from 'react-router-dom'
 import { Router } from 'router'
 
 import ThemeProvider from 'theme'
 
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: false, refetchOnWindowFocus: false } },
+})
+
 function App() {
-  const navigate = useNavigate()
-
-  const onRedirectCallback = (appState?: AppState | undefined) => {
-    navigate(appState && appState.returnTo ? appState.returnTo : window.location.pathname)
-  }
-
-  const auth0Config = {
-    domain: import.meta.env.VITE_AUTH_DOMAIN,
-    clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
-    audience: import.meta.env.VITE_AUTH_AUDIENCE,
-    onRedirectCallback,
-  }
-
   return (
-    <Auth0Provider {...auth0Config} authorizationParams={{ redirect_uri: window.location.origin }}>
+    <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <AuthLoader>
-          <Router />
-        </AuthLoader>
+        <ToastMessageProvider>
+          <BrowserRouter>
+            <AuthProvider>
+              <Router />
+            </AuthProvider>
+          </BrowserRouter>
+        </ToastMessageProvider>
       </ThemeProvider>
-    </Auth0Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 

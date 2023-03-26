@@ -1,1 +1,2 @@
-export { numberWithSpaces } from './number'
+export * from './enum'
+export * from './number'

@@ -22,6 +22,7 @@
     "paths": {
       "api/*": ["api/*"],
       "components": ["components"],
+      "contexts": ["contexts"],
       "pages/*": ["pages/*"],
       "hooks": ["hooks"],
       "layouts": ["layouts"],

@@ -2,13 +2,20 @@
   "common": {
     "no_data": "Aucune donnée",
     "list": "Liste",
-    "create": "Création"
+    "create": "Création",
+    "add": "Ajouter",
+    "required": "Champs obligatoire",
+    "rows_per_page": "Lignes par page",
+    "of": "sur",
+    "more_than": "plus de",
+    "warning": "Cette action est irréversible"
   },
   "action": {
     "activate": "Activer",
     "edit": "Modifier",
     "archive": "Archiver",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "cancel": "Annuler"
   },
   "enum": {
     "account_type": {
@@ -28,10 +35,17 @@
   },
   "account": {
     "create": "Nouveau compte",
+    "delete": "Supprimer un compte",
     "search": "Chercher un compte...",
     "name": "Nom",
     "bank": "Banque",
     "type": "Type",
-    "balance": "Solde"
+    "balance": "Solde",
+    "initial_balance": "Solde initial",
+    "add_title": "Ajouter un compte",
+    "add_button": "Ajouter le compte",
+    "created": "Compte créé avec succès !",
+    "deleted": "Compte supprimé avec succès !",
+    "confirm_delete": "Êtes-vous sûr de vouloir supprimer le compte \"{{account}}\" ?"
   }
 }

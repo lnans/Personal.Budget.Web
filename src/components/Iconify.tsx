@@ -1,9 +1,9 @@
-import { Icon } from '@iconify/react'
+import { Icon, IconifyIcon } from '@iconify/react'
 import { Box, BoxProps, SxProps, Theme } from '@mui/material'
 import { forwardRef } from 'react'
 
 type IconifyProps = {
-  icon: string
+  icon: string | IconifyIcon
   width?: string | number
   height?: string | number
   sx?: SxProps<Theme>

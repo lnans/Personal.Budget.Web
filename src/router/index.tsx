@@ -6,7 +6,7 @@ import Dashboard from 'pages/Dashboard'
 import Operations from 'pages/Operations'
 import Page404 from 'pages/Page404'
 import Settings from 'pages/Settings'
-import AccountForm from 'pages/accounts/new/AccountForm'
+import AccountAddForm from 'pages/accounts/forms/AccountAddForm'
 
 const PATH_ROUTES = {
   dashboard: {
@@ -47,7 +47,7 @@ function Router() {
         { element: <Navigate to={PATH_ROUTES.dashboard.path} />, index: true },
         { path: PATH_ROUTES.dashboard.path, element: <Dashboard /> },
         { path: PATH_ROUTES.finance.accounts.path, element: <AccountsList /> },
-        { path: PATH_ROUTES.finance.accounts.new.path, element: <AccountForm /> },
+        { path: PATH_ROUTES.finance.accounts.new.path, element: <AccountAddForm /> },
         { path: PATH_ROUTES.finance.operations.path, element: <Operations /> },
         { path: PATH_ROUTES.settings.path, element: <Settings /> },
       ],
