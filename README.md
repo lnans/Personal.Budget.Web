@@ -21,6 +21,8 @@ Technical information:
 
 # Getting Started
 
+Before anything, create an application in your Auth0 account and set the configuration file `.env.local` with your auth0 config.
+
 For running the project, first go to see the backend project : https://github.com/lnans/personal.budget \
 When `Budget. API` is running:
 
