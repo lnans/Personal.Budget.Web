@@ -1,3 +1,2 @@
-export { default as AccountsPage } from './Accounts/AccountsPage'
-export { default as DashboardPage } from './Dashboard/DashboardPage'
-export { default as TestBedPage } from './TestBed/TestBedPage'
+export { default as Settings } from './settings/settings'
+export { default as Accounts } from './accounts/accounts'

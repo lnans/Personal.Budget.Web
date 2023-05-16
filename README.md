@@ -11,14 +11,17 @@ Technical information:
 
 - React 18
 - React Router
-- React Hook Form
 - React Query
-- Yup
-- I18n Next
-- Boxicons
-- SASS
+- React I18next
+- Zod
+- Mantine
+- Emotion
+- Auth0
+- Iconify
 
 # Getting Started
+
+Before anything, create an application in your Auth0 account and set the configuration file `.env.local` with your auth0 config.
 
 For running the project, first go to see the backend project : https://github.com/lnans/personal.budget \
 When `Budget. API` is running:

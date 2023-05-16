@@ -1,37 +1,45 @@
-import { Main, NavBar } from '@components'
-import { AccountsPage, DashboardPage, TestBedPage } from '@pages'
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
-import './app.scss'
+import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
+import { useLocalStorage } from '@mantine/hooks'
+import { Notifications } from '@mantine/notifications'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { queryClient } from 'api/client'
+import { AppLoader } from 'components'
+import { AuthProvider } from 'contexts'
+import { useCallback } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { Router } from 'router'
+import { themeOverride } from 'styles'
 
-export default function App() {
-  const [currentPath, setCurrentPath] = useState<string>('/')
+function App() {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: 'light',
+    getInitialValueInEffect: true,
+  })
 
-  const { t } = useTranslation()
-  const navigate = useNavigate()
-  const location = useLocation()
-
-  const appRoutes = {
-    dashboard: { path: '/', name: t('nav.dashboard'), icon: 'bx bx-tachometer' },
-    accounts: { path: '/accounts', name: t('nav.accounts'), icon: 'bx bxs-wallet' },
-    test: { path: '/test', name: t('nav.test'), icon: 'bx bx-test-tube' },
-  }
-
-  useEffect(() => {
-    setCurrentPath(location.pathname)
-  }, [location])
+  const toggleColorScheme = useCallback(
+    (value?: ColorScheme) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark')),
+    [colorScheme, setColorScheme]
+  )
 
   return (
-    <>
-      <NavBar title={t('app')} routes={appRoutes} currentPath={currentPath} onNavigate={navigate} />
-      <Main>
-        <Routes>
-          <Route path={appRoutes.dashboard.path} element={<DashboardPage />} />
-          <Route path={appRoutes.accounts.path} element={<AccountsPage />} />
-          <Route path={appRoutes.test.path} element={<TestBedPage />} />
-        </Routes>
-      </Main>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider withGlobalStyles withNormalizeCSS theme={themeOverride(colorScheme)}>
+          <Notifications position="bottom-center" />
+          <BrowserRouter>
+            <AuthProvider>
+              <AppLoader>
+                <Router />
+              </AppLoader>
+            </AuthProvider>
+          </BrowserRouter>
+        </MantineProvider>
+      </ColorSchemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   )
 }
+
+export default App
