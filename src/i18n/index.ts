@@ -1,16 +1,18 @@
 import { initReactI18next } from 'react-i18next'
 
 import i18n from 'i18next'
+import transEn from './en.json'
 import transFr from './fr.json'
 
-const resources = {
+const translations = {
+  en: { translation: transEn },
   fr: { translation: transFr },
 }
 
 i18n.use(initReactI18next).init({
-  resources,
+  resources: translations,
   lng: 'fr',
-  fallbackLng: ['fr'],
+  fallbackLng: ['en'],
   interpolation: {
     escapeValue: false,
   },

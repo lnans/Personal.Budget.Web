@@ -1,10 +1,17 @@
 import { Auth0ContextInterface } from '@auth0/auth0-react'
-import { ErrorHttp } from './models/http/ErrorHttp'
-import { ErrorResponse } from './models/http/ErrorResponse'
+import { ErrorResponse } from 'api/contracts'
 
 const apiUrl = import.meta.env.VITE_API_URL
 
-async function getAuthorizedHeader(auth: Auth0ContextInterface, headers?: Headers): Promise<Headers> {
+type ErrorHttp = {
+  status: number
+  body: string
+}
+
+async function getAuthorizedHeader(
+  auth: Auth0ContextInterface,
+  headers?: Headers
+): Promise<Headers> {
   const authorizationHeader = new Headers(headers)
   const authToken = await auth.getAccessTokenSilently()
   authorizationHeader.append('Authorization', `Bearer ${authToken}`)
@@ -60,14 +67,23 @@ async function parseResponse<TResult>(response: Response): Promise<TResult> {
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
-async function Request<TResult>(auth: Auth0ContextInterface, method: HttpMethod, path: string): Promise<TResult> {
+async function Request<TResult>(
+  auth: Auth0ContextInterface,
+  method: HttpMethod,
+  path: string
+): Promise<TResult> {
   return fetch(`${apiUrl}${path}`, {
     method,
     headers: await getAuthorizedHeader(auth),
   }).then<TResult>(parseResponse)
 }
 
-async function RequestWithBody<TResult, TBody>(auth: Auth0ContextInterface, method: HttpMethod, path: string, body: TBody): Promise<TResult> {
+async function RequestWithBody<TResult, TBody>(
+  auth: Auth0ContextInterface,
+  method: HttpMethod,
+  path: string,
+  body: TBody
+): Promise<TResult> {
   return fetch(`${apiUrl}${path}`, {
     method,
     headers: await getAuthorizedHeader(auth, getContentHeader(body)),
@@ -75,11 +91,16 @@ async function RequestWithBody<TResult, TBody>(auth: Auth0ContextInterface, meth
   }).then<TResult>(parseResponse)
 }
 
-const Get = async <TResult>(auth: Auth0ContextInterface, path: string) => Request<TResult>(auth, 'GET', path)
-const Post = async <TBody, TResult>(auth: Auth0ContextInterface, path: string, body: TBody) => RequestWithBody<TResult, TBody>(auth, 'POST', path, body)
-const Put = async <TBody, TResult>(auth: Auth0ContextInterface, path: string, body: TBody) => RequestWithBody<TResult, TBody>(auth, 'PUT', path, body)
-const Patch = async <TBody, TResult>(auth: Auth0ContextInterface, path: string, body: TBody) => RequestWithBody<TResult, TBody>(auth, 'PATCH', path, body)
-const Delete = async <TResult>(auth: Auth0ContextInterface, path: string) => Request<TResult>(auth, 'DELETE', path)
+const Get = async <TResult>(auth: Auth0ContextInterface, path: string) =>
+  Request<TResult>(auth, 'GET', path)
+const Post = async <TBody, TResult>(auth: Auth0ContextInterface, path: string, body: TBody) =>
+  RequestWithBody<TResult, TBody>(auth, 'POST', path, body)
+const Put = async <TBody, TResult>(auth: Auth0ContextInterface, path: string, body: TBody) =>
+  RequestWithBody<TResult, TBody>(auth, 'PUT', path, body)
+const Patch = async <TBody, TResult>(auth: Auth0ContextInterface, path: string, body: TBody) =>
+  RequestWithBody<TResult, TBody>(auth, 'PATCH', path, body)
+const Delete = async <TResult>(auth: Auth0ContextInterface, path: string) =>
+  Request<TResult>(auth, 'DELETE', path)
 
 const http = { Delete, Get, Put, Patch, Post, getQueryParamsFrom }
 

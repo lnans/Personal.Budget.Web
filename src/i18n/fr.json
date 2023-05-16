@@ -1,51 +1,15 @@
 {
-  "common": {
-    "no_data": "Aucune donnée",
-    "list": "Liste",
-    "create": "Création",
-    "add": "Ajouter",
-    "required": "Champs obligatoire",
-    "rows_per_page": "Lignes par page",
-    "of": "sur",
-    "more_than": "plus de",
-    "warning": "Cette action est irréversible"
+  "account_list_card": {
+    "expenses": "Mes comptes",
+    "expenses_all": "Tous mes comptes",
+    "savings": "Mon épargne",
+    "savings_all": "Toute mon épargne"
   },
-  "action": {
-    "activate": "Activer",
-    "edit": "Modifier",
-    "archive": "Archiver",
-    "delete": "Supprimer",
-    "cancel": "Annuler"
+  "appbar": {
+    "accounts": "Mes comptes",
+    "settings": "Paramètres"
   },
-  "enum": {
-    "account_type": {
-      "Expenses": "Débit",
-      "Savings": "Epargne"
-    }
-  },
-  "nav": {
-    "title": "Menu",
-    "links": {
-      "dashboard": "Dashboard",
-      "finances": "Finances",
-      "accounts": "Comptes",
-      "operations": "Operations",
-      "settings": "Paramètres"
-    }
-  },
-  "account": {
-    "create": "Nouveau compte",
-    "delete": "Supprimer un compte",
-    "search": "Chercher un compte...",
-    "name": "Nom",
-    "bank": "Banque",
-    "type": "Type",
-    "balance": "Solde",
-    "initial_balance": "Solde initial",
-    "add_title": "Ajouter un compte",
-    "add_button": "Ajouter le compte",
-    "created": "Compte créé avec succès !",
-    "deleted": "Compte supprimé avec succès !",
-    "confirm_delete": "Êtes-vous sûr de vouloir supprimer le compte \"{{account}}\" ?"
+  "total_holdings_card": {
+    "title": "Total de mes avoirs"
   }
 }

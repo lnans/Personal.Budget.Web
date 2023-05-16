@@ -1,2 +1,1 @@
-export { AccountType } from './AccountType'
-export { OperationType } from './OperationType'
+export { AccountTypeEnum } from './account-type-enum'
