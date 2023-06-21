@@ -2,3 +2,4 @@
 dist
 public
 coverage
+node_modules

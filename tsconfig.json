@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -19,20 +20,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    /* Alias */
-    "baseUrl": "./src",
+    /* Paths */
+    "baseUrl": ".",
     "paths": {
-      "api/*": ["api/*"],
-      "components/*": ["components/*"],
-      "contexts": ["contexts"],
-      "hooks": ["hooks"],
-      "layouts": ["layouts"],
-      "pages": ["pages"],
-      "router": ["router"],
-      "styles": ["styles"],
-      "utils": ["utils"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

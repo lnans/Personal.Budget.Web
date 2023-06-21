@@ -9,7 +9,7 @@ import { TFunction } from 'i18next'
  * @param i18n i18n instance
  * @returns
  */
-function getSelectItemsfromEnum<T extends object>(
+export function getSelectItemsfromEnum<T extends object>(
   enumToList: T,
   transKey: string,
   i18n: TFunction<'translation', undefined, 'translation'>
@@ -21,5 +21,3 @@ function getSelectItemsfromEnum<T extends object>(
     label: i18n(`${transKey}.${key}`) ?? '',
   }))
 }
-
-export { getSelectItemsfromEnum }

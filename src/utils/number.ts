@@ -6,7 +6,7 @@ import { MantineColor } from '@mantine/styles'
  * @param value Number to transform
  * @returns Transformed number as string
  */
-function getNumberWithSpaces(value?: number): string {
+export function getNumberWithSpaces(value?: number): string {
   if (value === undefined) {
     return '-'
   }
@@ -22,11 +22,9 @@ function getNumberWithSpaces(value?: number): string {
  * @param value the currency value
  * @returns a mantine color
  */
-function getNumberColor(value?: number): MantineColor {
+export function getNumberColor(value?: number): MantineColor {
   if (value === undefined) {
     return 'gray'
   }
   return value > 0 ? 'teal' : value < 0 ? 'red' : 'yellow'
 }
-
-export { getNumberWithSpaces, getNumberColor }
