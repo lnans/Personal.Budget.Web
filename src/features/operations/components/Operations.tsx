@@ -1,11 +1,11 @@
-import { Icon } from '@iconify/react/dist/iconify.js'
-import { Group, MultiSelect, Paper, Tabs, TextInput } from '@mantine/core'
+import { Tabs } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 
 import { AccountSearchParams, AccountTypeEnum } from '@/types'
-import { getSelectItemsfromEnum } from '@/utils'
+
+import { OperationsList } from './OperationsList'
 
 export function Operations() {
   const [searchParams] = useSearchParams()
@@ -21,24 +21,18 @@ export function Operations() {
   }, [searchParams])
 
   return (
-    <Tabs defaultValue="gallery">
+    <Tabs keepMounted={false} defaultValue="operations-actual">
       <Tabs.List mb="md">
-        <Tabs.Tab value="gallery">Opérations</Tabs.Tab>
-        <Tabs.Tab value="messages">Opérations à venir</Tabs.Tab>
+        <Tabs.Tab value="operations-actual">{t('operations.tab.actual')}</Tabs.Tab>
+        <Tabs.Tab value="operations-pending">{t('operations.tab.pending')}</Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value="gallery" pt="xs">
-        <Paper p="md" withBorder mih={600}>
-          <Group>
-            <TextInput placeholder="Rechercher..." icon={<Icon icon="material-symbols:search" />} />
-            <MultiSelect placeholder="Type" data={getSelectItemsfromEnum(AccountTypeEnum, '', t)} />
-          </Group>
-          {JSON.stringify(accountFilter)}
-        </Paper>
+      <Tabs.Panel value="operations-actual" pt="xs">
+        <OperationsList accountFilter={accountFilter} />
       </Tabs.Panel>
 
-      <Tabs.Panel value="messages" pt="xs">
-        Messages tab content
+      <Tabs.Panel value="operations-pending" pt="xs">
+        <OperationsList accountFilter={accountFilter} pending />
       </Tabs.Panel>
     </Tabs>
   )

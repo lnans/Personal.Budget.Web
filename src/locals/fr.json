@@ -1,14 +1,24 @@
 {
-  "accounts.list.expenses": "Mes comptes",
-  "appbar.settings": "Paramètres",
-  "appbar.accounts": "Mes comptes",
   "account.summary.balance.title": "Solde",
   "account.summary.balance.subtitle": "Disponible au {{lastOperation}}",
   "account.summary.pending.title": "En attente",
   "account.summary.pending.subtitle": "Operations à venir",
-  "accounts.total": "Total de mes avoirs",
-  "accounts.list.savings.all": "Toute mon épargne",
-  "accounts.list.savings": "Mon épargne",
+
+  "accounts.list.expenses": "Mes comptes",
   "accounts.list.expenses.all": "Tous mes comptes",
-  "accounts.list.tip": "Selectionner un compte pour afficher ces opérations"
+  "accounts.list.savings": "Mon épargne",
+  "accounts.list.savings.all": "Toute mon épargne",
+  "accounts.list.tip": "Selectionner un compte pour afficher ces opérations",
+  "accounts.total": "Total de mes avoirs",
+
+  "appbar.accounts": "Mes comptes",
+  "appbar.settings": "Paramètres",
+
+  "enums.operation_type.Budget": "Budget",
+  "enums.operation_type.Expense": "Dépense",
+  "enums.operation_type.Fixe": "Fixe",
+  "enums.operation_type.Transfer": "Transfert",
+
+  "operations.tab.actual": "Opérations",
+  "operations.tab.pending": "Operations à venir"
 }
