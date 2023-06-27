@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { Group, Paper, Table, TextInput } from '@mantine/core'
+import { CloseButton, Group, Paper, Table, TextInput } from '@mantine/core'
 
 import { AccountSearchParams } from '@/types'
 
@@ -15,7 +15,11 @@ export function OperationsList({ accountFilter }: OperationsListProps) {
     <Paper p="md" withBorder mih={600}>
       <Group>
         <OperationsFilters />
-        <TextInput placeholder="Rechercher..." icon={<Icon icon="material-symbols:search" height={18} />} />
+        <TextInput
+          placeholder="Rechercher..."
+          icon={<Icon icon="material-symbols:search" height={18} />}
+          rightSection={<CloseButton />}
+        />
       </Group>
       <Table highlightOnHover verticalSpacing="xs" mt="md">
         <tbody>

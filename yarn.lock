@@ -887,6 +887,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/dates@npm:^6.0.15":
+  version: 6.0.15
+  resolution: "@mantine/dates@npm:6.0.15"
+  dependencies:
+    "@mantine/utils": 6.0.15
+  peerDependencies:
+    "@mantine/core": 6.0.15
+    "@mantine/hooks": 6.0.15
+    dayjs: ">=1.0.0"
+    react: ">=16.8.0"
+  checksum: 0b4516c557048c458c88ae0b1a4a6f628078e844a3b3be3f94dba06d1d3c8ed40f6d5bb93dc9be0ba1f505d31fa902e34911ef0cc3828f46e3bd8b354d3b0b49
+  languageName: node
+  linkType: hard
+
 "@mantine/hooks@npm:^6.0.15":
   version: 6.0.15
   resolution: "@mantine/hooks@npm:6.0.15"
@@ -5806,6 +5820,7 @@ __metadata:
     "@emotion/react": ^11.11.1
     "@iconify/react": ^4.1.1
     "@mantine/core": ^6.0.15
+    "@mantine/dates": ^6.0.15
     "@mantine/hooks": ^6.0.15
     "@mantine/notifications": ^6.0.15
     "@tanstack/eslint-plugin-query": ^4.29.9
