@@ -1,10 +1,9 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { Group, MultiSelect, Paper, TextInput } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
+import { Group, Paper, Table, TextInput } from '@mantine/core'
 
-import { useGetTags } from '@/features/tags'
-import { AccountSearchParams, OperationTypeEnum } from '@/types'
-import { getSelectItemsfromEnum } from '@/utils'
+import { AccountSearchParams } from '@/types'
+
+import { OperationsFilters } from './OperationsFilters'
 
 type OperationsListProps = {
   accountFilter: AccountSearchParams
@@ -12,24 +11,34 @@ type OperationsListProps = {
 }
 
 export function OperationsList({ accountFilter }: OperationsListProps) {
-  const { data: tags, isLoading: isLoadingTags } = useGetTags()
-
-  const { t } = useTranslation()
-
   return (
     <Paper p="md" withBorder mih={600}>
       <Group>
-        <TextInput placeholder="Rechercher..." icon={<Icon icon="material-symbols:search" />} />
-        <MultiSelect placeholder="Type" data={getSelectItemsfromEnum(OperationTypeEnum, 'enums.operation_type', t)} clearable />
-        <MultiSelect
-          placeholder="Tags"
-          data={tags?.map((tag) => ({ value: tag.id, label: tag.name })) ?? []}
-          clearable
-          disabled={isLoadingTags}
-        />
+        <OperationsFilters />
+        <TextInput placeholder="Rechercher..." icon={<Icon icon="material-symbols:search" height={18} />} />
       </Group>
-      {JSON.stringify(accountFilter)}
-      {JSON.stringify(tags)}
+      <Table highlightOnHover verticalSpacing="xs" mt="md">
+        <tbody>
+          <tr>
+            <td>hey</td>
+            <td>hey</td>
+            <td>hey</td>
+          </tr>
+          <tr>
+            <td>hey</td>
+            <td>hey</td>
+            <td>hey</td>
+          </tr>
+          <tr>
+            <td colSpan={3}>hey</td>
+          </tr>
+          <tr>
+            <td>hey</td>
+            <td>hey</td>
+            <td>hey</td>
+          </tr>
+        </tbody>
+      </Table>
     </Paper>
   )
 }

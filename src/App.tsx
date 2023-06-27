@@ -49,7 +49,7 @@ function App() {
             </BrowserRouter>
           </MantineProvider>
         </ColorSchemeProvider>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
       </QueryClientProvider>
     </ErrorBoundary>
   )

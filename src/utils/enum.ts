@@ -12,7 +12,7 @@ import { TFunction } from 'i18next'
 export function getSelectItemsfromEnum<T extends object>(
   enumToList: T,
   transKey: string,
-  i18n: TFunction<'translation', undefined, 'translation'>
+  i18n: TFunction<'translation', undefined>
 ): SelectItem[] {
   const keys = Object.keys(enumToList) as Array<string>
 
