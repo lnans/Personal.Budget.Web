@@ -20,5 +20,12 @@
   "enums.operation_type.Transfer": "Transfert",
 
   "operations.tab.actual": "Opérations",
-  "operations.tab.pending": "Operations à venir"
+  "operations.tab.pending": "Operations à venir",
+
+  "operations.filter.title": "Filtres",
+  "operations.filter.clear": "Supprimer",
+  "operations.filter.types": "Types",
+  "operations.filter.tags": "Tags",
+  "operations.filter.since": "Depuis",
+  "operations.filter.until": "Jusqu'au"
 }

@@ -3,22 +3,24 @@
   "account.summary.balance.subtitle": "Available on {{lastOperation}}",
   "account.summary.pending.title": "Pending",
   "account.summary.pending.subtitle": "Upcoming operations",
-
   "accounts.list.expenses": "My accounts",
   "accounts.list.expenses.all": "All my accounts",
   "accounts.list.savings": "My savings",
   "accounts.list.savings.all": "All my savings",
   "accounts.list.tip": "Select an account to show his operations",
   "accounts.total": "Total of my holdings",
-
   "appbar.accounts": "My Accounts",
   "appbar.settings": "Settings",
-
   "enums.operation_type.Expense": "Expense",
   "enums.operation_type.Fixe": "Fixe",
   "enums.operation_type.Transfer": "Transfer",
   "enums.operation_type.Budget": "Budget",
-
   "operations.tab.actual": "Operations",
-  "operations.tab.pending": "Pending operations"
+  "operations.tab.pending": "Pending operations",
+  "operations.filter.title": "Filters",
+  "operations.filter.clear": "Clear",
+  "operations.filter.types": "Types",
+  "operations.filter.tags": "Tags",
+  "operations.filter.since": "Since",
+  "operations.filter.until": "Until"
 }

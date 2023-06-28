@@ -18,5 +18,6 @@ export const useGetTags = ({ config }: UseGetTagsOptions = {}) => {
     ...config,
     queryKey: ['tags'],
     queryFn: getTags,
+    staleTime: 10000,
   })
 }
