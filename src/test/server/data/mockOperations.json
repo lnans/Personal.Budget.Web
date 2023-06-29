@@ -1,0 +1,101 @@
+{
+  "nextCursor": 1,
+  "data": [
+    {
+      "id": "1",
+      "description": "Operation 1",
+      "tags": [
+        {
+          "id": "1",
+          "name": "Car",
+          "color": "indigo"
+        },
+        {
+          "id": "2",
+          "name": "Electricity",
+          "color": "green"
+        }
+      ],
+      "account": {
+        "id": "1",
+        "name": "Boursorama Banque"
+      },
+      "amount": 12.34,
+      "type": "Expense",
+      "creationDate": "2023-06-16T10:32:07.950Z",
+      "executionDate": "2023-06-16T10:32:07.950Z"
+    },
+    {
+      "id": "2",
+      "description": "Operation 2",
+      "tags": [
+        {
+          "id": "1",
+          "name": "Car",
+          "color": "indigo"
+        },
+        {
+          "id": "2",
+          "name": "Electricity",
+          "color": "green"
+        }
+      ],
+      "account": {
+        "id": "1",
+        "name": "Boursorama Banque"
+      },
+      "amount": -12.34,
+      "type": "Expense",
+      "creationDate": "2023-06-16T10:32:07.950Z",
+      "executionDate": "2023-06-16T10:32:07.950Z"
+    },
+    {
+      "id": "3",
+      "description": "Operation 3",
+      "tags": [
+        {
+          "id": "1",
+          "name": "Car",
+          "color": "indigo"
+        },
+        {
+          "id": "2",
+          "name": "Electricity",
+          "color": "green"
+        }
+      ],
+      "account": {
+        "id": "1",
+        "name": "Boursorama Banque"
+      },
+      "amount": 12.34,
+      "type": "Expense",
+      "creationDate": "2023-06-16T10:32:07.950Z",
+      "executionDate": "2023-06-16T10:32:07.950Z"
+    },
+    {
+      "id": "4",
+      "description": "Operation 4",
+      "tags": [
+        {
+          "id": "1",
+          "name": "Car",
+          "color": "indigo"
+        },
+        {
+          "id": "2",
+          "name": "Electricity",
+          "color": "green"
+        }
+      ],
+      "account": {
+        "id": "1",
+        "name": "Boursorama Banque"
+      },
+      "amount": 12.34,
+      "type": "Expense",
+      "creationDate": "2023-06-16T10:32:07.950Z",
+      "executionDate": "2023-06-16T10:32:07.950Z"
+    }
+  ]
+}

@@ -23,8 +23,11 @@ axios.interceptors.response.use(
     return response.data
   },
   (error) => {
-    const message = error.response?.data?.message || error.message
-    notifyError({ title: 'Error', message })
+    // don't notify if the request was canceled
+    if (error.code !== 'ERR_CANCELED') {
+      const message = error.response?.data?.message || error.message
+      notifyError({ title: 'Error', message })
+    }
 
     return Promise.reject(error)
   }

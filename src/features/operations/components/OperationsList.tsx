@@ -1,11 +1,12 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { CloseButton, Group, Paper, Table, TextInput } from '@mantine/core'
+import { CloseButton, Group, Paper, TextInput } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
 import { useCallback, useEffect, useState } from 'react'
 
 import { AccountSearchParams } from '@/types'
 
-import { DEFAULT_FILTERS, OperationsFilterDto, OperationsRequestDto } from '../types'
+import { UseGetOperations } from '../api/getOperations'
+import { DEFAULT_QUERY, OperationsFilterDto, OperationsQueryDto } from '../types'
 
 import { OperationsFilters } from './OperationsFilters'
 
@@ -14,22 +15,27 @@ type OperationsListProps = {
   pending?: boolean
 }
 
-export function OperationsList({ accountFilter }: OperationsListProps) {
-  const [operationsRequest, setOperationsRequest] = useState<OperationsRequestDto>({ ...DEFAULT_FILTERS, search: '' })
+export function OperationsList({ accountFilter, pending }: OperationsListProps) {
+  const [operationsRequest, setOperationsRequest] = useState<OperationsQueryDto>({ ...DEFAULT_QUERY, pending })
   const [search, setSearch] = useState<string>('')
   const [debouncedSearch] = useDebouncedValue(search, 400)
+
+  const { data } = UseGetOperations({ query: operationsRequest })
 
   useEffect(() => {
     setOperationsRequest((prev) => ({ ...prev, search: debouncedSearch }))
   }, [debouncedSearch])
 
   useEffect(() => {
-    console.log(operationsRequest)
-  }, [operationsRequest])
+    setOperationsRequest((prev) => ({ ...prev, accountId: accountFilter.id, accountType: accountFilter.type }))
+  }, [accountFilter])
 
-  const handleFilters = useCallback((filters: OperationsFilterDto) => {
-    setOperationsRequest((prev) => ({ ...filters, search: prev.search }))
-  }, [])
+  const handleFilters = useCallback(
+    (filters: OperationsFilterDto) => {
+      setOperationsRequest((prev) => ({ ...filters, search: prev.search, pending }))
+    },
+    [pending]
+  )
 
   const handleClearSearch = useCallback(() => {
     setSearch('')
@@ -47,28 +53,7 @@ export function OperationsList({ accountFilter }: OperationsListProps) {
           rightSection={<CloseButton onClick={handleClearSearch} style={{ visibility: search ? 'visible' : 'hidden' }} />}
         />
       </Group>
-      <Table highlightOnHover verticalSpacing="xs" mt="md">
-        <tbody>
-          <tr>
-            <td>hey</td>
-            <td>hey</td>
-            <td>hey</td>
-          </tr>
-          <tr>
-            <td>hey</td>
-            <td>hey</td>
-            <td>hey</td>
-          </tr>
-          <tr>
-            <td colSpan={3}>hey</td>
-          </tr>
-          <tr>
-            <td>hey</td>
-            <td>hey</td>
-            <td>hey</td>
-          </tr>
-        </tbody>
-      </Table>
+      {data && data.pages.flatMap((page) => page.data).map((op) => <div key={op.id}>{op.description}</div>)}
     </Paper>
   )
 }

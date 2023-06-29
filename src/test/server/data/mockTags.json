@@ -2,16 +2,16 @@
   {
     "id": "1",
     "name": "Car",
-    "color": "#456756"
+    "color": "indigo"
   },
   {
     "id": "2",
     "name": "Electricity",
-    "color": "#421756"
+    "color": "green"
   },
   {
     "id": "3",
     "name": "Gaz",
-    "color": "#456056"
+    "color": "blue"
   }
 ]

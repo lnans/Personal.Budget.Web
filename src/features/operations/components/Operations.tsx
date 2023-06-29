@@ -9,7 +9,7 @@ import { OperationsList } from './OperationsList'
 
 export function Operations() {
   const [searchParams] = useSearchParams()
-  const [accountFilter, setAccountFilter] = useState<AccountSearchParams>({})
+  const [accountFilter, setAccountFilter] = useState<AccountSearchParams>({ id: null, type: null })
   const { t } = useTranslation()
 
   // retrieve account filter from query param in react router

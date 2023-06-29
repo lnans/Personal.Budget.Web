@@ -14,3 +14,8 @@ export type AccountSearchParams = {
   id?: string | null
   type?: AccountTypeEnum | null
 }
+
+export type Page<T> = {
+  nextCursor: number
+  data: T
+}
