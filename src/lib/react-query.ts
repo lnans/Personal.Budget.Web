@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 
 const queryConfig: DefaultOptions = {
   queries: {
-    useErrorBoundary: true,
+    throwOnError: false,
     refetchOnWindowFocus: false,
     retry: false,
   },

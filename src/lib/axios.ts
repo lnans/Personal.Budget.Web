@@ -1,6 +1,5 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios'
 
-import { notifyError } from '@/components/Notifications'
 import { API_URL } from '@/config'
 import { storage } from '@/utils/storage'
 
@@ -18,14 +17,8 @@ export const axios = Axios.create({
 })
 
 axios.interceptors.request.use(authRequestInterceptor)
-axios.interceptors.response.use(
-  (response) => {
-    return response.data
-  },
-  (error) => {
-    const message = error.response?.data?.message || error.message
-    notifyError({ title: 'Error', message })
 
-    return Promise.reject(error)
-  }
-)
+// TODO: handle error, and display a notification
+axios.interceptors.response.use((response) => {
+  return response.data
+})

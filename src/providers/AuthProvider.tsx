@@ -3,7 +3,7 @@ import { ReactNode, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AUTH_AUDIENCE, AUTH_CLIENT_ID, AUTH_DOMAIN } from '@/config'
-import { storage } from '@/utils'
+import { storage } from '@/utils/storage'
 
 const Auth0 = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ const Auth0 = ({ children }: { children: ReactNode }) => {
 }
 
 const TokenWrapper = ({ children }: { children: ReactNode }) => {
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
+  const { isLoading, isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0()
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -40,6 +40,15 @@ const TokenWrapper = ({ children }: { children: ReactNode }) => {
       getToken()
     }
   }, [isAuthenticated, getAccessTokenSilently])
+
+  if (isLoading && !isAuthenticated) {
+    return <div>authenticating...</div>
+  }
+
+  if (!isAuthenticated) {
+    loginWithRedirect({ appState: { returnTo: window.location.pathname } })
+    return <div>authenticating...</div>
+  }
 
   return <>{children}</>
 }

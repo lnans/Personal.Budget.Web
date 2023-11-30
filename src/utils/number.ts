@@ -1,5 +1,3 @@
-import { MantineColor } from '@mantine/styles'
-
 /**
  * Transorm number to string spaced number
  * ex: 12452.54 -> 12 452,54
@@ -7,6 +5,7 @@ import { MantineColor } from '@mantine/styles'
  * @returns Transformed number as string
  */
 export function getNumberWithSpaces(value?: number): string {
+  // TODO: implement this using Intl.NumberFormat
   if (value === undefined) {
     return '-'
   }
@@ -15,16 +14,4 @@ export function getNumberWithSpaces(value?: number): string {
   const parts = valueStr.split('.')
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
   return parts.join(',')
-}
-
-/**
- * Get a correspondig color for a currency amount
- * @param value the currency value
- * @returns a mantine color
- */
-export function getNumberColor(value?: number): MantineColor {
-  if (value === undefined) {
-    return 'gray'
-  }
-  return value > 0 ? 'teal' : value < 0 ? 'red' : 'yellow'
 }

@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 /// <reference types="vite/client" />
 
 import * as path from 'path'
@@ -12,18 +11,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-    },
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    css: false,
-    reporters: 'default',
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'html'],
-      include: ['src/components'],
     },
   },
 })

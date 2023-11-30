@@ -33,9 +33,7 @@
         "plugin:react-hooks/recommended",
         "plugin:@tanstack/eslint-plugin-query/recommended",
         "plugin:jsx-a11y/recommended",
-        "plugin:prettier/recommended",
-        "plugin:testing-library/react",
-        "plugin:jest-dom/recommended"
+        "plugin:prettier/recommended"
       ],
       "rules": {
         "no-restricted-imports": [

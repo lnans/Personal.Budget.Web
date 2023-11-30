@@ -1,31 +1,34 @@
-import dayjs from 'dayjs'
-import 'dayjs/locale/fr'
-import i18n from 'i18next'
+import i18next from 'i18next'
+import HttpApi from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 
-import transEn from '@/locals/en.json'
-import transFr from '@/locals/fr.json'
+const langDetectorOptions = {
+  // order and from where user language should be detected
+  order: ['cookie', 'localStorage', 'navigator'],
 
-let lng = 'fr'
-dayjs.locale(lng)
+  // keys or params to lookup language from
+  lookupCookie: 'locale',
+  lookupLocalStorage: 'locale',
 
-if (typeof localStorage !== 'undefined') {
-  lng = localStorage.getItem('i18nextLng') || 'fr'
-  dayjs.locale(lng)
+  // cache user language on
+  caches: ['localStorage', 'cookie'],
+  excludeCacheFor: ['cimode'], // languages to not persist (cookie, localStorage)
+
+  // only detect languages that are in the whitelist
+  checkWhitelist: true,
 }
 
-const translations = {
-  en: { translation: transEn },
-  fr: { translation: transFr },
-}
+i18next
+  .use(HttpApi)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: ['en'],
+    supportedLngs: ['fr', 'en'],
+    detection: langDetectorOptions,
+    backend: {
+      loadPath: '/locales/{{ns}}/{{lng}}.json',
+    },
+    ns: [], // Disable fallback NS behavior,
+  })
 
-i18n.use(initReactI18next).init({
-  resources: translations,
-  lng: 'fr',
-  fallbackLng: ['en'],
-  interpolation: {
-    escapeValue: false,
-  },
-})
-
-export default i18n
+export { i18next }
