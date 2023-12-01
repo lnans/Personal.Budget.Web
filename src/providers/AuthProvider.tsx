@@ -42,7 +42,7 @@ const TokenWrapper = ({ children }: { children: ReactNode }) => {
   }, [isAuthenticated, getAccessTokenSilently])
 
   if (isLoading && !isAuthenticated) {
-    return <div>authenticating...</div>
+    return <div>authenticating...</div> // TODO: implement a spinner with: https://cssloaders.github.io/
   }
 
   if (!isAuthenticated) {
