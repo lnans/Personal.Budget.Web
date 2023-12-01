@@ -3,7 +3,10 @@ import { AxiosError } from 'axios'
 
 const queryConfig: DefaultOptions = {
   queries: {
-    throwOnError: false,
+    throwOnError: (a: any) => {
+      const status = a.response?.status ?? 500 // assume this is a AxiosError, otherwise fallback to 500
+      return status >= 500
+    },
     refetchOnWindowFocus: false,
     retry: false,
   },

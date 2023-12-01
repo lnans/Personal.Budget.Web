@@ -1,0 +1,7 @@
+{
+  "fallback.not_found.title": "Page not found",
+  "fallback.not_found.description": "Sorry, the page you were looking for does not exist.",
+
+  "fallback.error.title": "An error occured",
+  "fallback.error.description": "Sorry, an error occurred, please try again later."
+}

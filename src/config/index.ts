@@ -7,6 +7,9 @@ export const ROUTER_LINKS = {
   wallet: {
     path: '/wallet',
     name: 'navbar:wallet',
-    icon: 'icon',
+  },
+  settings: {
+    path: '/settings',
+    name: 'navbar:settings',
   },
 } as const

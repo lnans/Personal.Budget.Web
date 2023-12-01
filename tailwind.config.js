@@ -8,6 +8,16 @@ export default {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      height: {
+        nav: 60,
+        main: 'calc(100vh - 60px)',
+      },
+      spacing: {
+        nav: 60,
+      },
+      aria: {
+        'current-page': 'current="page"',
+      },
     },
   },
   plugins: [],

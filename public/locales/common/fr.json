@@ -1,0 +1,7 @@
+{
+  "fallback.not_found.title": "Page non trouvée",
+  "fallback.not_found.description": "Désolé, la page que vous recherchez n'existe pas.",
+
+  "fallback.error.title": "Une erreur est survenue",
+  "fallback.error.description": "Désolé, une erreur est survenue veuillez réessayer plus tard."
+}

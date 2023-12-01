@@ -1,4 +1,10 @@
 {
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.localesPaths": ["public/locales"],
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{namespace}/{locale}.json",
+  "i18n-ally.keystyle": "flat",
   "editor.rulers": [120],
   "files.associations": {
     "*.css": "tailwindcss"
