@@ -1,4 +1,7 @@
 {
+  "element.app_loader.authenticating": "Authentification...",
+  "element.app_loader.redirecting": "Redirection...",
+
   "fallback.not_found.title": "Page non trouvée",
   "fallback.not_found.description": "Désolé, la page que vous recherchez n'existe pas.",
 
