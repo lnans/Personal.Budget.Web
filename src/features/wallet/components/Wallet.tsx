@@ -10,9 +10,6 @@ export function Wallet() {
   return (
     <div>
       <h3>Wallet Page</h3>
-      {Array.from({ length: 100 }, (_, i) => (
-        <p key={i}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, voluptatum.</p>
-      ))}
     </div>
   )
 }
