@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { ErrorFallback } from '@/components/Fallbacks'
+import { Notifications } from '@/components/Feedbacks'
 import { auth0Config } from '@/lib/auth0'
 import { queryClient } from '@/lib/react-query'
 import { CheckAuthProvider } from '@/providers'
@@ -22,13 +23,14 @@ function App() {
   return (
     // Errorboundary is a class component, we can't use useTranslation hook inside it
     <ErrorBoundary FallbackComponent={(props) => <ErrorFallback t={t} {...props} />}>
+      <Notifications autoClose={3000} />
       <QueryClientProvider client={queryClient}>
         <Auth0Provider {...auth0Config} onRedirectCallback={onRedirectCallback}>
           <CheckAuthProvider>
             <Router />
           </CheckAuthProvider>
         </Auth0Provider>
-        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" />
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
       </QueryClientProvider>
     </ErrorBoundary>
   )

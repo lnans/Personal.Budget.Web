@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { ReactNode, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { AppLoader } from '@/components/Elements'
+import { AppLoader } from '@/components/Feedbacks'
 import { storage } from '@/utils/storage'
 
 const CheckAuthProvider = ({ children }: { children: ReactNode }) => {

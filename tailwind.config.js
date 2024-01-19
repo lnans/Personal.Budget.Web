@@ -19,11 +19,11 @@ export default {
         'current-page': 'current="page"',
       },
       keyframes: {
-        hitZak: {
+        progressIndeterminate: {
           '0%': { left: 0, transform: 'translateX(-1%)' },
           '100%': { left: '100%', transform: 'translateX(-99%)' },
         },
-        flash: {
+        loadingDots: {
           '0%': {
             backgroundColor: 'rgba(67, 56, 202, 0.13)',
             boxShadow: '24px 0 rgba(67, 56, 202, 0.13), -24px 0 rgba(67, 56, 202, 1)',
@@ -37,10 +37,20 @@ export default {
             boxShadow: '24px 0 rgba(67, 56, 202, 1), -24px 0 rgba(67, 56, 202, 0.13)',
           },
         },
+        notificationEnter: {
+          '0%': { transform: 'translateX(100%)', opacity: 0 },
+          '100%': { transform: 'translateX(0)', opacity: 1 },
+        },
+        notificationLeave: {
+          '0%': { transform: 'translateX(0)', opacity: 1 },
+          '100%': { transform: 'translateX(100%)', opacity: 0 },
+        },
       },
       animation: {
-        hitZak: 'hitZak 0.8s linear infinite alternate',
-        flash: 'flash 0.5s ease-out infinite alternate',
+        progressIndeterminate: 'progressIndeterminate 0.8s linear infinite alternate',
+        loadingDots: 'loadingDots 0.5s ease-out infinite alternate',
+        notificationEnter: 'notificationEnter 0.250s cubic-bezier(0.51, 0.3, 0, 1.21)',
+        notificationLeave: 'notificationLeave 0.250s cubic-bezier(0.51, 0.3, 0, 1.21)',
       },
     },
   },
