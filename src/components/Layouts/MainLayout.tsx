@@ -1,3 +1,4 @@
+import { IconMoon } from '@tabler/icons-react'
 import { Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router-dom'
@@ -5,6 +6,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { LoadingFallback } from '@/components/Fallbacks'
 import { ROUTER_LINKS } from '@/config'
 
+import { ButtonIcon } from '../Actions'
 import { AppLogo } from '../Elements'
 
 function MainLayout() {
@@ -22,6 +24,8 @@ function MainLayout() {
             {t(name)}
           </NavLink>
         ))}
+        <div className="flex-grow" />
+        <ButtonIcon icon={<IconMoon />} />
       </nav>
       <main className="flex mt-nav h-main overflow-auto relative">
         <Suspense fallback={<LoadingFallback />}>

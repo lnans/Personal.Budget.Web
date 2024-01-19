@@ -6,9 +6,10 @@ import {
   IconSquareRoundedX,
   IconX,
 } from '@tabler/icons-react'
-import { cx } from 'class-variance-authority'
 import { useEffect } from 'react'
 import { create } from 'zustand'
+
+import { cn } from '@/lib/tailwind-merge'
 
 type NotificationType = 'success' | 'error' | 'info' | 'warning'
 
@@ -100,7 +101,7 @@ export function Notifications({ autoClose = 5000 }: NotificationProviderProps) {
       {notifications.map((notification) => (
         <div
           key={notification.id}
-          className={cx(
+          className={cn(
             { 'animate-notificationLeave': notification.isLeaving },
             'relative flex gap-4 p-4 pointer-events-auto w-full max-w-96 shadow-md shadow-slate-100 border-solid border-gray-200 border-[1px] rounded-lg animate-notificationEnter'
           )}
