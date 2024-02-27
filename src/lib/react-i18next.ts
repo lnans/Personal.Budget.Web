@@ -3,13 +3,15 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import HttpApi from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 
+import { STORAGE_PREFIX } from '@/config'
+
 const langDetectorOptions = {
   // order and from where user language should be detected
   order: ['cookie', 'localStorage', 'navigator'],
 
   // keys or params to lookup language from
   lookupCookie: 'locale',
-  lookupLocalStorage: 'locale',
+  lookupLocalStorage: `${STORAGE_PREFIX}locale`,
 
   // cache user language on
   caches: ['localStorage', 'cookie'],

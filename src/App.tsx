@@ -5,6 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
+import { useTheme } from '@/components/Actions'
 import { ErrorFallback } from '@/components/Fallbacks'
 import { Notifications } from '@/components/Feedbacks'
 import { auth0Config } from '@/lib/auth0'
@@ -19,6 +20,9 @@ function App() {
   const onRedirectCallback = (appState?: AppState | undefined) => {
     navigate(appState && appState.returnTo ? appState.returnTo : window.location.pathname)
   }
+
+  // call useTheme to initialize the theme to avoid FOUC
+  useTheme()
 
   return (
     // Errorboundary is a class component, we can't use useTranslation hook inside it
