@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { useNotifications } from '@/components/Feedbacks'
 import { axios } from '@/lib/axios'
+import { useNotificationsStore } from '@/stores'
 
 export function Wallet() {
-  const notifications = useNotifications()
+  const notifications = useNotificationsStore()
   const { data: _ } = useQuery({
     queryKey: ['wallet'],
     queryFn: () => axios.get('https://jsonplaceholder.typicode.com/tosdfdos/1'),

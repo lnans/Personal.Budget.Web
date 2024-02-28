@@ -1,8 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
-import { IconMoon, IconSun } from '@tabler/icons-react'
 import { create } from 'zustand'
 
-import { ButtonIcon } from '@/components/Actions'
 import { storage } from '@/utils/storage'
 
 type Theme = 'light' | 'dark'
@@ -26,7 +23,7 @@ function initTheme() {
   }
 }
 
-export const useTheme = create<ThemeState>((set) => ({
+export const useThemeStore = create<ThemeState>((set) => ({
   theme: initTheme(),
   toggleTheme: () =>
     set((state) => {
@@ -36,10 +33,3 @@ export const useTheme = create<ThemeState>((set) => ({
       return { theme: newTheme }
     }),
 }))
-
-function ButtonTheme() {
-  const { theme, toggleTheme } = useTheme()
-  return <ButtonIcon icon={theme === 'light' ? <IconMoon /> : <IconSun />} onClick={toggleTheme} />
-}
-
-export default ButtonTheme

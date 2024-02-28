@@ -1,5 +1,5 @@
 import i18next from 'i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
+import LanguageDetector, { DetectorOptions } from 'i18next-browser-languagedetector'
 import HttpApi from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
 
@@ -17,11 +17,8 @@ const langDetectorOptions = {
   caches: ['localStorage', 'cookie'],
   excludeCacheFor: ['cimode'], // languages to not persist (cookie, localStorage)
 
-  // only detect languages that are in the whitelist
-  checkWhitelist: true,
-
   convertDetectedLanguage: (lng: string) => lng.split('-')[0],
-}
+} satisfies DetectorOptions
 
 i18next
   .use(HttpApi)

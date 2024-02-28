@@ -1,14 +1,17 @@
+import { IconMoon, IconSun } from '@tabler/icons-react'
 import { Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router-dom'
 
-import { ButtonTheme } from '@/components/Actions'
+import { ButtonIcon } from '@/components/Actions'
 import { AppLogo } from '@/components/Elements'
 import { LoadingFallback } from '@/components/Fallbacks'
 import { ROUTER_LINKS } from '@/config'
+import { useThemeStore } from '@/stores'
 
 function MainLayout() {
   const { t } = useTranslation('navbar')
+  const { theme, toggleTheme } = useThemeStore()
   return (
     <>
       <nav className="fixed top-0 inline-flex items-center h-nav w-screen px-6 gap-6 z-50 shadow bg-white dark:bg-neutral-950">
@@ -23,7 +26,7 @@ function MainLayout() {
           </NavLink>
         ))}
         <div className="flex-grow" />
-        <ButtonTheme />
+        <ButtonIcon icon={theme === 'light' ? <IconMoon /> : <IconSun />} onClick={toggleTheme} />
       </nav>
       <main className="flex mt-nav h-main overflow-auto relative">
         <Suspense fallback={<LoadingFallback />}>

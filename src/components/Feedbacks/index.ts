@@ -1,2 +1,2 @@
 export { default as AppLoader } from './AppLoader'
-export { Notifications, useNotifications } from './Notifications'
+export { default as Notifications } from './Notifications'

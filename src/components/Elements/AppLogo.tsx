@@ -5,15 +5,16 @@ type AppLogoProps = SVGAttributes<SVGElement> & {
 }
 
 function AppLogo({ icon, ...props }: AppLogoProps) {
-  const color = '#4338ca'
+  // const color = 'text-indigo-700'
   return (
     <>
       {icon ? (
         <svg
+          // className="fill-indigo-700"
           width="34"
           height="34"
           viewBox="0 0 96 96"
-          fill={color}
+          // fill={color}
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           {...props}
@@ -32,10 +33,11 @@ function AppLogo({ icon, ...props }: AppLogoProps) {
         </svg>
       ) : (
         <svg
+          // className="fill-current text-indigo-700"
           width="110"
           height="46"
           viewBox="0 0 361 95"
-          fill={color}
+          // fill={color}
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           {...props}

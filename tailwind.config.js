@@ -1,11 +1,23 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+const palette = 'indigo'
+const primary = `colors.${palette}.700`
+const primarydark = `colors.${palette}.600`
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundColor: ({ theme }) => ({
+        primary: theme(primary),
+        'primary-dark': theme(primarydark),
+      }),
+      textColor: ({ theme }) => ({
+        primary: theme(primary),
+        'primary-dark': theme(primarydark),
+      }),
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
@@ -55,5 +67,4 @@ export default {
       },
     },
   },
-  plugins: [],
 }

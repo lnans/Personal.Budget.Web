@@ -5,13 +5,13 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
-import { useTheme } from '@/components/Actions'
 import { ErrorFallback } from '@/components/Fallbacks'
 import { Notifications } from '@/components/Feedbacks'
 import { auth0Config } from '@/lib/auth0'
 import { queryClient } from '@/lib/react-query'
 import { CheckAuthProvider } from '@/providers'
 import { Router } from '@/routes'
+import { useThemeStore } from '@/stores'
 
 function App() {
   const { t } = useTranslation('common')
@@ -21,8 +21,8 @@ function App() {
     navigate(appState && appState.returnTo ? appState.returnTo : window.location.pathname)
   }
 
-  // call useTheme to initialize the theme to avoid FOUC
-  useTheme()
+  // call useThemeStore to initialize the state and avoid FOUC
+  useThemeStore()
 
   return (
     // Errorboundary is a class component, we can't use useTranslation hook inside it

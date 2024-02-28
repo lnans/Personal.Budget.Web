@@ -19,16 +19,10 @@ const CheckAuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [isAuthenticated, getAccessTokenSilently])
 
-  if (isLoading && !isAuthenticated) {
+  // if (true && isLoading && !isAuthenticated) {
+  if (true) {
     return <AppLoader text={t('element.app_loader.authenticating')} />
   }
-
-  if (!isAuthenticated) {
-    loginWithRedirect({ appState: { returnTo: window.location.pathname } })
-    return <AppLoader text={t('element.app_loader.redirecting')} />
-  }
-
-  return <>{children}</>
 }
 
 export { CheckAuthProvider }

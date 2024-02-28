@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import {
   IconAlertSquareRounded,
   IconInfoSquareRounded,
@@ -7,76 +6,16 @@ import {
   IconX,
 } from '@tabler/icons-react'
 import { useEffect } from 'react'
-import { create } from 'zustand'
 
 import { cn } from '@/lib/tailwind-merge'
-
-type NotificationType = 'success' | 'error' | 'info' | 'warning'
-
-type Notification = {
-  id: number
-  message: string
-  type: NotificationType
-  isLeaving?: boolean
-}
-
-type NotificationState = {
-  notifications: Notification[]
-  autoClose: number | boolean
-  setAutoClose: (autoClose: number | boolean) => void
-  info: (message: string) => void
-  success: (message: string) => void
-  warning: (message: string) => void
-  error: (message: string) => void
-  remove: (id: number) => void
-}
-
-const notificationStore = create<NotificationState>()((set) => {
-  const add = (message: string, type: NotificationType) => {
-    return set((state) => {
-      const id = Date.now()
-
-      if (typeof state.autoClose === 'number') {
-        setTimeout(() => {
-          state.remove(id)
-        }, state.autoClose)
-      }
-
-      return {
-        notifications: [...state.notifications, { id, message, type }],
-      }
-    })
-  }
-
-  return {
-    notifications: [],
-    autoClose: 5000,
-    setAutoClose: (autoClose) => set({ autoClose }),
-    info: (message) => add(message, 'info'),
-    success: (message) => add(message, 'success'),
-    warning: (message) => add(message, 'warning'),
-    error: (message) => add(message, 'error'),
-    remove: (id) =>
-      set((state) => {
-        const notification = state.notifications.find((notification) => notification.id === id)
-        if (notification && !notification.isLeaving) {
-          notification.isLeaving = true
-          setTimeout(() => {
-            set((state) => ({ notifications: state.notifications.filter((notification) => notification.id !== id) }))
-          }, 220)
-        }
-
-        return { notifications: state.notifications }
-      }),
-  }
-})
+import { NotificationType, useNotificationsStore } from '@/stores'
 
 type NotificationProviderProps = {
   autoClose?: number | boolean
 }
 
-export function Notifications({ autoClose = 5000 }: NotificationProviderProps) {
-  const { notifications, remove, setAutoClose } = notificationStore()
+function Notifications({ autoClose = 5000 }: NotificationProviderProps) {
+  const { list: notifications, remove, setAutoClose } = useNotificationsStore()
 
   useEffect(() => {
     setAutoClose(autoClose)
@@ -119,7 +58,4 @@ export function Notifications({ autoClose = 5000 }: NotificationProviderProps) {
   )
 }
 
-export function useNotifications() {
-  const { info, success, warning, error } = notificationStore()
-  return { info, success, warning, error }
-}
+export default Notifications
