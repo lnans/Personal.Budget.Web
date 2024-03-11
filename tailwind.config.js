@@ -2,7 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 const palette = 'indigo'
 const primary = `colors.${palette}.700`
-const primarydark = `colors.${palette}.600`
+const primarydark = `colors.${palette}.500`
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -10,6 +10,21 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors: {
+        gray: {
+          50: '#F0F6FC',
+          100: '#C9D1D9',
+          200: '#B1BAC4',
+          300: '#8B949E',
+          400: '#6E7681',
+          500: '#484F58',
+          600: '#30363D',
+          700: '#21262D',
+          800: '#161B22',
+          900: '#0D1117',
+          950: '#010409',
+        },
+      },
       backgroundColor: ({ theme }) => ({
         primary: theme(primary),
         'primary-dark': theme(primarydark),
@@ -18,6 +33,9 @@ export default {
         primary: theme(primary),
         'primary-dark': theme(primarydark),
       }),
+      borderWidth: {
+        1: '1px',
+      },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },

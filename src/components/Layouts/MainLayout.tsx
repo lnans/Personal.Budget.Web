@@ -14,7 +14,7 @@ function MainLayout() {
   const { theme, toggleTheme } = useThemeStore()
   return (
     <>
-      <nav className="fixed top-0 inline-flex items-center h-nav w-screen px-6 gap-6 z-50 shadow bg-white dark:bg-neutral-950">
+      <nav className="fixed top-0 inline-flex items-center h-nav w-screen px-6 gap-6 z-50 border-solid border-b-1 border-b-gray-100 dark:border-b-gray-600 bg-white dark:bg-gray-950">
         <AppLogo className="mx-3" />
         {Object.values(ROUTER_LINKS).map(({ path, name }) => (
           <NavLink
@@ -28,7 +28,7 @@ function MainLayout() {
         <div className="flex-grow" />
         <ButtonIcon icon={theme === 'light' ? <IconMoon /> : <IconSun />} onClick={toggleTheme} />
       </nav>
-      <main className="flex mt-nav h-main overflow-auto relative">
+      <main className="flex mt-nav h-main overflow-auto relative bg-white dark:bg-gray-900">
         <Suspense fallback={<LoadingFallback />}>
           <Outlet />
         </Suspense>
