@@ -5,7 +5,7 @@
   "extends": ["eslint:recommended"],
   "ignorePatterns": ["dist", ".eslintrc.cjs", "node_modules/*"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react-refresh", "check-file"],
+  "plugins": ["react-refresh"],
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
@@ -34,7 +34,8 @@
         "plugin:testing-library/react",
         "plugin:jest-dom/recommended",
         "plugin:tailwindcss/recommended",
-        "plugin:vitest/legacy-recommended"
+        "plugin:vitest/legacy-recommended",
+        "plugin:@tanstack/eslint-plugin-query/recommended"
       ],
       "rules": {
         "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
@@ -106,16 +107,7 @@
         "@typescript-eslint/explicit-module-boundary-types": ["off", {}],
         "@typescript-eslint/no-empty-function": ["off", {}],
         "@typescript-eslint/no-explicit-any": ["off", {}],
-        "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
-        "check-file/filename-naming-convention": [
-          "error",
-          {
-            "**/*.{ts,tsx}": "KEBAB_CASE"
-          },
-          {
-            "ignoreMiddleExtensions": true
-          }
-        ]
+        "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
       }
     }
   ]
