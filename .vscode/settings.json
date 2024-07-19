@@ -1,0 +1,7 @@
+{
+  "editor.rulers": [130],
+  "files.eol": "\n",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}

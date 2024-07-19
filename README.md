@@ -1,34 +1,30 @@
-<p align="center">
-    <img src="./doc/logo.png" />
-</p>
+# React + TypeScript + Vite
 
-# Budget.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-**Budget.** is my personal app for organize and managed my spendings and savings over years.\
-This repository only contains FrontEnd code.
+Currently, two official plugins are available:
 
-Technical information:
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- React 18
-- React Router
-- React Query
-- React I18next
-- Zod
-- Mantine
-- Emotion
-- Auth0
-- Iconify
+## Expanding the ESLint configuration
 
-# Getting Started
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-Before anything, create an application in your Auth0 account and set the configuration file `.env.local` with your auth0 config.
+- Configure the top-level `parserOptions` property like this:
 
-For running the project, first go to see the backend project : https://github.com/lnans/personal.budget \
-When `Budget. API` is running:
-
-```bash
-git clone https://github.com/lnans/personal.budget.web
-cd personal.budget.web
-yarn
-yarn dev
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
 ```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
