@@ -1,0 +1,8 @@
+{
+  "app_name": "Life app",
+
+  "theme.dark": "Dark theme",
+  "theme.light": "Light theme",
+
+  "logout": "Logout"
+}

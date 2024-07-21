@@ -8,6 +8,7 @@ type AuthStoreState = {
   actions: {
     setAccessToken: (accessToken: AuthTokensDto) => void
     getBearerToken: () => string
+    getUsername: () => string
     clearAccessToken: () => void
   }
 }
@@ -19,11 +20,16 @@ export const useAuthStore = create<AuthStoreState>()(
       actions: {
         setAccessToken: (accessToken) => set({ accessToken }),
         getBearerToken: () => store().accessToken?.accessToken || '',
+        getUsername: () => {
+          const { accessToken } = store()
+          if (!accessToken) return ''
+          return `${accessToken.claims.firstName} ${accessToken.claims.lastName}`
+        },
         clearAccessToken: () => set({ accessToken: undefined }),
       },
     }),
     {
-      name: 'auth-token-storage',
+      name: 'life-app-auth',
       partialize: (state) => ({ accessToken: state.accessToken }),
     },
   ),

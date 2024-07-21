@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
+import { NavBarLinks } from '@/config/navbar'
 import { ProtectedRoute } from '@/lib/auth'
 
 import { AppRoute } from './app/AppRoute'
@@ -21,7 +22,7 @@ export const createRouter = () =>
       },
     },
     {
-      path: '/app',
+      path: NavBarLinks.wallet.to,
       element: (
         <ProtectedRoute>
           <AppRoute />

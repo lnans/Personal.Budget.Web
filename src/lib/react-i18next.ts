@@ -9,7 +9,7 @@ const langDetectorOptions = {
 
   // keys or params to lookup language from
   lookupCookie: 'locale',
-  lookupLocalStorage: 'locale',
+  lookupLocalStorage: 'life-app-lang',
 
   // cache user language on
   caches: ['localStorage', 'cookie'],
