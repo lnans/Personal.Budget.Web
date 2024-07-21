@@ -1,25 +1,14 @@
-import { QueryClientProvider } from '@tanstack/react-query'
-import { RouterProvider } from '@tanstack/react-router'
-import ReactDOM from 'react-dom/client'
+import * as React from 'react'
+import { createRoot } from 'react-dom/client'
 
-import { queryClient } from '@/lib/tanstack-query'
-import { router } from '@/lib/tanstack-router'
-
+import App from './app'
 import './main.css'
 
-const rootElement = document.getElementById('app')!
+const root = document.getElementById('app')
+if (!root) throw new Error('No root element found')
 
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
-}
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>,
-  )
-}
+createRoot(root).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)

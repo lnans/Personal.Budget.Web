@@ -1,0 +1,9 @@
+{
+  "title": "Se connecter",
+  "header": "Entrez vos identifiants pour vous connecter à votre compte",
+
+  "form.username": "Identifiant",
+  "form.password": "Mot de passe",
+
+  "form.submit": "Se connecter"
+}

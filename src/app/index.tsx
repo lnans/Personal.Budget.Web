@@ -1,13 +1,21 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { useMemo } from 'react'
+import { RouterProvider } from 'react-router-dom'
 
-export const Route = createFileRoute('/')({
-  component: HomeComponent,
-})
+import { AppProvider } from './main-provider'
+import { createRouter } from './routes'
 
-function HomeComponent() {
+const AppRouter = () => {
+  const router = useMemo(() => createRouter(), [])
+
+  return <RouterProvider router={router} />
+}
+
+function App() {
   return (
-    <div className="flex items-center justify-center p-2">
-      <h3>Welcome Home!</h3>
-    </div>
+    <AppProvider>
+      <AppRouter />
+    </AppProvider>
   )
 }
+
+export default App
