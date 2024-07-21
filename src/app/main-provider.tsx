@@ -5,6 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { I18nextProvider } from 'react-i18next'
 
 import { MainErrorFallback } from '@/components/errors/MainErrorFallback'
+import { AppLoader } from '@/components/feedback/AppLoader'
 import { i18next } from '@/lib/react-i18next'
 import { queryClient } from '@/lib/tanstack-query'
 
@@ -14,7 +15,13 @@ type AppProviderProps = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <React.Suspense fallback={<div className="flex h-screen w-screen items-center justify-center">...loading main</div>}>
+    <React.Suspense
+      fallback={
+        <div className="flex h-screen w-screen items-center justify-center">
+          <AppLoader />
+        </div>
+      }
+    >
       <ErrorBoundary FallbackComponent={MainErrorFallback}>
         <I18nextProvider i18n={i18next}>
           <QueryClientProvider client={queryClient}>
