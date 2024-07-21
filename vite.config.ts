@@ -12,11 +12,11 @@ export default defineConfig({
   base: './',
   plugins: [ViteReact(), ViteTsconfigPaths(), ViteValidateEnv()],
   server: {
-    port: 4200,
+    port: 5200,
     host: '0.0.0.0',
   },
   preview: {
-    port: 4200,
+    port: 5200,
   },
   optimizeDeps: { exclude: ['fsevents'] },
   build: {
