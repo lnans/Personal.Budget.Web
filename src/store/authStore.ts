@@ -7,16 +7,18 @@ type AuthStoreState = {
   accessToken?: AuthTokensDto
   actions: {
     setAccessToken: (accessToken: AuthTokensDto) => void
+    getBearerToken: () => string
     clearAccessToken: () => void
   }
 }
 
 export const useAuthStore = create<AuthStoreState>()(
   persist(
-    (set) => ({
+    (set, store) => ({
       accessToken: undefined,
       actions: {
         setAccessToken: (accessToken) => set({ accessToken }),
+        getBearerToken: () => store().accessToken?.accessToken || '',
         clearAccessToken: () => set({ accessToken: undefined }),
       },
     }),

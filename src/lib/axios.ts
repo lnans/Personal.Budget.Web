@@ -1,10 +1,16 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios'
 
 import { env } from '@/config/env'
+import { useAuthStore } from '@/store/authStore'
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
     config.headers.Accept = 'application/json'
+  }
+
+  const bearer = useAuthStore.getState().actions.getBearerToken()
+  if (bearer) {
+    config.headers.Authorization = bearer
   }
 
   return config
