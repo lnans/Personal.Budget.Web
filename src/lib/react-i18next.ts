@@ -28,12 +28,11 @@ i18next
     supportedLngs: ['en', 'fr'],
     detection: langDetectorOptions,
     backend: {
-      loadPath: '/locales/{{ns}}/{{lng}}.json',
+      loadPath: '/locales/{{lng}}.json',
       requestOptions: {
         cache: 'no-store',
       },
     },
-    ns: [], // Disable fallback NS behavior,
     react: {
       transKeepBasicHtmlNodesFor: ['b', 'br', 'strong', 'i', 'ul', 'ol', 'li', 'p'],
     },

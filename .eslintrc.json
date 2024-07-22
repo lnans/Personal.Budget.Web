@@ -80,7 +80,7 @@
 
               // e.g src/features and src/app can import from these shared modules but not the other way around
               {
-                "target": ["./src/components", "./src/hooks", "./src/lib", "./src/types", "./src/utils"],
+                "target": ["./src/components", "./src/hooks", "./src/lib", "./src/types"],
                 "from": ["./src/features", "./src/app"]
               }
             ]

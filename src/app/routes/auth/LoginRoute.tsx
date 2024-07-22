@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Logo } from '@/components/ui/Logo'
@@ -6,7 +7,9 @@ import { useAuthStore } from '@/store/authStore'
 import { AuthTokensDto } from '@/types/authTypes'
 
 export function LoginRoute() {
+  const { t } = useTranslation()
   const { setAccessToken } = useAuthStore((state) => state.actions)
+
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const redirectTo = searchParams.get('redirectTo')
@@ -22,7 +25,7 @@ export function LoginRoute() {
       <div className="flex flex-col items-center">
         <div className="mb-6 inline-flex items-center gap-4 text-4xl font-bold">
           <Logo size={46} />
-          <p className="text-neutral-950 dark:text-neutral-100">Life app</p>
+          <p className="text-neutral-950 dark:text-neutral-100">{t('common.app_name')}</p>
         </div>
         <LoginForm className="mb-24" onSuccess={onSuccess} />
       </div>

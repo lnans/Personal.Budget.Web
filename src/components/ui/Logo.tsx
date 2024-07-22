@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn'
+import { cn } from '@/lib/tailwind-merge'
 
 type LogoProps = {
   size?: number

@@ -17,7 +17,7 @@ const login = ({ form }: { form: AuthFormDto }): Promise<AuthTokensDto> => {
         expiresAt: new Date().getTime() + 5000,
         refreshToken: {
           expiresIn: 5000,
-          refreshToken: '123',
+          refreshToken: form.login,
         },
       })
     }, 500)

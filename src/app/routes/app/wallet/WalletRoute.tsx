@@ -1,3 +1,12 @@
+import { useTranslation } from 'react-i18next'
+
+import { ContentLayout } from '@/components/ui/ContentLayout'
+
 export function WalletRoute() {
-  return <div className="flex w-full flex-col items-center justify-center gap-2">wallet page</div>
+  const { t } = useTranslation()
+  return (
+    <ContentLayout title={t('routes.wallet')}>
+      <div className="flex flex-col">TODO content</div>
+    </ContentLayout>
+  )
 }

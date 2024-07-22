@@ -1,8 +1,9 @@
-import * as z from 'zod'
+// don't use alias here, vite doesn't not have aliases at pre build time
+import { createSchema, stringRequired } from '../lib/validation'
 
 const createEnv = () => {
-  const EnvSchema = z.object({
-    API_URL: z.string(),
+  const EnvSchema = createSchema({
+    API_URL: stringRequired(),
   })
 
   const envVars = Object.entries(import.meta.env).reduce<Record<string, string>>((acc, curr) => {

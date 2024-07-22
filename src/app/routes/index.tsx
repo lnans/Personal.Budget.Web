@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
+import { AppRouteNotFoundFallback } from '@/components/fallbacks/AppRouteNotFoundFallback'
 import { NavBarLinks } from '@/config/navbar'
 import { ProtectedRoute } from '@/lib/auth'
 
@@ -40,9 +41,6 @@ export const createRouter = () =>
     },
     {
       path: '*',
-      lazy: async () => {
-        const { NotFoundRoute } = await import('./NotFoundRoute')
-        return { Component: NotFoundRoute }
-      },
+      element: <AppRouteNotFoundFallback />,
     },
   ])

@@ -17,7 +17,7 @@ import { Theme, useTheme } from '@/components/ui/ThemeProvider'
 import { useAuthStore } from '@/store/authStore'
 
 function Profile() {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
   const { getUsername, clearAccessToken } = useAuthStore((state) => state.actions)
   const { theme, setTheme } = useTheme()
 
@@ -34,14 +34,14 @@ function Profile() {
         <DropdownMenuLabel>{getUsername()}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={theme} onValueChange={(v) => setTheme(v as Theme)}>
-          <DropdownMenuRadioItem value="light">{t('theme.light')}</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">{t('theme.dark')}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="light">{t('common.theme.light')}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">{t('common.theme.dark')}</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
-          {t('logout')}
+          {t('actions.sign_out')}
           <DropdownMenuShortcut>
-            <IconLogout size={18} />
+            <IconLogout className="ms-3" size={18} />
           </DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>

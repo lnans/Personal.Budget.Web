@@ -7,11 +7,12 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import { Drawer, DrawerContent, DrawerDescription, DrawerTitle, DrawerTrigger } from '@/components/ui/Drawer'
 import { Logo } from '@/components/ui/Logo'
+import { ScrollArea } from '@/components/ui/ScrollArea'
 import { NavBarLinks } from '@/config/navbar'
 import Profile from '@/features/auth/components/Profile'
 
 export function AppRoute() {
-  const { t } = useTranslation('navbar')
+  const { t } = useTranslation()
   const location = useLocation()
 
   const renderNavLinks = useCallback(() => {
@@ -36,11 +37,11 @@ export function AppRoute() {
   }, [])
 
   return (
-    <Suspense fallback={<div className="flex size-full items-center justify-center">...loading</div>}>
+    <Suspense fallback={<div className="flex size-full items-center justify-center text-white ">...LOOOOOOOAD</div>}>
       <ErrorBoundary key={location.pathname} fallback={<div>Something went wrong!</div>}>
-        <div className="flex min-h-screen w-full flex-col">
+        <div className="flex min-h-dvh w-full flex-col">
           <header className="sticky top-0 border-b bg-white px-4 md:px-6 dark:border-zinc-800 dark:bg-zinc-950">
-            <div className="mx-auto flex h-16 max-w-app-width items-center gap-4 md:gap-6">
+            <div className="mx-auto flex h-header-height max-w-app-width items-center gap-4 md:gap-6">
               <Drawer>
                 <DrawerTrigger asChild>
                   <Button variant="outline" size="icon" icon={IconMenu2} className="shrink-0 md:hidden" />
@@ -62,8 +63,10 @@ export function AppRoute() {
             </div>
           </header>
 
-          <main>
-            <Outlet />
+          <main className="max-h-main-height">
+            <ScrollArea className="h-main-height w-dvw">
+              <Outlet />
+            </ScrollArea>
           </main>
         </div>
       </ErrorBoundary>

@@ -1,10 +1,10 @@
 export const NavBarLinks = {
   wallet: {
-    title: 'navbar:wallet',
+    title: 'routes.wallet',
     to: '/app',
   },
   settings: {
-    title: 'navbar:settings',
+    title: 'routes.settings',
     to: '/app/settings',
   },
 } as const

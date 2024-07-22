@@ -1,4 +1,3 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -6,8 +5,9 @@ import { Form } from '@/components/form/FormBase'
 import InputTextForm from '@/components/form/InputTextForm'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
+import { cn } from '@/lib/tailwind-merge'
+import { resolver } from '@/lib/validation'
 import { AuthFormDto, authFormSchema, AuthTokensDto } from '@/types/authTypes'
-import { cn } from '@/utils/cn'
 
 import { useLogin } from '../api/login'
 
@@ -17,13 +17,10 @@ type LoginFormProps = {
 }
 
 export function LoginForm({ onSuccess, className }: LoginFormProps) {
-  const { t } = useTranslation('login')
+  const { t } = useTranslation()
   const { mutate: login, isPending } = useLogin({ mutationConfig: { onSuccess } })
 
-  const form = useForm<AuthFormDto>({
-    resolver: zodResolver(authFormSchema),
-    defaultValues: { login: '', password: '' },
-  })
+  const form = useForm<AuthFormDto>({ resolver: resolver(authFormSchema) })
 
   function onSubmit(form: AuthFormDto) {
     login({ form })
@@ -34,18 +31,18 @@ export function LoginForm({ onSuccess, className }: LoginFormProps) {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader>
-            <CardTitle className="text-2xl">{t('title')}</CardTitle>
-            <CardDescription>{t('header')}</CardDescription>
+            <CardTitle className="text-2xl">{t('features.login.title')}</CardTitle>
+            <CardDescription>{t('features.login.header')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-2">
-              <InputTextForm control={form.control} name="login" label={t('form.username')} autocomplete="off" />
-              <InputTextForm control={form.control} name="password" label={t('form.password')} type="password" />
+              <InputTextForm control={form.control} name="login" label={t('features.login.form.username')} autocomplete="off" />
+              <InputTextForm control={form.control} name="password" label={t('features.login.form.password')} type="password" />
             </div>
           </CardContent>
           <CardFooter>
             <Button type="submit" className="mt-2 w-full" loading={isPending}>
-              {t('form.submit')}
+              {t('actions.sign_in')}
             </Button>
           </CardFooter>
         </form>

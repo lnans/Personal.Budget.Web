@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { createSchema, InferSchemaType, stringRequired } from '@/lib/validation'
 
 export type RefreshTokenDto = {
   refreshToken: string
@@ -16,9 +16,9 @@ export type AuthTokensDto = {
   refreshToken: RefreshTokenDto
 }
 
-export const authFormSchema = z.object({
-  login: z.string().min(1, 'form.required'),
-  password: z.string().min(1, 'form.required'),
+export const authFormSchema = createSchema({
+  login: stringRequired(),
+  password: stringRequired(),
 })
 
-export type AuthFormDto = z.infer<typeof authFormSchema>
+export type AuthFormDto = InferSchemaType<typeof authFormSchema>

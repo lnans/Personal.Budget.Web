@@ -1,0 +1,23 @@
+{
+  "common.app_name": "Life app",
+  "common.app_loading": "Chargement de l'application...",
+  "common.theme.dark": "Thème sombre",
+  "common.theme.light": "Thème clair",
+
+  "actions.go_back": "Page précédente",
+  "actions.sign_in": "Se connecter",
+  "actions.sign_out": "Se déconnecter",
+
+  "routes.wallet": "Portefeuille",
+  "routes.settings": "Paramètres",
+
+  "form_validation.required": "Champ obligatoire",
+
+  "boundaries.not_found.title": "Page non trouvée",
+  "boundaries.not_found.description": "Désolé, la page que vous recherchez n'existe pas.",
+
+  "features.login.title": "Authentification",
+  "features.login.header": "Entrez vos identifiants pour vous connecter à votre compte",
+  "features.login.form.username": "Identifiant",
+  "features.login.form.password": "Mot de passe"
+}
