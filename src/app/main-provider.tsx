@@ -1,7 +1,6 @@
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import * as React from 'react'
-import { Suspense } from 'react'
+import { ReactNode, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { I18nextProvider } from 'react-i18next'
 
@@ -12,7 +11,7 @@ import { i18next } from '@/lib/react-i18next'
 import { queryClient } from '@/lib/tanstack-query'
 
 type AppProviderProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => {
