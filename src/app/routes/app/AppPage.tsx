@@ -11,7 +11,7 @@ import { ScrollArea } from '@/components/ui/ScrollArea'
 import { NavBarLinks } from '@/config/navbar'
 import Profile from '@/features/auth/components/Profile'
 
-export function AppRoute() {
+export function AppPage() {
   const { t } = useTranslation()
   const location = useLocation()
 

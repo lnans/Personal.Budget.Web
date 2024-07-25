@@ -4,37 +4,37 @@ import { AppRouteNotFoundFallback } from '@/components/fallbacks/AppRouteNotFoun
 import { NavBarLinks } from '@/config/navbar'
 import { ProtectedRoute } from '@/lib/auth'
 
-import { AppRoute } from './app/AppRoute'
+import { AppPage } from './app/AppPage'
 
 export const createRouter = () =>
   createBrowserRouter([
     {
       path: '/',
       lazy: async () => {
-        const { RootPage } = await import('./Root')
+        const { RootPage } = await import('./RootPage')
         return { Component: RootPage }
       },
     },
     {
       path: '/auth',
       lazy: async () => {
-        const { LoginRoute } = await import('./auth/LoginRoute')
-        return { Component: LoginRoute }
+        const { LoginPage } = await import('./auth/LoginPage')
+        return { Component: LoginPage }
       },
     },
     {
       path: NavBarLinks.wallet.to,
       element: (
         <ProtectedRoute>
-          <AppRoute />
+          <AppPage />
         </ProtectedRoute>
       ),
       children: [
         {
           path: '',
           lazy: async () => {
-            const { WalletRoute } = await import('./app/wallet/WalletRoute')
-            return { Component: WalletRoute }
+            const { WalletPage } = await import('./app/wallet/WalletPage')
+            return { Component: WalletPage }
           },
         },
       ],

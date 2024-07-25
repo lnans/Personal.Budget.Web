@@ -6,7 +6,7 @@ import { LoginForm } from '@/features/auth/components/LoginForm'
 import { useAuthStore } from '@/store/authStore'
 import { AuthTokensDto } from '@/types/authTypes'
 
-export function LoginRoute() {
+export function LoginPage() {
   const { t } = useTranslation()
   const { setAccessToken } = useAuthStore((state) => state.actions)
 
