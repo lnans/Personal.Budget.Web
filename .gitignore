@@ -2,6 +2,7 @@ node_modules
 dist
 *.local
 coverage
+.turbo
 
 # Yarn 3
 .yarn/*

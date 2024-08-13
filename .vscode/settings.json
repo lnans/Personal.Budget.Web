@@ -15,5 +15,6 @@
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "liveServer.settings.root": "/dist"
+  "liveServer.settings.root": "/dist",
+  "eslint.workingDirectories": ["packages/life-app-front"]
 }
