@@ -18,8 +18,9 @@ import { useAuthStore } from '@/store/authStore'
 
 function Profile() {
   const { t } = useTranslation()
-  const { getUsername, clearAccessToken } = useAuthStore((state) => state.actions)
   const { theme, setTheme } = useTheme()
+
+  const { getUsername, clearAccessToken } = useAuthStore((state) => state.actions)
 
   const handleLogout = () => {
     clearAccessToken()

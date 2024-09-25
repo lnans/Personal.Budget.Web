@@ -11,6 +11,7 @@
   "i18n-ally.localesPaths": ["public/locales"],
   "i18n-ally.keystyle": "flat",
   "i18n-ally.usage.derivedKeyRules": ["{key}_one", "{key}_other"],
+  "i18n-ally.includeSubfolders": true,
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]

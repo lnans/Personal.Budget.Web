@@ -18,12 +18,12 @@ type LoginFormProps = {
 
 export function LoginForm({ onSuccess, className }: LoginFormProps) {
   const { t } = useTranslation()
-  const { mutate: login, isPending } = useLogin({ mutationConfig: { onSuccess } })
 
+  const loginQuery = useLogin({ mutationConfig: { onSuccess } })
   const form = useForm<AuthFormDto>({ resolver: resolver(authFormSchema) })
 
-  function onSubmit(form: AuthFormDto) {
-    login({ form })
+  const onSubmit = async (form: AuthFormDto) => {
+    await loginQuery.mutateAsync({ form })
   }
 
   return (
@@ -41,7 +41,7 @@ export function LoginForm({ onSuccess, className }: LoginFormProps) {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="mt-2 w-full" loading={isPending}>
+            <Button type="submit" className="mt-2 w-full" loading={loginQuery.isPending} disabled={!form.formState.isValid}>
               {t('actions.sign_in')}
             </Button>
           </CardFooter>

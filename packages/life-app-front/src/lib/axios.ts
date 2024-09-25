@@ -8,7 +8,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
     config.headers.Accept = 'application/json'
   }
 
-  const bearer = useAuthStore.getState().actions.getBearerToken()
+  const bearer = useAuthStore.getState().actions.getAccessToken()
   if (bearer) {
     config.headers.Authorization = bearer
   }
@@ -22,9 +22,7 @@ export const api = Axios.create({
 
 api.interceptors.request.use(authRequestInterceptor)
 api.interceptors.response.use(
-  (response) => {
-    return response.data
-  },
+  (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       const searchParams = new URLSearchParams()
