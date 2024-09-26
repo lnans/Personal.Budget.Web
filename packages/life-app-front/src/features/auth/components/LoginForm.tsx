@@ -27,7 +27,7 @@ export function LoginForm({ onSuccess, className }: LoginFormProps) {
   }
 
   return (
-    <Card className={cn('mx-auto max-w-sm dark:shadow-neutral-800 shadow-xl ', className)}>
+    <Card className={cn('mx-auto max-w-sm shadow-xl dark:shadow-neutral-800 ', className)}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader>

@@ -34,6 +34,6 @@ export default {
     },
   },
   darkMode: 'selector',
-  // eslint-disable-next-line no-undef
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require('tailwindcss-animate')],
 }
