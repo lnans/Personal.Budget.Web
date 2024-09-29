@@ -1,8 +1,9 @@
+import { ReactNode } from 'react'
 import Heading from './Heading'
 
 type ContentLayoutProps = {
   title: string
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function ContentLayout({ title, children }: ContentLayoutProps) {

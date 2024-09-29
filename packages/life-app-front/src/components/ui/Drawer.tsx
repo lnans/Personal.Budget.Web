@@ -1,21 +1,18 @@
 import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { IconX } from '@tabler/icons-react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import * as React from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, HTMLAttributes } from 'react'
 
 import { cn } from '@/lib/tailwind-merge'
 
 const Drawer = SheetPrimitive.Root
-
 const DrawerTrigger = SheetPrimitive.Trigger
-
 const DrawerClose = SheetPrimitive.Close
-
 const DrawerPortal = SheetPrimitive.Portal
 
-const DrawerOverlay = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
+const DrawerOverlay = forwardRef<
+  ElementRef<typeof SheetPrimitive.Overlay>,
+  ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
@@ -47,10 +44,10 @@ const drawerVariants = cva(
 )
 
 interface DrawerContentProps
-  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
+  extends ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof drawerVariants> {}
 
-const DrawerContent = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Content>, DrawerContentProps>(
+const DrawerContent = forwardRef<ElementRef<typeof SheetPrimitive.Content>, DrawerContentProps>(
   ({ side = 'right', className, children, ...props }, ref) => (
     <DrawerPortal>
       <DrawerOverlay />
@@ -66,27 +63,30 @@ const DrawerContent = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Co
 )
 DrawerContent.displayName = SheetPrimitive.Content.displayName
 
-const DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+const DrawerHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
   <div className={cn('flex flex-col space-y-2 text-center sm:text-left', className)} {...props} />
 )
 DrawerHeader.displayName = 'DrawerHeader'
 
-const DrawerFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+const DrawerFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
   <div className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)} {...props} />
 )
 DrawerFooter.displayName = 'DrawerFooter'
 
-const DrawerTitle = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
->(({ className, ...props }, ref) => (
-  <SheetPrimitive.Title ref={ref} className={cn('text-lg font-semibold text-zinc-950 dark:text-zinc-50', className)} {...props} />
-))
+const DrawerTitle = forwardRef<ElementRef<typeof SheetPrimitive.Title>, ComponentPropsWithoutRef<typeof SheetPrimitive.Title>>(
+  ({ className, ...props }, ref) => (
+    <SheetPrimitive.Title
+      ref={ref}
+      className={cn('text-lg font-semibold text-zinc-950 dark:text-zinc-50', className)}
+      {...props}
+    />
+  ),
+)
 DrawerTitle.displayName = SheetPrimitive.Title.displayName
 
-const DrawerDescription = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
+const DrawerDescription = forwardRef<
+  ElementRef<typeof SheetPrimitive.Description>,
+  ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description ref={ref} className={cn('text-sm text-zinc-500 dark:text-zinc-400', className)} {...props} />
 ))

@@ -13,8 +13,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/DropDownMenu'
-import { Theme, useTheme } from '@/components/ui/ThemeProvider'
-import { useAuthStore } from '@/store/authStore'
+import { useTheme } from '@/hooks/useTheme'
+import { useAuthStore } from '@/stores/authStore'
 
 function Profile() {
   const { t } = useTranslation()
@@ -34,9 +34,9 @@ function Profile() {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{getUsername()}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={theme} onValueChange={(v) => setTheme(v as Theme)}>
-          <DropdownMenuRadioItem value="light">{t('common.theme.light')}</DropdownMenuRadioItem>
+        <DropdownMenuRadioGroup value={theme} onValueChange={(v) => setTheme(v as 'dark' | 'light')}>
           <DropdownMenuRadioItem value="dark">{t('common.theme.dark')}</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="light">{t('common.theme.light')}</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>

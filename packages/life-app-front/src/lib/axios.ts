@@ -1,7 +1,7 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios'
 
-import { env } from '@/config/env'
-import { useAuthStore } from '@/store/authStore'
+import { ENV } from '@/config/env'
+import { useAuthStore } from '@/stores/authStore'
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
@@ -17,7 +17,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const api = Axios.create({
-  baseURL: env.API_URL,
+  baseURL: ENV.API_URL,
 })
 
 api.interceptors.request.use(authRequestInterceptor)

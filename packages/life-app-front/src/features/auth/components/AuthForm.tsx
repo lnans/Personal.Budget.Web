@@ -9,21 +9,21 @@ import { cn } from '@/lib/tailwind-merge'
 import { resolver } from '@/lib/validation'
 import { AuthFormDto, authFormSchema, AuthTokensDto } from '@/types/authTypes'
 
-import { useLogin } from '../api/login'
+import { useAuthenticate } from '../api/authenticate'
 
-type LoginFormProps = {
+type AuthFormProps = {
   onSuccess?: (authToken: AuthTokensDto) => void
   className?: string
 }
 
-export function LoginForm({ onSuccess, className }: LoginFormProps) {
+export function AuthForm({ onSuccess, className }: AuthFormProps) {
   const { t } = useTranslation()
 
-  const loginQuery = useLogin({ mutationConfig: { onSuccess } })
+  const authenticateQuery = useAuthenticate({ mutationConfig: { onSuccess } })
   const form = useForm<AuthFormDto>({ resolver: resolver(authFormSchema) })
 
   const onSubmit = async (form: AuthFormDto) => {
-    await loginQuery.mutateAsync({ form })
+    await authenticateQuery.mutateAsync({ form })
   }
 
   return (
@@ -41,7 +41,12 @@ export function LoginForm({ onSuccess, className }: LoginFormProps) {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="mt-2 w-full" loading={loginQuery.isPending} disabled={!form.formState.isValid}>
+            <Button
+              type="submit"
+              className="mt-2 w-full"
+              loading={authenticateQuery.isPending}
+              disabled={!form.formState.isValid}
+            >
               {t('actions.sign_in')}
             </Button>
           </CardFooter>

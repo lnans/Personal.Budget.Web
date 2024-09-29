@@ -30,4 +30,4 @@ ${Object.entries(parsedEnv.error.flatten().fieldErrors)
   return parsedEnv.data
 }
 
-export const env = createEnv()
+export const ENV = createEnv()

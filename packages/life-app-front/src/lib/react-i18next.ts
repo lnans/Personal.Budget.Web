@@ -1,3 +1,4 @@
+import { STORAGE_KEYS } from '@/config/constants'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import HttpApi, { HttpBackendOptions } from 'i18next-http-backend'
@@ -9,7 +10,7 @@ const langDetectorOptions = {
 
   // keys or params to lookup language from
   lookupCookie: 'locale',
-  lookupLocalStorage: 'life-app-lang',
+  lookupLocalStorage: STORAGE_KEYS.lang,
 
   // cache user language on
   caches: ['localStorage', 'cookie'],

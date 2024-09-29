@@ -8,7 +8,7 @@
   "i18n-ally.dirStructure": "file",
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.displayLanguage": "en",
-  "i18n-ally.localesPaths": ["public/locales"],
+  "i18n-ally.localesPaths": ["packages/life-app-front/public/locales"],
   "i18n-ally.keystyle": "flat",
   "i18n-ally.usage.derivedKeyRules": ["{key}_one", "{key}_other"],
   "i18n-ally.includeSubfolders": true,
