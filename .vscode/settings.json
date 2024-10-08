@@ -17,5 +17,11 @@
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "liveServer.settings.root": "/dist",
-  "eslint.workingDirectories": ["packages/life-app-front"]
+  "eslint.workingDirectories": ["packages/life-app-front"],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/bin": true,
+    "**/obj": true
+  }
 }
