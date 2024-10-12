@@ -1,5 +1,6 @@
-import { cn } from '@/lib/tailwind-merge'
 import { forwardRef, HTMLAttributes } from 'react'
+
+import { cn } from '@/lib/tailwind-merge'
 
 const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
   <div

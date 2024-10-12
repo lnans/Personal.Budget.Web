@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+
 import Heading from './Heading'
 
 type ContentLayoutProps = {

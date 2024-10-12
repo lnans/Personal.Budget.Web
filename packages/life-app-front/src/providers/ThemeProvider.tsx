@@ -1,6 +1,7 @@
-import { STORAGE_KEYS } from '@/config/constants'
 import { createContext, ReactNode, useEffect } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
+
+import { STORAGE_KEYS } from '@/config/constants'
 
 export type Theme = 'dark' | 'light'
 

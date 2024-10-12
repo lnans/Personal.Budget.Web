@@ -1,8 +1,9 @@
-import { STORAGE_KEYS } from '@/config/constants'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import HttpApi, { HttpBackendOptions } from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
+
+import { STORAGE_KEYS } from '@/config/constants'
 
 const langDetectorOptions = {
   // order and from where user language should be detected

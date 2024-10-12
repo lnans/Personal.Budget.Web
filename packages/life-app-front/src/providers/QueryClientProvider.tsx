@@ -1,7 +1,8 @@
-import { queryClient } from '@/lib/tanstack-query'
 import { QueryClientProvider as TanstackQueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools as TanstackReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ReactNode } from 'react'
+
+import { queryClient } from '@/lib/tanstack-query'
 
 type QueryClientProviderProps = {
   children: ReactNode

@@ -1,5 +1,6 @@
 import eslintJs from '@eslint/js'
 import reactQuery from '@tanstack/eslint-plugin-query'
+import importPlugin from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import prettier from 'eslint-plugin-prettier'
 import react from 'eslint-plugin-react'
@@ -8,7 +9,6 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tailwindcss from 'eslint-plugin-tailwindcss'
 import globals from 'globals'
 import eslintTs from 'typescript-eslint'
-// import importPlugin from 'eslint-plugin-import' TODO: wait for package to be updated
 
 export default eslintTs.config(
   { ignores: ['dist', 'public'] },
@@ -16,12 +16,15 @@ export default eslintTs.config(
     extends: [
       eslintJs.configs.recommended,
       ...eslintTs.configs.recommended,
-      /*importPlugin.flatConfigs.recommended TODO: wait for package to be updated */
+      importPlugin.flatConfigs.errors,
+      importPlugin.flatConfigs.warnings,
+      importPlugin.flatConfigs.typescript,
     ],
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2022,
       globals: globals.browser,
+      sourceType: 'module',
     },
     plugins: {
       react,
@@ -37,6 +40,9 @@ export default eslintTs.config(
       tailwindcss: {
         callees: ['classnames', 'clsx', 'cx', 'cn', 'ctl'],
       },
+      'import/resolver': {
+        typescript: {},
+      },
     },
     rules: {
       ...react.configs.recommended.rules,
@@ -45,7 +51,6 @@ export default eslintTs.config(
       ...prettier.configs.recommended.rules,
       ...tailwindcss.configs.recommended.rules,
       ...reactQuery.configs.recommended.rules,
-      // ...importPlugin.flatConfigs.recommended.rules, TODO: wait for package to be updated
 
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
@@ -71,18 +76,17 @@ export default eslintTs.config(
         },
       ],
 
-      // TODO: wait for package to be updated
-      // 'import/default': 'off',
-      // 'import/no-named-as-default-member': 'off',
-      // 'import/no-named-as-default': 'off',
-      // 'import/order': [
-      //   'error',
-      //   {
-      //     groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
-      //     'newlines-between': 'always',
-      //     alphabetize: { order: 'asc', caseInsensitive: true },
-      //   },
-      // ],
+      'import/default': 'off',
+      'import/no-named-as-default-member': 'off',
+      'import/no-named-as-default': 'off',
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
       // 'import/no-restricted-paths': [
       //   'error',
       //   {

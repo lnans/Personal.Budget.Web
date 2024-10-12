@@ -1,5 +1,6 @@
-import { cn } from '@/lib/tailwind-merge'
 import { InputHTMLAttributes, forwardRef } from 'react'
+
+import { cn } from '@/lib/tailwind-merge'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
