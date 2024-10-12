@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --mode dev",
     "build": "tsc -b && vite build --mode prod --base=/",
-    "check-lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "check-lint": "eslint . --report-unused-disable-directives --max-warnings 5",
     "check-types": "tsc --project tsconfig.json --pretty --noEmit",
     "check": "yarn check-lint && yarn check-types",
     "format": "eslint . --fix && prettier --write .",

@@ -52,6 +52,8 @@ export default eslintTs.config(
       ...tailwindcss.configs.recommended.rules,
       ...reactQuery.configs.recommended.rules,
 
+      'no-warning-comments': 'warn',
+
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
 
@@ -87,33 +89,34 @@ export default eslintTs.config(
           alphabetize: { order: 'asc', caseInsensitive: true },
         },
       ],
-      // 'import/no-restricted-paths': [
-      //   'error',
-      //   {
-      //     zones: [
-      //       // disables cross-feature imports:
-      //       // eg. src/features/discussions should not import from src/features/comments, etc.
-      //       {
-      //         target: './src/features/auth',
-      //         from: './src/features',
-      //         except: ['./auth'],
-      //       },
-      //       // enforce unidirectional codebase:
+      'import/no-restricted-paths': [
+        'error',
+        {
+          zones: [
+            // TODO: add zones for each features
+            // disables cross-feature imports:
+            // eg. src/features/discussions should not import from src/features/comments, etc.
+            // {
+            //   target: './src/features/auth',
+            //   from: './src/features',
+            //   except: ['./auth'],
+            // },
+            // enforce unidirectional codebase:
 
-      //       // e.g. src/app can import from src/features but not the other way around
-      //       {
-      //         target: './src/features',
-      //         from: './src/app',
-      //       },
+            // e.g. src/app can import from these shared modules but not the other way around
+            {
+              target: ['./src/features', './src/providers'],
+              from: './src/app',
+            },
 
-      //       // e.g src/features and src/app can import from these shared modules but not the other way around
-      //       {
-      //         target: ['./src/components', './src/hooks', './src/lib', './src/types'],
-      //         from: ['./src/features', './src/app'],
-      //       },
-      //     ],
-      //   },
-      // ],
+            // e.g src/features and src/app can import from these shared modules but not the other way around
+            {
+              target: ['./src/components', './src/config', './src/hooks', './src/lib', './src/stores', './src/types'],
+              from: ['./src/features', './src/app'],
+            },
+          ],
+        },
+      ],
     },
   },
 )
