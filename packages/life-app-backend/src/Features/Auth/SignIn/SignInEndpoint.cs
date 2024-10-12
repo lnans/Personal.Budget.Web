@@ -3,7 +3,7 @@ using Life.App.Backend.Contracts.Authentication;
 using Life.App.Backend.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace Life.App.Backend.Features.Authentication.SignIn;
+namespace Life.App.Backend.Features.Auth.SignIn;
 
 public class SignInEndpoint : Endpoint<SignInRequest, AuthenticationDto>
 {

@@ -7,7 +7,7 @@ using Life.App.Backend.Settings;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Life.App.Backend.Features.Authentication;
+namespace Life.App.Backend.Features.Auth;
 
 public class AuthenticationService
 {

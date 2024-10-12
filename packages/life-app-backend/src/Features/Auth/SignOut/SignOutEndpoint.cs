@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace Life.App.Backend.Features.Authentication.SignOut;
+namespace Life.App.Backend.Features.Auth.SignOut;
 
 public class SignOutEndpoint : Endpoint<SignOutRequest>
 {

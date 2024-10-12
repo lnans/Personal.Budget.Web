@@ -1,4 +1,4 @@
-namespace Life.App.Backend.Features.Authentication.RefreshToken;
+namespace Life.App.Backend.Features.Auth.RefreshToken;
 
 public class RefreshTokenRequest
 {

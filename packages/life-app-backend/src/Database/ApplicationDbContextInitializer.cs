@@ -1,5 +1,5 @@
 using Life.App.Backend.Database.Entities;
-using Life.App.Backend.Features.Authentication;
+using Life.App.Backend.Features.Auth;
 using Microsoft.EntityFrameworkCore;
 
 namespace Life.App.Backend.Database;

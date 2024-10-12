@@ -1,7 +1,7 @@
 using System.Text;
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using Life.App.Backend.Features.Authentication;
+using Life.App.Backend.Features.Auth;
 using Life.App.Backend.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

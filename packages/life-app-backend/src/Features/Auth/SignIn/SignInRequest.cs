@@ -1,4 +1,4 @@
-namespace Life.App.Backend.Features.Authentication.SignIn;
+namespace Life.App.Backend.Features.Auth.SignIn;
 
 public class SignInRequest
 {
