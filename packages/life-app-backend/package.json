@@ -1,0 +1,9 @@
+{
+  "name": "life-app-backend",
+  "scripts": {
+    "dev": "dotnet run --project src/Life.App.Backend.csproj -c Debug",
+    "test": "dotnet test -v quiet --nologo -l 'console;verbosity=normal'",
+    "build": "dotnet build -tl -c Release",
+    "format": "dotnet tool restore && dotnet format . -v detailed && dotnet csharpier ."
+  }
+}

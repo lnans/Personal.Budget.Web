@@ -4021,6 +4021,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"life-app-backend@workspace:packages/life-app-backend":
+  version: 0.0.0-use.local
+  resolution: "life-app-backend@workspace:packages/life-app-backend"
+  languageName: unknown
+  linkType: soft
+
 "life-app-front@workspace:packages/life-app-front":
   version: 0.0.0-use.local
   resolution: "life-app-front@workspace:packages/life-app-front"
