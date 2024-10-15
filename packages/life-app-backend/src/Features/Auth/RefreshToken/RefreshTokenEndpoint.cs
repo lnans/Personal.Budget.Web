@@ -1,16 +1,15 @@
 using FastEndpoints;
-using Life.App.Backend.Contracts.Authentication;
 using Life.App.Backend.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Life.App.Backend.Features.Auth.RefreshToken;
 
-public class RefreshTokenEndpoint : Endpoint<RefreshTokenRequest, AuthenticationDto>
+public class RefreshTokenEndpoint : Endpoint<RefreshTokenRequest, AuthDto>
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly AuthenticationService _authService;
+    private readonly AuthService _authService;
 
-    public RefreshTokenEndpoint(ApplicationDbContext dbContext, AuthenticationService authService)
+    public RefreshTokenEndpoint(ApplicationDbContext dbContext, AuthService authService)
     {
         _dbContext = dbContext;
         _authService = authService;
@@ -29,12 +28,6 @@ public class RefreshTokenEndpoint : Endpoint<RefreshTokenRequest, Authentication
 
     public override async Task HandleAsync(RefreshTokenRequest req, CancellationToken ct)
     {
-        if (string.IsNullOrWhiteSpace(req.RefreshToken))
-        {
-            await SendUnauthorizedAsync(ct);
-            return;
-        }
-
         var (userId, isValid) = _authService.IsTokenInMemory(req.RefreshToken);
         if (!isValid)
         {
@@ -50,14 +43,14 @@ public class RefreshTokenEndpoint : Endpoint<RefreshTokenRequest, Authentication
             return;
         }
 
-        var accessToken = _authService.GenerateAuthenticationToken(user.Id.ToString());
+        var accessToken = _authService.GenerateAuthToken(user.Id.ToString());
         var refreshToken = _authService.GenerateRefreshToken();
 
         _authService.RevokeTokenFromMemory(req.RefreshToken);
         _authService.StoreTokenInMemory(refreshToken, user.Id.ToString());
 
         await SendAsync(
-            new AuthenticationDto
+            new AuthDto
             {
                 Username = user.Username,
                 AccessToken = accessToken,

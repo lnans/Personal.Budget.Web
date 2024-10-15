@@ -1,6 +1,6 @@
-namespace Life.App.Backend.Contracts.Authentication;
+namespace Life.App.Backend.Features.Auth;
 
-public class AuthenticationTokenDto
+public class AuthTokenDto
 {
     /// <summary>
     ///     Token value

@@ -7,23 +7,25 @@ import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
 import { cn } from '@/lib/tailwind-merge'
 import { resolver } from '@/lib/validation'
-import { AuthFormDto, authFormSchema, AuthTokensDto } from '@/types/authTypes'
 
-import { useAuthenticate } from '../api/authenticate'
+import { useSignIn } from '../api/signInEndpoint'
+import { AuthDto } from '../types/authDto'
+import { SignInRequest } from '../types/signInRequest'
+import { signInRequestValidator } from '../types/signInRequestValidator'
 
-type AuthFormProps = {
-  onSuccess?: (authToken: AuthTokensDto) => void
+type SignInFormProps = {
+  onSuccess?: (authDto: AuthDto) => void
   className?: string
 }
 
-export function AuthForm({ onSuccess, className }: AuthFormProps) {
+export function SignInForm({ onSuccess, className }: SignInFormProps) {
   const { t } = useTranslation()
 
-  const authenticateQuery = useAuthenticate({ mutationConfig: { onSuccess } })
-  const form = useForm<AuthFormDto>({ resolver: resolver(authFormSchema) })
+  const signInQuery = useSignIn({ mutationConfig: { onSuccess } })
+  const form = useForm<SignInRequest>({ resolver: resolver(signInRequestValidator) })
 
-  const onSubmit = async (form: AuthFormDto) => {
-    await authenticateQuery.mutateAsync({ form })
+  const onSubmit = async (form: SignInRequest) => {
+    await signInQuery.mutateAsync({ form })
   }
 
   return (
@@ -36,17 +38,17 @@ export function AuthForm({ onSuccess, className }: AuthFormProps) {
           </CardHeader>
           <CardContent>
             <div className="grid gap-2">
-              <InputTextForm control={form.control} name="login" label={t('features.login.form.username')} autocomplete="off" />
+              <InputTextForm
+                control={form.control}
+                name="username"
+                label={t('features.login.form.username')}
+                autocomplete="off"
+              />
               <InputTextForm control={form.control} name="password" label={t('features.login.form.password')} type="password" />
             </div>
           </CardContent>
           <CardFooter>
-            <Button
-              type="submit"
-              className="mt-2 w-full"
-              loading={authenticateQuery.isPending}
-              disabled={!form.formState.isValid}
-            >
+            <Button type="submit" className="mt-2 w-full" loading={signInQuery.isPending} disabled={!form.formState.isValid}>
               {t('actions.sign_in')}
             </Button>
           </CardFooter>

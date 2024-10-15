@@ -1,6 +1,6 @@
-namespace Life.App.Backend.Contracts.Authentication;
+namespace Life.App.Backend.Features.Auth;
 
-public class AuthenticationDto
+public class AuthDto
 {
     /// <summary>
     ///     Identity of the user
@@ -10,10 +10,10 @@ public class AuthenticationDto
     /// <summary>
     ///     Access token used to authenticate requests
     /// </summary>
-    public required AuthenticationTokenDto AccessToken { get; set; }
+    public required AuthTokenDto AccessToken { get; set; }
 
     /// <summary>
     ///     Refresh token used to refresh the access token
     /// </summary>
-    public required AuthenticationTokenDto RefreshToken { get; set; }
+    public required AuthTokenDto RefreshToken { get; set; }
 }

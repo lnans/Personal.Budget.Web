@@ -93,15 +93,13 @@ export default eslintTs.config(
         'error',
         {
           zones: [
-            // TODO: add zones for each features
             // disables cross-feature imports:
             // eg. src/features/discussions should not import from src/features/comments, etc.
-            // {
-            //   target: './src/features/auth',
-            //   from: './src/features',
-            //   except: ['./auth'],
-            // },
-            // enforce unidirectional codebase:
+            {
+              target: './src/features/auth',
+              from: './src/features',
+              except: ['./auth'],
+            },
 
             // e.g. src/app can import from these shared modules but not the other way around
             {
@@ -111,7 +109,7 @@ export default eslintTs.config(
 
             // e.g src/features and src/app can import from these shared modules but not the other way around
             {
-              target: ['./src/components', './src/config', './src/hooks', './src/lib', './src/stores', './src/types'],
+              target: ['./src/components', './src/config', './src/hooks', './src/stores', './src/types'],
               from: ['./src/features', './src/app'],
             },
           ],

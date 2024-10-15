@@ -20,7 +20,7 @@ public static class ApiConfiguration
 
     public static void ConfigureApi(this IServiceCollection services, IConfiguration configuration)
     {
-        var authenticationSettings = AuthenticationSettings.Create(configuration);
+        var authenticationSettings = AuthSettings.Create(configuration);
 
         services
             .AddAuthentication(options =>
@@ -41,6 +41,8 @@ public static class ApiConfiguration
                     ),
                 };
             });
+
+        // Extension from FastEndpoints
         services.SwaggerDocument(options =>
         {
             options.EnableJWTBearerAuth = false;
@@ -64,7 +66,7 @@ public static class ApiConfiguration
         services.AddAuthorization();
 
         services.AddSingleton(authenticationSettings);
-        services.AddSingleton<AuthenticationService>();
+        services.AddSingleton<AuthService>();
 
         services.AddMemoryCache();
         services.AddFastEndpoints();
@@ -87,6 +89,7 @@ public static class ApiConfiguration
             c.Path = DocSpecEndpoint;
         });
         app.UseOpenApiUi();
+
         app.MapGet("/", () => Results.Redirect(DocEndpoint)).ExcludeFromDescription();
     }
 

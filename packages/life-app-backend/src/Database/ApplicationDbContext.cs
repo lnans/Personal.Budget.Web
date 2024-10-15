@@ -19,6 +19,6 @@ public class ApplicationDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseLoggerFactory(_loggerFactory);
-        optionsBuilder.LogTo(_ => { }, new[] { CoreEventId.QueryExecutionPlanned, CoreEventId.ContextInitialized });
+        optionsBuilder.LogTo(_ => { }, [CoreEventId.QueryExecutionPlanned, CoreEventId.ContextInitialized]);
     }
 }

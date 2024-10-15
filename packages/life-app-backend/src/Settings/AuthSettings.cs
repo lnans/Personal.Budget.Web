@@ -2,12 +2,12 @@ using Ardalis.GuardClauses;
 
 namespace Life.App.Backend.Settings;
 
-public class AuthenticationSettings
+public class AuthSettings
 {
     /// <summary>
     ///     Configuration section name.
     /// </summary>
-    public const string Authentication = "Authentication";
+    public const string Auth = "Auth";
 
     /// <summary>
     ///     Pepper used for hashing passwords.
@@ -30,14 +30,14 @@ public class AuthenticationSettings
     public int RefreshTokenExpirationInDays { get; set; }
 
     /// <summary>
-    ///     Creates an instance of <see cref="AuthenticationSettings" /> from the provided configuration.
+    ///     Creates an instance of <see cref="AuthSettings" /> from the provided configuration.
     ///     Throws an exception if the configuration is invalid.
     /// </summary>
     /// <param name="configuration">Configuration</param>
-    /// <returns>Instance of <see cref="AuthenticationSettings" /></returns>
-    public static AuthenticationSettings Create(IConfiguration configuration)
+    /// <returns>Instance of <see cref="AuthSettings" /></returns>
+    public static AuthSettings Create(IConfiguration configuration)
     {
-        var authenticationOptions = configuration.GetSection(Authentication).Get<AuthenticationSettings>();
+        var authenticationOptions = configuration.GetSection(Auth).Get<AuthSettings>();
 
         Guard.Against.Null(authenticationOptions, nameof(authenticationOptions));
         Guard.Against.NullOrWhiteSpace(authenticationOptions.JwtSecret, nameof(authenticationOptions.JwtSecret));

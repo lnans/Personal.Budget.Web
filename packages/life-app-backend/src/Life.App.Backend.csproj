@@ -13,13 +13,15 @@
     <PackageReference Include="Ardalis.GuardClauses" Version="5.0.0" />
     <PackageReference Include="FastEndpoints" Version="5.30.0" />
     <PackageReference Include="FastEndpoints.Swagger" Version="5.30.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0-rc.2.24474.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"
+      Version="9.0.0-rc.2.24474.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0-rc.1.24452.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0-rc.1.24451.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0-rc.1.24451.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"
+      Version="9.0.0-rc.1.24451.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0-rc.1" />
   </ItemGroup>
 

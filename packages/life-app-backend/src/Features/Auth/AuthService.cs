@@ -2,28 +2,23 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Life.App.Backend.Contracts.Authentication;
 using Life.App.Backend.Settings;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Life.App.Backend.Features.Auth;
 
-public class AuthenticationService
+public class AuthService
 {
     private const int HashIterations = 100_000;
     private const int RandomSaltSize = 32;
-    private readonly AuthenticationSettings _authSettings;
+    private readonly AuthSettings _authSettings;
     private readonly IMemoryCache _cache;
 
-    public readonly int RefreshTokenExpirationInDays;
-
-    public AuthenticationService(AuthenticationSettings authSettings, IMemoryCache cache)
+    public AuthService(AuthSettings authSettings, IMemoryCache cache)
     {
         _authSettings = authSettings;
         _cache = cache;
-
-        RefreshTokenExpirationInDays = authSettings.RefreshTokenExpirationInDays;
     }
 
     /// <summary>
@@ -75,7 +70,7 @@ public class AuthenticationService
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <returns>Access token</returns>
-    public AuthenticationTokenDto GenerateAuthenticationToken(string userId)
+    public AuthTokenDto GenerateAuthToken(string userId)
     {
         var claims = new[] { new Claim(ClaimTypes.NameIdentifier, userId) };
 
@@ -88,7 +83,7 @@ public class AuthenticationService
             signingCredentials: signingCredentials
         );
 
-        return new AuthenticationTokenDto
+        return new AuthTokenDto
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
             ExpiresIn = _authSettings.TokenExpirationInMinutes * 60,
@@ -99,10 +94,10 @@ public class AuthenticationService
     ///     Generates a refresh token.
     /// </summary>
     /// <returns>Refresh token</returns>
-    public AuthenticationTokenDto GenerateRefreshToken()
+    public AuthTokenDto GenerateRefreshToken()
     {
         var refreshToken = GenerateRandomSalt();
-        return new AuthenticationTokenDto
+        return new AuthTokenDto
         {
             Token = refreshToken,
             ExpiresIn = _authSettings.RefreshTokenExpirationInDays * 24 * 60 * 60,
@@ -114,7 +109,7 @@ public class AuthenticationService
     /// </summary>
     /// <param name="authToken">Token to store</param>
     /// <param name="userId">User ID</param>
-    public void StoreTokenInMemory(AuthenticationTokenDto authToken, string userId)
+    public void StoreTokenInMemory(AuthTokenDto authToken, string userId)
     {
         var cacheEntryOptions = new MemoryCacheEntryOptions
         {

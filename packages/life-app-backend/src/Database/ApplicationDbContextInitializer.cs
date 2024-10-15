@@ -9,19 +9,19 @@ public class ApplicationDbContextInitializer
     private readonly ILogger<ApplicationDbContextInitializer> _logger;
     private readonly IConfiguration _configuration;
     private readonly ApplicationDbContext _dbContext;
-    private readonly AuthenticationService _authenticationService;
+    private readonly AuthService _authService;
 
     public ApplicationDbContextInitializer(
         ILogger<ApplicationDbContextInitializer> logger,
         IConfiguration configuration,
         ApplicationDbContext dbContext,
-        AuthenticationService authenticationService
+        AuthService authService
     )
     {
         _logger = logger;
         _dbContext = dbContext;
         _configuration = configuration;
-        _authenticationService = authenticationService;
+        _authService = authService;
     }
 
     public async Task InitialiseAsync()
@@ -60,8 +60,8 @@ public class ApplicationDbContextInitializer
         var userCount = await _dbContext.Users.CountAsync();
         if (userCount == 0)
         {
-            var salt = _authenticationService.GenerateRandomSalt();
-            var passwordHash = _authenticationService.HashPassword(password, salt);
+            var salt = _authService.GenerateRandomSalt();
+            var passwordHash = _authService.HashPassword(password, salt);
             var user = new User
             {
                 Username = username,

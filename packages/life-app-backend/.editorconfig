@@ -17,6 +17,13 @@ indent_size = 2
 # C# files
 [*.cs]
 
+#### IDE specifics ####
+
+resharper_place_field_attribute_on_same_line = false
+resharper_place_accessorholder_attribute_on_same_line = false
+resharper_convert_to_primary_constructor_highlighting = none
+resharper_class_never_instantiated_global_highlighting = none
+
 #### Core EditorConfig Options ####
 
 # Indentation and spacing
@@ -379,3 +386,4 @@ dotnet_style_namespace_match_folder = true:warning
 
 dotnet_diagnostic.IDE0001.severity = warning
 dotnet_diagnostic.IDE0005.severity = warning
+dotnet_diagnostic.IDE0290.severity = none

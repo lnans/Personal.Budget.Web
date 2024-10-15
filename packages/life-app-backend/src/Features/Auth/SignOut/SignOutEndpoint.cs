@@ -4,9 +4,9 @@ namespace Life.App.Backend.Features.Auth.SignOut;
 
 public class SignOutEndpoint : Endpoint<SignOutRequest>
 {
-    private readonly AuthenticationService _authService;
+    private readonly AuthService _authService;
 
-    public SignOutEndpoint(AuthenticationService authService)
+    public SignOutEndpoint(AuthService authService)
     {
         _authService = authService;
     }
@@ -23,11 +23,6 @@ public class SignOutEndpoint : Endpoint<SignOutRequest>
 
     public override Task HandleAsync(SignOutRequest req, CancellationToken ct)
     {
-        if (string.IsNullOrWhiteSpace(req.RefreshToken))
-        {
-            return SendOkAsync(ct);
-        }
-
         _authService.RevokeTokenFromMemory(req.RefreshToken);
         return SendOkAsync(ct);
     }

@@ -14,16 +14,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropDownMenu'
 import { useTheme } from '@/hooks/useTheme'
-import { useAuthStore } from '@/stores/authStore'
 
-function Profile() {
+import { useAuthStore } from '../stores/authStore'
+
+function ProfileMenu() {
   const { t } = useTranslation()
   const { theme, setTheme } = useTheme()
 
-  const { getUsername, clearAccessToken } = useAuthStore((state) => state.actions)
+  const identity = useAuthStore((state) => state.identity)
+  const { clearIdentity } = useAuthStore((state) => state.actions)
 
   const handleLogout = () => {
-    clearAccessToken()
+    clearIdentity()
   }
 
   return (
@@ -32,7 +34,7 @@ function Profile() {
         <Button variant="secondary" icon={IconUserCircle} size="icon" className="ml-auto rounded-full" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>{getUsername()}</DropdownMenuLabel>
+        <DropdownMenuLabel>{identity?.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={theme} onValueChange={(v) => setTheme(v as 'dark' | 'light')}>
           <DropdownMenuRadioItem value="dark">{t('common.theme.dark')}</DropdownMenuRadioItem>
@@ -50,4 +52,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default ProfileMenu
