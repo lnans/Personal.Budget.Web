@@ -94,7 +94,7 @@ FormControl.displayName = 'FormControl'
 
 const FormMessage = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className, children, ...props }, ref) => {
-    const { t } = useTranslation(['form'])
+    const { t } = useTranslation()
     const { error, formMessageId } = useFormField()
     const body = error?.message ? String(t(error.message)) : children
 
