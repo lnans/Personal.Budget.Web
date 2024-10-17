@@ -12,7 +12,7 @@ function QueryClientProvider({ children }: QueryClientProviderProps) {
   return (
     <TanstackQueryClientProvider client={queryClient}>
       {children}
-      <TanstackReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+      <TanstackReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" />
     </TanstackQueryClientProvider>
   )
 }

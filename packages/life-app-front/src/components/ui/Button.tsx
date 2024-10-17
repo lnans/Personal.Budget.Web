@@ -61,7 +61,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} disabled={disabled || loading}>
         <div className="inline-flex items-center justify-center whitespace-nowrap">
           {loading && <IconLoader2 className="mr-2 size-4.5 animate-spin" />}
-          {!loading && Icon && <Icon className={iconVariants({ size })} />}
+          {!loading && !!Icon && <Icon className={iconVariants({ size })} />}
           {children}
         </div>
       </Comp>

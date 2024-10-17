@@ -2,11 +2,10 @@
 
 > This repo is a sandbox for now and will be rename in the future.
 
-Work in progress on eslint 9 migration:
+Work in progress on tabler-icons:
 
-- `eslint-plugin-react-hooks` wait for release (use RC for now)
-- `eslint-plugin-import` wait for release or RC (not compatible yet with eslint 9)
-  - [related Pull request](https://github.com/import-js/eslint-plugin-import/pull/2996)
+- current issue on the latest version [issue](https://github.com/tabler/tabler-icons/issues/1233)
+  after correction bump the version of tabler and vite
 
 Work in progress on application architecture:
 
