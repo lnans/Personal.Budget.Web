@@ -1,4 +1,4 @@
-import { IconLogout, IconUserCircle } from '@tabler/icons-react'
+import { LogOutIcon, UserCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/Button'
@@ -40,7 +40,9 @@ function ProfileMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" icon={IconUserCircle} size="icon" className="ml-auto rounded-full" />
+        <Button variant="secondary" size="icon" className="ml-auto rounded-full">
+          <UserCircle />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>{identity?.username}</DropdownMenuLabel>
@@ -53,7 +55,7 @@ function ProfileMenu() {
         <DropdownMenuItem onClick={handleLogout}>
           {t('actions.sign_out')}
           <DropdownMenuShortcut>
-            <IconLogout className="ms-3" size={18} />
+            <LogOutIcon className="ms-3" size={18} />
           </DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>

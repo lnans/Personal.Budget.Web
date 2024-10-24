@@ -24,6 +24,7 @@ const InputTextForm = <
   type,
   autocomplete,
   className,
+  disabled,
   ...props
 }: InputTextFormProps<TFieldValues, TName>) => {
   return (
@@ -33,7 +34,14 @@ const InputTextForm = <
         <FormItem className={className}>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input placeholder={placeholder} {...field} value={value ?? ''} type={type} autoComplete={autocomplete} />
+            <Input
+              placeholder={placeholder}
+              {...field}
+              value={value ?? ''}
+              disabled={disabled}
+              type={type}
+              autoComplete={autocomplete}
+            />
           </FormControl>
           <FormMessage />
         </FormItem>

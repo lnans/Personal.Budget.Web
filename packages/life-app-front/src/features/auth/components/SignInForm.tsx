@@ -52,12 +52,13 @@ export function SignInForm({ onSuccess, className }: SignInFormProps) {
                 name="username"
                 label={t('features.login.form.username')}
                 autocomplete="off"
+                disabled={signInQuery.isPending}
               />
               <InputTextForm control={form.control} name="password" label={t('features.login.form.password')} type="password" />
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="mt-2 w-full" loading={signInQuery.isPending} disabled={!form.formState.isValid}>
+            <Button type="submit" className="mt-2 w-full" disabled={signInQuery.isPending}>
               {t('actions.sign_in')}
             </Button>
           </CardFooter>
