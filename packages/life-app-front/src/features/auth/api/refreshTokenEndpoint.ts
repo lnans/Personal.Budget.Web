@@ -7,7 +7,7 @@ import { AuthDto } from '../types/authDto'
 import { RefreshTokenRequest } from '../types/refreshTokenRequest'
 
 const refreshToken = async ({ form }: { form: RefreshTokenRequest }) => {
-  const response = await api.post<AuthDto>('/api/refresh', form)
+  const response = await api.post<AuthDto>('/api/auth/refresh', form)
   return response.data
 }
 

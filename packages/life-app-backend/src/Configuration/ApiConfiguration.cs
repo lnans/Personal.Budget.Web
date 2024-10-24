@@ -79,7 +79,8 @@ public static class ApiConfiguration
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseCors(options => {
+        app.UseCors(options =>
+        {
             options.AllowAnyOrigin();
             options.AllowAnyMethod();
             options.AllowAnyHeader();

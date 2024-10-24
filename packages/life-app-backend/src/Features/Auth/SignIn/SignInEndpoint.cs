@@ -32,6 +32,7 @@ public class SignInEndpoint : Endpoint<SignInRequest, AuthDto>
 
         if (user is null || !_authService.VerifyPassword(req.Password, user.PasswordSalt, user.PasswordHash))
         {
+            await Task.Delay(2000, ct);
             await SendUnauthorizedAsync(ct);
             return;
         }

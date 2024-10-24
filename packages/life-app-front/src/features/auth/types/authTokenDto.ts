@@ -1,4 +1,4 @@
 export type AuthTokenDto = {
   token: string
-  expiresIn: number
+  expiresAt: number
 }

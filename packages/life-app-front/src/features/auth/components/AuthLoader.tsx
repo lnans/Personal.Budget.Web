@@ -19,8 +19,8 @@ function AuthLoader({ children, onRedirect }: AuthLoaderProps) {
     mutationConfig: {
       onSuccess: (identity) => setIdentity(identity),
       onError: () => {
-        clearIdentity()
         onRedirect()
+        clearIdentity()
       },
     },
   })
@@ -28,12 +28,20 @@ function AuthLoader({ children, onRedirect }: AuthLoaderProps) {
   const timeout = useRef<number>(0)
 
   useEffect(() => {
+    if (refreshQuery.isPending || refreshQuery.isError) {
+      return
+    }
+
     if (identity && authState === 'Authenticated') {
-      // TODO: test if the timeout works correctly
-      const accessExpiresIn = (identity.accessToken.expiresIn - 60) * 1000
+      const accessExpiresAt = identity.accessToken.expiresAt
+      const now = new Date().getTime()
+      const accessExpiresIn = accessExpiresAt - now - 60000 // 1 minute before expiration
+
+      console.info(`%cAuthenticated, next refresh in: ${(accessExpiresIn / 1000).toFixed(0)}sec`, 'color: LightSkyBlue;')
 
       clearTimeout(timeout.current)
       timeout.current = setTimeout(() => {
+        console.info('%cRefreshing auth token...', 'color: LightSkyBlue;')
         refreshQuery.mutate({ form: { refreshToken: identity.refreshToken.token } })
       }, accessExpiresIn)
 
@@ -46,6 +54,7 @@ function AuthLoader({ children, onRedirect }: AuthLoaderProps) {
     }
 
     if (authState === 'AccessExpired') {
+      console.info('%cRefreshing auth token...', 'color: LightSkyBlue;')
       refreshQuery.mutate({ form: { refreshToken: identity.refreshToken.token } })
     }
 

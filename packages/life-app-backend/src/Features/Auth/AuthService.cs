@@ -77,16 +77,17 @@ public class AuthService
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authSettings.JwtSecret));
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+        var expirationDate = DateTimeOffset.UtcNow.AddMinutes(_authSettings.TokenExpirationInMinutes);
         var token = new JwtSecurityToken(
             claims: claims,
-            expires: DateTime.Now.AddMinutes(_authSettings.TokenExpirationInMinutes), // Use configured expiry time
+            expires: expirationDate.DateTime,
             signingCredentials: signingCredentials
         );
 
         return new AuthTokenDto
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
-            ExpiresIn = _authSettings.TokenExpirationInMinutes * 60,
+            ExpiresAt = expirationDate.ToUnixTimeMilliseconds(),
         };
     }
 
@@ -97,11 +98,8 @@ public class AuthService
     public AuthTokenDto GenerateRefreshToken()
     {
         var refreshToken = GenerateRandomSalt();
-        return new AuthTokenDto
-        {
-            Token = refreshToken,
-            ExpiresIn = _authSettings.RefreshTokenExpirationInDays * 24 * 60 * 60,
-        };
+        var expirationDate = DateTimeOffset.UtcNow.AddDays(_authSettings.RefreshTokenExpirationInDays);
+        return new AuthTokenDto { Token = refreshToken, ExpiresAt = expirationDate.ToUnixTimeMilliseconds() };
     }
 
     /// <summary>
@@ -111,10 +109,8 @@ public class AuthService
     /// <param name="userId">User ID</param>
     public void StoreTokenInMemory(AuthTokenDto authToken, string userId)
     {
-        var cacheEntryOptions = new MemoryCacheEntryOptions
-        {
-            AbsoluteExpiration = DateTime.UtcNow.AddSeconds(authToken.ExpiresIn),
-        };
+        var absoluteExpiration = DateTimeOffset.FromUnixTimeMilliseconds(authToken.ExpiresAt);
+        var cacheEntryOptions = new MemoryCacheEntryOptions { AbsoluteExpiration = absoluteExpiration };
 
         _cache.Set(authToken.Token, userId, cacheEntryOptions);
     }

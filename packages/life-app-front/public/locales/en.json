@@ -23,5 +23,6 @@
   "features.login.title": "Authentication",
   "features.login.header": "Enter your credentials to sign in to your account",
   "features.login.form.username": "Username",
-  "features.login.form.password": "Password"
+  "features.login.form.password": "Password",
+  "features.login.failed": "Incorrect username or password"
 }

@@ -3,6 +3,7 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
+import { Toaster } from '@/components/ui/Toaster'
 import { queryClient } from '@/lib/tanstack-query'
 import QueryClientProvider from '@/providers/QueryClientProvider'
 import { ThemeProvider } from '@/providers/ThemeProvider'
@@ -34,6 +35,7 @@ if (!rootElement.innerHTML) {
       <TranslationProvider>
         <ThemeProvider>
           <QueryClientProvider>
+            <Toaster />
             <RouterProvider router={router} />
             <TanStackRouterDevtools router={router} />
           </QueryClientProvider>

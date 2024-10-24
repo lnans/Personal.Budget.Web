@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -5,6 +6,7 @@ import { Form } from '@/components/form/FormBase'
 import InputTextForm from '@/components/form/InputTextForm'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
+import { useToast } from '@/hooks/useToast'
 import { cn } from '@/lib/utils'
 import { resolver } from '@/lib/validation'
 
@@ -20,6 +22,7 @@ type SignInFormProps = {
 
 export function SignInForm({ onSuccess, className }: SignInFormProps) {
   const { t } = useTranslation()
+  const { toast } = useToast()
   const { setIdentity } = useAuthStore((state) => state.actions)
 
   const signInQuery = useSignIn({
@@ -27,6 +30,13 @@ export function SignInForm({ onSuccess, className }: SignInFormProps) {
       onSuccess: (identity) => {
         setIdentity(identity)
         onSuccess?.()
+      },
+      onError: () => {
+        toast({
+          title: t('features.login.title'),
+          description: t('features.login.failed'),
+          variant: 'destructive',
+        })
       },
     },
   })
@@ -54,11 +64,18 @@ export function SignInForm({ onSuccess, className }: SignInFormProps) {
                 autocomplete="off"
                 disabled={signInQuery.isPending}
               />
-              <InputTextForm control={form.control} name="password" label={t('features.login.form.password')} type="password" />
+              <InputTextForm
+                control={form.control}
+                name="password"
+                label={t('features.login.form.password')}
+                type="password"
+                disabled={signInQuery.isPending}
+              />
             </div>
           </CardContent>
           <CardFooter>
             <Button type="submit" className="mt-2 w-full" disabled={signInQuery.isPending}>
+              {signInQuery.isPending && <Loader2 className="mr-2 size-4 animate-spin" />}
               {t('actions.sign_in')}
             </Button>
           </CardFooter>

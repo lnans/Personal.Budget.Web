@@ -31,12 +31,10 @@ export const useAuthStore = create<AuthStoreState>()(
           if (!identity) return 'NotAuthenticated'
 
           const now = new Date()
-          const accessExpiresIn = identity.accessToken.expiresIn
-          const accessExpiresAt = new Date(now.getTime() + accessExpiresIn * 1000)
+          const accessExpiresAt = new Date(identity.accessToken.expiresAt)
 
           if (accessExpiresAt <= now) {
-            const refreshExpiresIn = identity.refreshToken.expiresIn
-            const refreshExpiresAt = new Date(now.getTime() + refreshExpiresIn * 1000)
+            const refreshExpiresAt = new Date(identity.refreshToken.expiresAt)
 
             if (refreshExpiresAt <= now) {
               return 'NotAuthenticated' // all token are expired
@@ -52,7 +50,7 @@ export const useAuthStore = create<AuthStoreState>()(
     }),
     {
       name: STORAGE_KEYS.auth,
-      partialize: (state) => ({ accessToken: state.identity }),
+      partialize: (state) => ({ identity: state.identity }),
     },
   ),
 )

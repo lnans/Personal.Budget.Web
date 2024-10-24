@@ -8,7 +8,7 @@ public class AuthTokenDto
     public required string Token { get; set; }
 
     /// <summary>
-    ///     Token expiration in seconds
+    ///     Token expiration in epoch time
     /// </summary>
-    public required int ExpiresIn { get; set; }
+    public required long ExpiresAt { get; set; }
 }
