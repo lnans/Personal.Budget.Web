@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/DropDownMenu'
 import { useTheme } from '@/hooks/useTheme'
 
+import { useSignOut } from '../api/signOutEndpoint'
 import { useAuthStore } from '../stores/authStore'
 
 function ProfileMenu() {
@@ -24,8 +25,16 @@ function ProfileMenu() {
   const identity = useAuthStore((state) => state.identity)
   const { clearIdentity } = useAuthStore((state) => state.actions)
 
+  const signOutQuery = useSignOut({
+    mutationConfig: {
+      onSettled: () => {
+        clearIdentity()
+      },
+    },
+  })
+
   const handleLogout = () => {
-    clearIdentity()
+    signOutQuery.mutate({ form: { refreshToken: identity!.refreshToken.token } })
   }
 
   return (

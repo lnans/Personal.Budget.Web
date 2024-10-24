@@ -5,23 +5,32 @@ import { Form } from '@/components/form/FormBase'
 import InputTextForm from '@/components/form/InputTextForm'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card'
-import { cn } from '@/lib/tailwind-merge'
+import { cn } from '@/lib/utils'
 import { resolver } from '@/lib/validation'
 
 import { useSignIn } from '../api/signInEndpoint'
-import { AuthDto } from '../types/authDto'
+import { useAuthStore } from '../stores/authStore'
 import { SignInRequest } from '../types/signInRequest'
 import { signInRequestValidator } from '../types/signInRequestValidator'
 
 type SignInFormProps = {
-  onSuccess?: (authDto: AuthDto) => void
+  onSuccess?: () => void
   className?: string
 }
 
 export function SignInForm({ onSuccess, className }: SignInFormProps) {
   const { t } = useTranslation()
+  const { setIdentity } = useAuthStore((state) => state.actions)
 
-  const signInQuery = useSignIn({ mutationConfig: { onSuccess } })
+  const signInQuery = useSignIn({
+    mutationConfig: {
+      onSuccess: (identity) => {
+        setIdentity(identity)
+        onSuccess?.()
+      },
+    },
+  })
+
   const form = useForm<SignInRequest>({ resolver: resolver(signInRequestValidator) })
 
   const onSubmit = async (form: SignInRequest) => {
@@ -29,7 +38,7 @@ export function SignInForm({ onSuccess, className }: SignInFormProps) {
   }
 
   return (
-    <Card className={cn('mx-auto max-w-sm shadow-xl dark:shadow-neutral-800 ', className)}>
+    <Card className={cn('mx-auto max-w-sm ', className)}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader>

@@ -2,7 +2,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import { IconCheck, IconChevronRight, IconCircle } from '@tabler/icons-react'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, HTMLAttributes } from 'react'
 
-import { cn } from '@/lib/tailwind-merge'
+import { cn } from '@/lib/utils'
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger

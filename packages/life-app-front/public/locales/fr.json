@@ -4,6 +4,7 @@
   "common.theme.dark": "Thème sombre",
   "common.theme.light": "Thème clair",
 
+  "actions.refresh": "Rafraîchir",
   "actions.go_back": "Page précédente",
   "actions.sign_in": "Se connecter",
   "actions.sign_out": "Se déconnecter",
@@ -11,10 +12,13 @@
   "routes.wallet": "Portefeuille",
   "routes.settings": "Paramètres",
 
-  "form_validation.required": "Champ obligatoire",
+  "errors.fieldIsRequired": "Champ obligatoire",
 
   "boundaries.not_found.title": "Page non trouvée",
   "boundaries.not_found.description": "Désolé, la page que vous recherchez n'existe pas.",
+
+  "boundaries.error.title": "Une erreur est survenue",
+  "boundaries.error.description": "Désolé, une erreur est survenue lors du chargement de la page.",
 
   "features.login.title": "Authentification",
   "features.login.header": "Entrez vos identifiants pour vous connecter à votre compte",

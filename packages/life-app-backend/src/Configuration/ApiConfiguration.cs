@@ -70,12 +70,20 @@ public static class ApiConfiguration
 
         services.AddMemoryCache();
         services.AddFastEndpoints();
+
+        services.AddCors();
     }
 
     public static void InitApi(this WebApplication app)
     {
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.UseCors(options => {
+            options.AllowAnyOrigin();
+            options.AllowAnyMethod();
+            options.AllowAnyHeader();
+        });
 
         // register all endpoints under Features directory
         app.UseFastEndpoints(c =>

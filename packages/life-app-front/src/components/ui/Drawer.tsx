@@ -3,7 +3,7 @@ import { IconX } from '@tabler/icons-react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, HTMLAttributes } from 'react'
 
-import { cn } from '@/lib/tailwind-merge'
+import { cn } from '@/lib/utils'
 
 const Drawer = SheetPrimitive.Root
 const DrawerTrigger = SheetPrimitive.Trigger

@@ -1,20 +1,24 @@
 import { cva, VariantProps } from 'class-variance-authority'
 import { forwardRef, HtmlHTMLAttributes } from 'react'
 
-import { cn } from '@/lib/tailwind-merge'
+import { cn } from '@/lib/utils'
 
-export type HeadingVariant = 'h1' | 'h2'
+export type HeadingVariant = 'h1' | 'h2' | 'h3' | 'h4'
 
-const htmlTagMap: Record<HeadingVariant, keyof Pick<JSX.IntrinsicElements, 'h1' | 'h2'>> = {
+const htmlTagMap: Record<HeadingVariant, keyof Pick<JSX.IntrinsicElements, HeadingVariant>> = {
   h1: 'h1',
   h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
 }
 
 const headingVariants = cva('scroll-m-20 tracking-tight', {
   variants: {
     variant: {
-      h1: 'text-4xl font-extrabold lg:text-5xl',
-      h2: 'pb-2 text-3xl font-semibold first:mt-0',
+      h1: 'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
+      h2: 'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+      h3: 'scroll-m-20 text-2xl font-semibold tracking-tight',
+      h4: 'scroll-m-20 text-xl font-semibold tracking-tight',
     },
   },
   defaultVariants: {

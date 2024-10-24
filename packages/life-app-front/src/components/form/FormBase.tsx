@@ -4,7 +4,7 @@ import { Controller, ControllerProps, FieldPath, FieldValues, FormProvider, useF
 import { useTranslation } from 'react-i18next'
 
 import { Label } from '@/components/ui/Label'
-import { cn } from '@/lib/tailwind-merge'
+import { cn } from '@/lib/utils'
 
 const Form = FormProvider
 

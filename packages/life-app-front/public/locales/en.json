@@ -4,6 +4,7 @@
   "common.theme.dark": "Dark theme",
   "common.theme.light": "Light theme",
 
+  "actions.refresh": "Refresh",
   "actions.go_back": "Previous page",
   "actions.sign_in": "Sign in",
   "actions.sign_out": "Sign out",
@@ -11,10 +12,13 @@
   "routes.wallet": "Wallet",
   "routes.settings": "Settings",
 
-  "form_validation.required": "Required field",
+  "errors.fieldIsRequired": "Required",
 
   "boundaries.not_found.title": "Page not found",
   "boundaries.not_found.description": "Sorry, the page you are looking for does not exist.",
+
+  "boundaries.error.title": "An error occurred",
+  "boundaries.error.description": "Sorry, an error occurred while loading the page.",
 
   "features.login.title": "Authentication",
   "features.login.header": "Enter your credentials to sign in to your account",

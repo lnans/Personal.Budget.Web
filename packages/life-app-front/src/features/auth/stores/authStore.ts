@@ -10,6 +10,7 @@ type AuthStoreState = {
   actions: {
     setIdentity: (identity: AuthDto) => void
     getBearerToken: () => string
+    getAuthState: () => 'NotAuthenticated' | 'AccessExpired' | 'Authenticated'
     clearIdentity: () => void
   }
 }
@@ -24,6 +25,27 @@ export const useAuthStore = create<AuthStoreState>()(
           const { identity } = get()
           if (!identity) return ''
           return `Bearer ${identity.accessToken.token}`
+        },
+        getAuthState: () => {
+          const { identity } = get()
+          if (!identity) return 'NotAuthenticated'
+
+          const now = new Date()
+          const accessExpiresIn = identity.accessToken.expiresIn
+          const accessExpiresAt = new Date(now.getTime() + accessExpiresIn * 1000)
+
+          if (accessExpiresAt <= now) {
+            const refreshExpiresIn = identity.refreshToken.expiresIn
+            const refreshExpiresAt = new Date(now.getTime() + refreshExpiresIn * 1000)
+
+            if (refreshExpiresAt <= now) {
+              return 'NotAuthenticated' // all token are expired
+            }
+
+            return 'AccessExpired'
+          }
+
+          return 'Authenticated'
         },
         clearIdentity: () => set({ identity: undefined }),
       },

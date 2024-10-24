@@ -1,4 +1,4 @@
-import Axios, { InternalAxiosRequestConfig } from 'axios'
+import Axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 
 import { ENV } from '@/config/env'
 import { useAuthStore } from '@/features/auth/stores/authStore'
@@ -23,11 +23,11 @@ export const api = Axios.create({
 api.interceptors.request.use(authRequestInterceptor)
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
+  (error: AxiosError) => {
+    if (error.response?.status === 401 && error.config?.url !== '/api/auth') {
       const searchParams = new URLSearchParams()
       const redirectTo = searchParams.get('redirectTo')
-      window.location.href = `/auth/login?redirectTo=${redirectTo}`
+      window.location.href = `/signin?redirectTo=${redirectTo}`
     }
 
     return Promise.reject(error)
