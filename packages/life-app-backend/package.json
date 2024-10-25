@@ -1,9 +1,10 @@
 {
   "name": "life-app-backend",
   "scripts": {
-    "dev": "dotnet run --project src/Life.App.Backend.csproj -c Debug",
+    "dev": "dotnet watch --verbose --no-hot-reload --non-interactive run --project src/Life.App.Backend.csproj -c Debug",
+    "build": "dotnet publish src/Life.App.Backend.csproj -c Release -o dist",
     "test": "dotnet test -v quiet --nologo -l 'console;verbosity=normal'",
-    "build": "dotnet build -tl -c Release",
+    "check": "dotnet build -tl -c Release",
     "format": "dotnet tool restore && dotnet format . -v detailed && dotnet csharpier ."
   }
 }

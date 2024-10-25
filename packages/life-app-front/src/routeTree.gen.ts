@@ -35,16 +35,19 @@ const AuthRoute = AuthImport.update({
 } as any)
 
 const IndexRoute = IndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
 const MainDashboardLazyRoute = MainDashboardLazyImport.update({
+  id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => MainRoute,
 } as any).lazy(() => import('./app/_main/dashboard.lazy').then((d) => d.Route))
 
 const AuthSigninLazyRoute = AuthSigninLazyImport.update({
+  id: '/signin',
   path: '/signin',
   getParentRoute: () => AuthRoute,
 } as any).lazy(() => import('./app/_auth/signin.lazy').then((d) => d.Route))
@@ -141,7 +144,13 @@ export interface FileRouteTypes {
   fullPaths: '/' | '' | '/signin' | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '' | '/signin' | '/dashboard'
-  id: '__root__' | '/' | '/_auth' | '/_main' | '/_auth/signin' | '/_main/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_main'
+    | '/_auth/signin'
+    | '/_main/dashboard'
   fileRoutesById: FileRoutesById
 }
 
@@ -157,7 +166,9 @@ const rootRouteChildren: RootRouteChildren = {
   MainRoute: MainRouteWithChildren,
 }
 
-export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>()
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 

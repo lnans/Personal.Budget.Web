@@ -1,12 +1,32 @@
 # Life.App
 
-> This repo is a sandbox for now and will be rename in the future.
+## Description
 
-Work in progress on tabler-icons:
+This repository contains the source code for a personal life application. It helps users manage their finances or other things by tracking income and expenses, generating reports, and providing insights.
 
-- current issue on the latest version [issue](https://github.com/tabler/tabler-icons/issues/1233)
-  after correction bump the version of tabler and vite
+## Run locally
 
-Work in progress on application architecture:
+1. **Build and Run:**
 
-- Remove `react-router-dom` and use `@tanstack/router` instead
+```sh
+# Only if you have .NET 9 and a PostgreSQL database installed
+yarn install
+yarn dev
+```
+
+Or:
+
+```sh
+# Only Docker installed
+docker compose build --no-cache
+docker-compose up
+
+# To stop and remove all containers, images, and volumes
+docker compose down --rmi all --volumes
+```
+
+2. **Open your browser and navigate to:**
+
+```
+http://localhost:6001
+```

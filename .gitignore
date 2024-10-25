@@ -3,6 +3,7 @@ dist
 *.local
 coverage
 .turbo
+.docker
 
 # Yarn 3
 .yarn/*
@@ -32,8 +33,8 @@ pnpm-debug.log*
 *.sw?
 
 # misc
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+packages/**/.env
+packages/**/.env.local
+packages/**/.env.development.local
+packages/**/.env.test.local
+packages/**/.env.production.local

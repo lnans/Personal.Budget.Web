@@ -1,0 +1,53 @@
+##
+# This docker compose file read environment variables from .env file
+services:
+  backend:
+    build:
+      context: ./packages/life-app-backend
+      dockerfile: Dockerfile
+      args:
+        - --no-cache
+    container_name: life-app-backend
+    environment:
+      Auth__Pepper: ${BACKEND_AUTH_PEPPER}
+      Auth__JwtSecret: ${BACKEND_AUTH_JWT_SECRET}
+      Auth__TokenExpirationInMinutes: ${BACKEND_AUTH_TOKEN_EXPIRATION_IN_MINUTES}
+      Auth__RefreshTokenExpirationInDays: ${BACKEND_AUTH_REFRESH_TOKEN_EXPIRATION_IN_DAYS}
+      DEFAULT_USER: ${BACKEND_DEFAULT_USER}
+      DEFAULT_PASSWORD: ${BACKEND_DEFAULT_PASSWORD}
+      ConnectionStrings__Database: "Server=${INTERNAL_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD};"
+    ports:
+      - ${BACKEND_PORT}:8080
+    extra_hosts:
+      - "${INTERNAL_HOST}:host-gateway"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    container_name: life-app-database
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: /data/postgres
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - .docker/database:/data/postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./packages/life-app-front
+      dockerfile: Dockerfile
+      args:
+        - VITE_APP_API_URL=http://${EXTERNAL_HOST}:${BACKEND_PORT}
+    container_name: life-app-frontend
+    ports:
+      - ${FRONTEND_PORT}:80

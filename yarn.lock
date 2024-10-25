@@ -4624,6 +4624,7 @@ __metadata:
     tailwind-merge: "npm:^2.5.4"
     tailwindcss: "npm:^3.4.14"
     tailwindcss-animate: "npm:^1.0.7"
+    terser: "npm:^5.36.0"
     typescript: "npm:5.5.4"
     typescript-eslint: "npm:^8.11.0"
     usehooks-ts: "npm:^3.1.0"
@@ -6162,7 +6163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.17.4":
+"terser@npm:^5.17.4, terser@npm:^5.36.0":
   version: 5.36.0
   resolution: "terser@npm:5.36.0"
   dependencies:

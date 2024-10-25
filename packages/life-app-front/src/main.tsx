@@ -1,6 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createRouter, RouterProvider } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import { StrictMode } from 'react'
+import { lazy, StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { Toaster } from '@/components/ui/Toaster'
@@ -25,6 +25,15 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
+
+const TanStackRouterDevtools = import.meta.env.PROD
+  ? () => null // Render nothing in production
+  : lazy(() =>
+      // Lazy load in development
+      import('@tanstack/router-devtools').then((res) => ({
+        default: res.TanStackRouterDevtools,
+      })),
+    )
 
 // Render the app
 const rootElement = document.getElementById('app')!
